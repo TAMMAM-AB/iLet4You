@@ -16,7 +16,7 @@ namespace iLet4You
         private void btnLogin_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK; // signal success
-            this.Close(); // close login form (program.cs will now run Main form)
+            this.Close(); // close login form (Program.cs will now run Main form)
         }
     }
 }
