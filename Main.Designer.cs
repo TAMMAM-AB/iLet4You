@@ -31,15 +31,23 @@
             textBox1 = new TextBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            comboBox1 = new ComboBox();
+            button3 = new Button();
+            label4 = new Label();
+            richTextBox4 = new RichTextBox();
             tabPage2 = new TabPage();
+            button2 = new Button();
+            label5 = new Label();
+            richTextBox5 = new RichTextBox();
             tabPage3 = new TabPage();
-            radioButton1 = new RadioButton();
-            tabPage4 = new TabPage();
-            richTextBox1 = new RichTextBox();
+            label1 = new Label();
+            richTextBox3 = new RichTextBox();
             button1 = new Button();
+            comboBox1 = new ComboBox();
+            radioButton1 = new RadioButton();
             tabControl1.SuspendLayout();
-            tabPage4.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
@@ -56,7 +64,6 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
             tabControl1.Location = new Point(241, 57);
             tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
@@ -66,6 +73,9 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button3);
+            tabPage1.Controls.Add(label4);
+            tabPage1.Controls.Add(richTextBox4);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Margin = new Padding(3, 2, 3, 2);
             tabPage1.Name = "tabPage1";
@@ -75,16 +85,37 @@
             tabPage1.Text = "Property Details";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // button3
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(1224, 29);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 3;
+            button3.Location = new Point(1108, 438);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 9;
+            button3.Text = "save";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(876, 19);
+            label4.Name = "label4";
+            label4.Size = new Size(52, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Property";
+            // 
+            // richTextBox4
+            // 
+            richTextBox4.Location = new Point(876, 37);
+            richTextBox4.Name = "richTextBox4";
+            richTextBox4.Size = new Size(307, 395);
+            richTextBox4.TabIndex = 7;
+            richTextBox4.Text = "";
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button2);
+            tabPage2.Controls.Add(label5);
+            tabPage2.Controls.Add(richTextBox5);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Margin = new Padding(3, 2, 3, 2);
             tabPage2.Name = "tabPage2";
@@ -94,8 +125,37 @@
             tabPage2.Text = "Landlord";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(1108, 446);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 8;
+            button2.Text = "save";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(876, 27);
+            label5.Name = "label5";
+            label5.Size = new Size(54, 15);
+            label5.TabIndex = 7;
+            label5.Text = "Landlord";
+            // 
+            // richTextBox5
+            // 
+            richTextBox5.Location = new Point(876, 45);
+            richTextBox5.Name = "richTextBox5";
+            richTextBox5.Size = new Size(307, 395);
+            richTextBox5.TabIndex = 6;
+            richTextBox5.Text = "";
+            // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(label1);
+            tabPage3.Controls.Add(richTextBox3);
+            tabPage3.Controls.Add(button1);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Margin = new Padding(3, 2, 3, 2);
             tabPage3.Name = "tabPage3";
@@ -105,10 +165,45 @@
             tabPage3.Text = "Tenant";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(876, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(78, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Tenant notes:";
+            // 
+            // richTextBox3
+            // 
+            richTextBox3.Location = new Point(876, 37);
+            richTextBox3.Name = "richTextBox3";
+            richTextBox3.Size = new Size(307, 395);
+            richTextBox3.TabIndex = 6;
+            richTextBox3.Text = "";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(1108, 455);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 5;
+            button1.Text = "save";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(1224, 29);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 3;
+            // 
             // radioButton1
             // 
             radioButton1.AllowDrop = true;
             radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
             radioButton1.Location = new Point(1121, 13);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(88, 19);
@@ -116,35 +211,6 @@
             radioButton1.TabStop = true;
             radioButton1.Text = "radioButton";
             radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            tabPage4.Controls.Add(button1);
-            tabPage4.Controls.Add(richTextBox1);
-            tabPage4.Location = new Point(4, 24);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(1241, 497);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Notes";
-            tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(6, 6);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(1229, 444);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(581, 468);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 1;
-            button1.Text = "save";
-            button1.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -160,7 +226,12 @@
             Text = "iLet4You";
             WindowState = FormWindowState.Maximized;
             tabControl1.ResumeLayout(false);
-            tabPage4.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -174,8 +245,14 @@
         private TabPage tabPage3;
         private RadioButton radioButton1;
         private ComboBox comboBox1;
-        private TabPage tabPage4;
+        private Button button3;
+        private Label label4;
+        private RichTextBox richTextBox4;
+        private Button button2;
+        private Label label5;
+        private RichTextBox richTextBox5;
+        private Label label1;
+        private RichTextBox richTextBox3;
         private Button button1;
-        private RichTextBox richTextBox1;
     }
 }
