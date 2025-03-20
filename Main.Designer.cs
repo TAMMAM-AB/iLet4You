@@ -42,8 +42,9 @@
             label1 = new Label();
             richTextBox3 = new RichTextBox();
             button1 = new Button();
-            comboBox1 = new ComboBox();
-            radioButton1 = new RadioButton();
+            radioBtnProperty = new RadioButton();
+            radioBtnLandlord = new RadioButton();
+            radioBtnTenant = new RadioButton();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -52,10 +53,10 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(467, 9);
+            textBox1.Location = new Point(241, 13);
             textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(622, 23);
+            textBox1.Size = new Size(621, 23);
             textBox1.TabIndex = 0;
             textBox1.Text = "Search...";
             // 
@@ -137,7 +138,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(876, 27);
+            label5.Location = new Point(876, 17);
             label5.Name = "label5";
             label5.Size = new Size(54, 15);
             label5.TabIndex = 7;
@@ -145,7 +146,7 @@
             // 
             // richTextBox5
             // 
-            richTextBox5.Location = new Point(876, 45);
+            richTextBox5.Location = new Point(876, 35);
             richTextBox5.Name = "richTextBox5";
             richTextBox5.Size = new Size(307, 395);
             richTextBox5.TabIndex = 6;
@@ -191,34 +192,46 @@
             button1.Text = "save";
             button1.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // radioBtnProperty
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(1224, 29);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 3;
+            radioBtnProperty.AutoSize = true;
+            radioBtnProperty.Checked = true;
+            radioBtnProperty.Location = new Point(868, 17);
+            radioBtnProperty.Name = "radioBtnProperty";
+            radioBtnProperty.Size = new Size(70, 19);
+            radioBtnProperty.TabIndex = 2;
+            radioBtnProperty.TabStop = true;
+            radioBtnProperty.Text = "Property";
+            radioBtnProperty.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radioBtnLandlord
             // 
-            radioButton1.AllowDrop = true;
-            radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
-            radioButton1.Location = new Point(1121, 13);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(88, 19);
-            radioButton1.TabIndex = 2;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "radioButton";
-            radioButton1.UseVisualStyleBackColor = true;
+            radioBtnLandlord.AutoSize = true;
+            radioBtnLandlord.Location = new Point(944, 17);
+            radioBtnLandlord.Name = "radioBtnLandlord";
+            radioBtnLandlord.Size = new Size(72, 19);
+            radioBtnLandlord.TabIndex = 3;
+            radioBtnLandlord.Text = "Landlord";
+            radioBtnLandlord.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnTenant
+            // 
+            radioBtnTenant.AutoSize = true;
+            radioBtnTenant.Location = new Point(1022, 17);
+            radioBtnTenant.Name = "radioBtnTenant";
+            radioBtnTenant.Size = new Size(61, 19);
+            radioBtnTenant.TabIndex = 4;
+            radioBtnTenant.Text = "Tenant";
+            radioBtnTenant.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 775);
-            Controls.Add(comboBox1);
-            Controls.Add(radioButton1);
+            Controls.Add(radioBtnTenant);
+            Controls.Add(radioBtnLandlord);
+            Controls.Add(radioBtnProperty);
             Controls.Add(tabControl1);
             Controls.Add(textBox1);
             Margin = new Padding(3, 2, 3, 2);
@@ -243,8 +256,6 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
-        private RadioButton radioButton1;
-        private ComboBox comboBox1;
         private Button button3;
         private Label label4;
         private RichTextBox richTextBox4;
@@ -254,5 +265,8 @@
         private Label label1;
         private RichTextBox richTextBox3;
         private Button button1;
+        private RadioButton radioBtnProperty;
+        private RadioButton radioBtnLandlord;
+        private RadioButton radioBtnTenant;
     }
 }
