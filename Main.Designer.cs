@@ -45,10 +45,19 @@
             radioBtnProperty = new RadioButton();
             radioBtnLandlord = new RadioButton();
             radioBtnTenant = new RadioButton();
+            panel1 = new Panel();
+            linkLabel1 = new LinkLabel();
+            linkLabel2 = new LinkLabel();
+            linkLabel3 = new LinkLabel();
+            linkLabel4 = new LinkLabel();
+            linkLabel5 = new LinkLabel();
+            linkLabel6 = new LinkLabel();
+            tabPage4 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
@@ -65,6 +74,7 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
             tabControl1.Location = new Point(241, 57);
             tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
@@ -224,11 +234,95 @@
             radioBtnTenant.Text = "Tenant";
             radioBtnTenant.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(linkLabel6);
+            panel1.Controls.Add(linkLabel5);
+            panel1.Controls.Add(linkLabel4);
+            panel1.Controls.Add(linkLabel3);
+            panel1.Controls.Add(linkLabel2);
+            panel1.Controls.Add(linkLabel1);
+            panel1.Location = new Point(12, 81);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(223, 497);
+            panel1.TabIndex = 5;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(74, 19);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(60, 15);
+            linkLabel1.TabIndex = 0;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "linkLabel1";
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.Location = new Point(74, 65);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(60, 15);
+            linkLabel2.TabIndex = 1;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "linkLabel2";
+            // 
+            // linkLabel3
+            // 
+            linkLabel3.AutoSize = true;
+            linkLabel3.Location = new Point(74, 114);
+            linkLabel3.Name = "linkLabel3";
+            linkLabel3.Size = new Size(60, 15);
+            linkLabel3.TabIndex = 2;
+            linkLabel3.TabStop = true;
+            linkLabel3.Text = "linkLabel3";
+            // 
+            // linkLabel4
+            // 
+            linkLabel4.AutoSize = true;
+            linkLabel4.Location = new Point(74, 151);
+            linkLabel4.Name = "linkLabel4";
+            linkLabel4.Size = new Size(60, 15);
+            linkLabel4.TabIndex = 3;
+            linkLabel4.TabStop = true;
+            linkLabel4.Text = "linkLabel4";
+            // 
+            // linkLabel5
+            // 
+            linkLabel5.AutoSize = true;
+            linkLabel5.Location = new Point(74, 182);
+            linkLabel5.Name = "linkLabel5";
+            linkLabel5.Size = new Size(60, 15);
+            linkLabel5.TabIndex = 4;
+            linkLabel5.TabStop = true;
+            linkLabel5.Text = "linkLabel5";
+            // 
+            // linkLabel6
+            // 
+            linkLabel6.AutoSize = true;
+            linkLabel6.Location = new Point(74, 214);
+            linkLabel6.Name = "linkLabel6";
+            linkLabel6.Size = new Size(60, 15);
+            linkLabel6.TabIndex = 5;
+            linkLabel6.TabStop = true;
+            linkLabel6.Text = "linkLabel6";
+            // 
+            // tabPage4
+            // 
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(1241, 497);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Notes";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 775);
+            Controls.Add(panel1);
             Controls.Add(radioBtnTenant);
             Controls.Add(radioBtnLandlord);
             Controls.Add(radioBtnProperty);
@@ -245,6 +339,8 @@
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -268,5 +364,13 @@
         private RadioButton radioBtnProperty;
         private RadioButton radioBtnLandlord;
         private RadioButton radioBtnTenant;
+        private Panel panel1;
+        private LinkLabel linkLabel6;
+        private LinkLabel linkLabel5;
+        private LinkLabel linkLabel4;
+        private LinkLabel linkLabel3;
+        private LinkLabel linkLabel2;
+        private LinkLabel linkLabel1;
+        private TabPage tabPage4;
     }
 }
