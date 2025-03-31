@@ -15,8 +15,20 @@ namespace iLet4You
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK; // signal success
-            this.Close(); // close login form (Program.cs will now run Main form)
+            Global.wsServer.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
+            // wait for response
+            while (!Global.wsServer.receivedResponce)
+            {
+                if (Global.wsServer.receivedResponce) break;
+                Thread.Sleep(100);
+            }
+            Global.wsServer.receivedResponce = false;
+
+            if (Global.wsServer.loggedIn)
+            {
+                this.DialogResult = DialogResult.OK; // signal success
+                this.Close(); // close login form (Program.cs will now run Main form)
+            }
         }
     }
 }

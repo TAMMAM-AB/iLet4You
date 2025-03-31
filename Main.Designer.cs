@@ -42,17 +42,17 @@
             label1 = new Label();
             richTextBox3 = new RichTextBox();
             button1 = new Button();
+            tabPage4 = new TabPage();
             radioBtnProperty = new RadioButton();
             radioBtnLandlord = new RadioButton();
             radioBtnTenant = new RadioButton();
             panel1 = new Panel();
-            linkLabel1 = new LinkLabel();
-            linkLabel2 = new LinkLabel();
-            linkLabel3 = new LinkLabel();
-            linkLabel4 = new LinkLabel();
-            linkLabel5 = new LinkLabel();
             linkLabel6 = new LinkLabel();
-            tabPage4 = new TabPage();
+            linkLabel5 = new LinkLabel();
+            linkLabel4 = new LinkLabel();
+            linkLabel3 = new LinkLabel();
+            linkLabel2 = new LinkLabel();
+            linkLabel1 = new LinkLabel();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -202,6 +202,16 @@
             button1.Text = "save";
             button1.UseVisualStyleBackColor = true;
             // 
+            // tabPage4
+            // 
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(1241, 497);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Notes";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
             // radioBtnProperty
             // 
             radioBtnProperty.AutoSize = true;
@@ -247,45 +257,15 @@
             panel1.Size = new Size(223, 497);
             panel1.TabIndex = 5;
             // 
-            // linkLabel1
+            // linkLabel6
             // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(74, 19);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(60, 15);
-            linkLabel1.TabIndex = 0;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "linkLabel1";
-            // 
-            // linkLabel2
-            // 
-            linkLabel2.AutoSize = true;
-            linkLabel2.Location = new Point(74, 65);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(60, 15);
-            linkLabel2.TabIndex = 1;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "linkLabel2";
-            // 
-            // linkLabel3
-            // 
-            linkLabel3.AutoSize = true;
-            linkLabel3.Location = new Point(74, 114);
-            linkLabel3.Name = "linkLabel3";
-            linkLabel3.Size = new Size(60, 15);
-            linkLabel3.TabIndex = 2;
-            linkLabel3.TabStop = true;
-            linkLabel3.Text = "linkLabel3";
-            // 
-            // linkLabel4
-            // 
-            linkLabel4.AutoSize = true;
-            linkLabel4.Location = new Point(74, 151);
-            linkLabel4.Name = "linkLabel4";
-            linkLabel4.Size = new Size(60, 15);
-            linkLabel4.TabIndex = 3;
-            linkLabel4.TabStop = true;
-            linkLabel4.Text = "linkLabel4";
+            linkLabel6.AutoSize = true;
+            linkLabel6.Location = new Point(74, 214);
+            linkLabel6.Name = "linkLabel6";
+            linkLabel6.Size = new Size(60, 15);
+            linkLabel6.TabIndex = 5;
+            linkLabel6.TabStop = true;
+            linkLabel6.Text = "linkLabel6";
             // 
             // linkLabel5
             // 
@@ -297,30 +277,51 @@
             linkLabel5.TabStop = true;
             linkLabel5.Text = "linkLabel5";
             // 
-            // linkLabel6
+            // linkLabel4
             // 
-            linkLabel6.AutoSize = true;
-            linkLabel6.Location = new Point(74, 214);
-            linkLabel6.Name = "linkLabel6";
-            linkLabel6.Size = new Size(60, 15);
-            linkLabel6.TabIndex = 5;
-            linkLabel6.TabStop = true;
-            linkLabel6.Text = "linkLabel6";
+            linkLabel4.AutoSize = true;
+            linkLabel4.Location = new Point(74, 151);
+            linkLabel4.Name = "linkLabel4";
+            linkLabel4.Size = new Size(60, 15);
+            linkLabel4.TabIndex = 3;
+            linkLabel4.TabStop = true;
+            linkLabel4.Text = "linkLabel4";
             // 
-            // tabPage4
+            // linkLabel3
             // 
-            tabPage4.Location = new Point(4, 24);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(1241, 497);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Notes";
-            tabPage4.UseVisualStyleBackColor = true;
+            linkLabel3.AutoSize = true;
+            linkLabel3.Location = new Point(74, 114);
+            linkLabel3.Name = "linkLabel3";
+            linkLabel3.Size = new Size(60, 15);
+            linkLabel3.TabIndex = 2;
+            linkLabel3.TabStop = true;
+            linkLabel3.Text = "linkLabel3";
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.Location = new Point(74, 65);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(60, 15);
+            linkLabel2.TabIndex = 1;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "linkLabel2";
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(74, 19);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(60, 15);
+            linkLabel1.TabIndex = 0;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "linkLabel1";
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(1664, 775);
             Controls.Add(panel1);
             Controls.Add(radioBtnTenant);
