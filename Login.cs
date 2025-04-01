@@ -1,4 +1,4 @@
-namespace iLet4You
+﻿namespace iLet4You
 {
     public partial class Login : Form
     {
@@ -9,8 +9,8 @@ namespace iLet4You
 
         private void btnPass_Click(object sender, EventArgs e)
         {
-            if (txtbxPass.PasswordChar == '*') txtbxPass.PasswordChar = '\0';
-            else txtbxPass.PasswordChar = '*';
+            if (txtbxPass.PasswordChar == '*') { txtbxPass.PasswordChar = '\0'; btnPass.Text = "🔓"; }
+            else { txtbxPass.PasswordChar = '*';  btnPass.Text = "🔒"; }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
