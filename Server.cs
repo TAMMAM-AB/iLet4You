@@ -6,8 +6,12 @@ namespace iLet4You
 {
     public class Server
     {
-        // ORGANISE THIS
+        // ORGANISE THIS (i kinda did if this is what you meant)
+
+        // server related
         public WebSocket ws;
+
+        // login related
         public bool IsLoggedIn = false;
         public bool receivedResponce = false;
         public string role = "";
@@ -16,7 +20,7 @@ namespace iLet4You
         {
             ws = new WebSocket($"ws://{ip}:{port}");
 
-            // connect to the WebSocket server
+            // setting event handlers
             ws.OnOpen += Ws_OnOpen;
             ws.OnMessage += Ws_OnMessage;
             ws.OnError += Ws_OnError;
