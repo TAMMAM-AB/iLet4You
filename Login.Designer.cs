@@ -38,42 +38,45 @@
             // 
             // label1
             // 
-            label1.Location = new Point(318, 139);
+            label1.Location = new Point(278, 104);
             label1.Name = "label1";
-            label1.Size = new Size(125, 20);
+            label1.Size = new Size(109, 15);
             label1.TabIndex = 0;
             label1.Text = "Username:";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // txtbxUser
             // 
-            txtbxUser.Location = new Point(318, 162);
+            txtbxUser.Location = new Point(278, 122);
+            txtbxUser.Margin = new Padding(3, 2, 3, 2);
             txtbxUser.Name = "txtbxUser";
-            txtbxUser.Size = new Size(125, 27);
+            txtbxUser.Size = new Size(110, 23);
             txtbxUser.TabIndex = 1;
             // 
             // label2
             // 
-            label2.Location = new Point(318, 192);
+            label2.Location = new Point(278, 144);
             label2.Name = "label2";
-            label2.Size = new Size(125, 20);
+            label2.Size = new Size(109, 15);
             label2.TabIndex = 2;
             label2.Text = "Password:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // txtbxPass
             // 
-            txtbxPass.Location = new Point(318, 215);
+            txtbxPass.Location = new Point(278, 161);
+            txtbxPass.Margin = new Padding(3, 2, 3, 2);
             txtbxPass.Name = "txtbxPass";
             txtbxPass.PasswordChar = '*';
-            txtbxPass.Size = new Size(125, 27);
+            txtbxPass.Size = new Size(110, 23);
             txtbxPass.TabIndex = 3;
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(318, 260);
+            btnLogin.Location = new Point(278, 195);
+            btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(125, 29);
+            btnLogin.Size = new Size(109, 22);
             btnLogin.TabIndex = 4;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
@@ -82,26 +85,28 @@
             // btnPass
             // 
             btnPass.FlatStyle = FlatStyle.Flat;
-            btnPass.Font = new Font("Segoe UI", 6F);
-            btnPass.Location = new Point(449, 214);
+            btnPass.Font = new Font("Segoe UI", 8F);
+            btnPass.Location = new Point(393, 160);
+            btnPass.Margin = new Padding(3, 2, 3, 2);
             btnPass.Name = "btnPass";
-            btnPass.Size = new Size(156, 29);
+            btnPass.Size = new Size(35, 22);
             btnPass.TabIndex = 5;
-            btnPass.Text = "show / hide pass(add icon later)";
+            btnPass.Text = "🔒";
             btnPass.UseVisualStyleBackColor = true;
             btnPass.Click += btnPass_Click;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(btnPass);
             Controls.Add(btnLogin);
             Controls.Add(txtbxPass);
             Controls.Add(label2);
             Controls.Add(txtbxUser);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Login";
             Text = "Form1";
             ResumeLayout(false);

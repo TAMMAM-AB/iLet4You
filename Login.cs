@@ -16,12 +16,19 @@
         private void btnLogin_Click(object sender, EventArgs e)
         {
             Global.Server.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
-            // wait for response - FIX THIS BY DOING ASYNC STUFF INSTEAD isntead of silly while loop
+            // need to loop due to waiting for server response (could add loading icon?)
+
+            int count = 0;
+
             while (!Global.Server.receivedResponce)
             {
+                count++;
                 if (Global.Server.receivedResponce) break;
+                if (count == 100) { MessageBox.Show("Failed to connect to the server!"); break; }
                 Thread.Sleep(100);
             }
+
+            // set it back to false so it can be repeated for if password is wrong
             Global.Server.receivedResponce = false;
 
             if (Global.Server.IsLoggedIn)
