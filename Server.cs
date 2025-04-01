@@ -115,7 +115,7 @@ namespace iLet4You
 
         }
 
-        public void Login (string username, string password)
+        public void Login(string username, string password)
         {
             var loginData = new
             {
@@ -125,7 +125,16 @@ namespace iLet4You
             };
 
             string jsonMessage = JsonSerializer.Serialize(loginData);
-            ws.Send(jsonMessage);
+
+            try
+            {
+                ws.Send(jsonMessage);
+                receivedResponce = false; // Reset here instead of UI
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

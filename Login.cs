@@ -13,29 +13,41 @@
             else { txtbxPass.PasswordChar = '*';  btnPass.Text = "🔒"; }
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
+            btnLogin.Enabled = false; // disable button to prevent multiple clicks
+            Cursor = Cursors.WaitCursor; // show loading cursor
+
             Global.Server.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
-            // need to loop due to waiting for server response (could add loading icon?)
 
-            int count = 0;
+            // wait for server response with a timeout
+            int timeoutMs = 5000; // 5 seconds max
+            int intervalMs = 100;
+            int waited = 0;
 
-            while (!Global.Server.receivedResponce)
+            while (!Global.Server.receivedResponce && waited < timeoutMs)
             {
-                count++;
-                if (Global.Server.receivedResponce) break;
-                if (count == 100) { MessageBox.Show("Failed to connect to the server!"); break; }
-                Thread.Sleep(100);
+                await Task.Delay(intervalMs);
+                waited += intervalMs;
             }
 
-            // set it back to false so it can be repeated for if password is wrong
-            Global.Server.receivedResponce = false;
+            btnLogin.Enabled = true; // re-enable button
+            Cursor = Cursors.Default; // restore cursor
+
+            if (!Global.Server.receivedResponce)
+            {
+                MessageBox.Show("Failed to connect to the server!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (Global.Server.IsLoggedIn)
             {
                 this.DialogResult = DialogResult.OK; // signal success
-                this.Close(); // close login form (Program.cs will now run Main form)
+                this.Close(); // close Login form (Main form will open)
             }
+
+            // server responded, but login failed (wrong password, etc.)
+            // MessageBox.Show("Incorrect username or password!", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
