@@ -2,5 +2,5 @@
 
 public static class Global
 {
-    public static Server wsServer = new Server(Settings.ip, Settings.port);
+    public static Server Server = new Server(Settings.ip, Settings.port);
 }

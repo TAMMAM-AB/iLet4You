@@ -15,16 +15,16 @@ namespace iLet4You
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Global.wsServer.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
-            // wait for response
-            while (!Global.wsServer.receivedResponce)
+            Global.Server.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
+            // wait for response - FIX THIS BY DOING ASYNC STUFF INSTEAD isntead of silly while loop
+            while (!Global.Server.receivedResponce)
             {
-                if (Global.wsServer.receivedResponce) break;
+                if (Global.Server.receivedResponce) break;
                 Thread.Sleep(100);
             }
-            Global.wsServer.receivedResponce = false;
+            Global.Server.receivedResponce = false;
 
-            if (Global.wsServer.loggedIn)
+            if (Global.Server.IsLoggedIn)
             {
                 this.DialogResult = DialogResult.OK; // signal success
                 this.Close(); // close login form (Program.cs will now run Main form)

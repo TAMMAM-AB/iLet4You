@@ -6,8 +6,9 @@ namespace iLet4You
 {
     public class Server
     {
+        // ORGANISE THIS
         public WebSocket ws;
-        public bool loggedIn = false;
+        public bool IsLoggedIn = false;
         public bool receivedResponce = false;
         public string role = "";
 
@@ -47,7 +48,7 @@ namespace iLet4You
                 switch (type)
                 {
                     case "login_success":
-                        loggedIn = true;
+                        IsLoggedIn = true;
                         receivedResponce = true;
                         string role = data["role"]?.ToString();
                         MessageBox.Show($"Login Successful! Role: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
