@@ -53,6 +53,7 @@
             linkLabel3 = new LinkLabel();
             linkLabel2 = new LinkLabel();
             linkLabel1 = new LinkLabel();
+            btnAdmin = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -317,12 +318,25 @@
             linkLabel1.TabStop = true;
             linkLabel1.Text = "linkLabel1";
             // 
+            // btnAdmin
+            // 
+            btnAdmin.Enabled = false;
+            btnAdmin.Location = new Point(1520, 12);
+            btnAdmin.Name = "btnAdmin";
+            btnAdmin.Size = new Size(132, 23);
+            btnAdmin.TabIndex = 6;
+            btnAdmin.Text = "Admin Controls";
+            btnAdmin.UseVisualStyleBackColor = true;
+            btnAdmin.Visible = false;
+            btnAdmin.Click += btnAdmin_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1664, 775);
+            ClientSize = new Size(1904, 1041);
+            Controls.Add(btnAdmin);
             Controls.Add(panel1);
             Controls.Add(radioBtnTenant);
             Controls.Add(radioBtnLandlord);
@@ -373,5 +387,6 @@
         private LinkLabel linkLabel2;
         private LinkLabel linkLabel1;
         private TabPage tabPage4;
+        private Button btnAdmin;
     }
 }
