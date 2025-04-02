@@ -55,7 +55,17 @@
         {
             if (dgvUsers.SelectedRows.Count > 0)
             {
-                DeleteUser(dgvUsers.SelectedRows[0].Cells["usernameDataGridViewTextBoxColumn"].Value?.ToString().Trim());
+                string username = dgvUsers.SelectedRows[0].Cells["usernameDataGridViewTextBoxColumn"].Value?.ToString().Trim();
+                DialogResult result = MessageBox.Show(
+                    $"Are you sure you want to delete the account '{username}'?",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteUser(username);
+                }
             }
         }
 
