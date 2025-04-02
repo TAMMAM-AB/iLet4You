@@ -10,11 +10,24 @@
         private void btnPass_Click(object sender, EventArgs e)
         {
             if (txtbxPass.PasswordChar == '*') { txtbxPass.PasswordChar = '\0'; btnPass.Text = "🔓"; }
-            else { txtbxPass.PasswordChar = '*';  btnPass.Text = "🔒"; }
+            else { txtbxPass.PasswordChar = '*'; btnPass.Text = "🔒"; }
         }
 
-        private async void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
+            LogIn();
+        }
+
+        private void txtbxPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && btnLogin.Enabled) LogIn();
+        }
+
+        private async void LogIn()
+        {
+            if (String.IsNullOrWhiteSpace(txtbxUser.Text))
+                return;
+
             btnLogin.Enabled = false; // disable button to prevent multiple clicks
             Cursor = Cursors.WaitCursor; // show loading cursor
 
@@ -31,7 +44,7 @@
                 waited += intervalMs;
             }
 
-            btnLogin.Enabled = true; // re-enable button
+            btnLogin.Enabled = true; // re enable button
             Cursor = Cursors.Default; // restore cursor
 
             if (!Global.Server.receivedResponce)
@@ -46,8 +59,11 @@
                 this.Close(); // close Login form (Main form will open)
             }
 
+            Thread.Sleep(1000); // avoid spam login attempts 
+
             // server responded, but login failed (wrong password, etc.)
             // MessageBox.Show("Incorrect username or password!", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
     }
 }

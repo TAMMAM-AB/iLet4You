@@ -1,20 +1,18 @@
 ﻿using System.Text.Json;
 using WebSocketSharp;
 using Newtonsoft.Json.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iLet4You
 {
     public class Server
     {
-        // ORGANISE THIS (i kinda did if this is what you meant)
-
         // server related
         public WebSocket ws;
 
         // login related
         public bool IsLoggedIn = false;
         public bool receivedResponce = false;
-        public string role = "";
 
         public Server(string ip, string port)
         {
@@ -37,15 +35,15 @@ namespace iLet4You
 
         }
 
-        // server resonses / updates (rens every time a server sends message (?))
+        // server resonses / updates (runs every time a server sends message)
         private async void Ws_OnMessage(object sender, MessageEventArgs e)
         {
             try
             {
-                // Parse JSON message
+                // parse JSON message
                 JObject json = JObject.Parse(e.Data);
 
-                // Extract type and data
+                // extract type and data
                 string type = json["type"]?.ToString();
                 JToken data = json["data"];
 
@@ -54,7 +52,12 @@ namespace iLet4You
                     case "login_success":
                         IsLoggedIn = true;
                         receivedResponce = true;
+
                         string role = data["role"]?.ToString();
+                        string username = data["username"]?.ToString();
+
+                        Global.User = new User(username, role);
+
                         MessageBox.Show($"Login Successful! Role: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
 
@@ -83,8 +86,8 @@ namespace iLet4You
                         MessageBox.Show("Record deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
 
-                    case "get_users":
-                        // HandleUsersData(data);
+                    case "users_data":
+                        HandleUsersData(data);
                         break;
 
                     case "error":
@@ -93,13 +96,13 @@ namespace iLet4You
                         break;
 
                     default:
-                        Console.WriteLine($"Unknown message type: {type}");
+                        // Console.WriteLine($"Unknown message type: {type}");
                         break;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error processing WebSocket message: {ex.Message}");
+                // Console.WriteLine($"Error processing WebSocket message: {ex.Message}");
             }
         }
 
@@ -129,12 +132,39 @@ namespace iLet4You
             try
             {
                 ws.Send(jsonMessage);
-                receivedResponce = false; // Reset here instead of UI
+                receivedResponce = false; // reset here instead of in UI
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // admin
+        public void RequestUsers()
+        {
+            var request = new
+            {
+                action = "get_users"
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleUsersData(JToken data)
+        {
+            List<User> userList = data.ToObject<List<User>>();
+            Global.Users = new Users(userList); // store in global users collection
+            MessageBox.Show($"Users received: {userList.Count}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

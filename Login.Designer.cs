@@ -70,14 +70,15 @@
             txtbxPass.PasswordChar = '*';
             txtbxPass.Size = new Size(110, 23);
             txtbxPass.TabIndex = 3;
+            txtbxPass.KeyDown += txtbxPass_KeyDown;
             // 
             // btnLogin
             // 
             btnLogin.Location = new Point(278, 195);
             btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(109, 22);
-            btnLogin.TabIndex = 4;
+            btnLogin.Size = new Size(109, 27);
+            btnLogin.TabIndex = 5;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
@@ -90,7 +91,7 @@
             btnPass.Margin = new Padding(3, 2, 3, 2);
             btnPass.Name = "btnPass";
             btnPass.Size = new Size(35, 22);
-            btnPass.TabIndex = 5;
+            btnPass.TabIndex = 4;
             btnPass.Text = "🔒";
             btnPass.UseVisualStyleBackColor = true;
             btnPass.Click += btnPass_Click;
@@ -108,7 +109,7 @@
             Controls.Add(label1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Login";
-            Text = "Form1";
+            Text = "iLet4You - Login";
             ResumeLayout(false);
             PerformLayout();
         }
