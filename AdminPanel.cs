@@ -23,11 +23,15 @@
         public AdminPanel()
         {
             InitializeComponent();
+
+            cmbobxUserRoles.SelectedIndex = 0;
+
             RefreshUsers();
+            RefreshData();
         }
 
-        // Users
-        public async void RefreshUsers()
+        // users
+        private async void RefreshUsers()
         {
             Global.Server.RequestUsers();
             bool success = await AwaitResponse(); // wait for response
@@ -74,9 +78,23 @@
             CreateUser(txtbxUsername.Text.Trim(), txtbxPassword.Text, cmbobxUserRoles.Text);
         }
 
+        // data
+        private async void RefreshData()
+        {
+            Global.Server.RequestData();
+            bool success = await AwaitResponse(); // wait for response
+            dgvLandlords.DataSource = Global.Landlords?.GetAll();
+            dgvTenants.DataSource = Global.Tenants?.GetAll();
+        }
 
+        private void btnLandlordRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
-
-        //Landlords
+        private void btnTenantRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }

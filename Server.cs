@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using WebSocketSharp;
 using Newtonsoft.Json.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace iLet4You
 {
@@ -60,11 +61,13 @@ namespace iLet4You
                         break;
 
                     case "landlords_data":
-                        // HandleLandlordsData(data);
+                        AdminPanel.ResultReceived(true);
+                        HandleLandlordsData(data);
                         break;
 
                     case "tenants_data":
-                        // HandleTenantsData(data);
+                        AdminPanel.ResultReceived(true);
+                        HandleTenantsData(data);
                         break;
 
                     case "record_created":
@@ -120,6 +123,7 @@ namespace iLet4You
             // open login page again (and close everything else)? idk
         }
 
+        // login
         public void Login(string username, string password)
         {
             var loginData = new
@@ -141,7 +145,98 @@ namespace iLet4You
             }
         }
 
-        // admin
+        // data
+        public void RequestData()
+        {
+            var request = new
+            {
+                action = "fetch_data"
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleLandlordsData(JToken data)
+        {
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<Landlord> landlordList = new();
+
+                foreach (var landlord in data)
+                {
+                    int LandlordID = landlord["LandlordID"] != null && landlord["LandlordID"].Type != JTokenType.Null
+                        ? landlord["LandlordID"].Value<int>() : -1; // -1 if somehow no Landlord ID
+                    string FirstName = landlord["FirstName"]?.ToString() ?? "Unknown";
+                    string LastName = landlord["LastName"]?.ToString() ?? "Unknown";
+                    string Address = landlord["Address"]?.ToString() ?? "Unknown";
+                    string PhoneNumber = landlord["Address"]?.ToString() ?? "Unknown";
+                    string Email = landlord["Email"]?.ToString() ?? "Unknown";
+                    string Notes = landlord["Notes"]?.ToString() ?? "Unknown";
+
+                    landlordList.Add(new Landlord(LandlordID, FirstName, LastName, Address, PhoneNumber, Email, Notes));
+                }
+
+                Global.Landlords = new Landlords(landlordList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleTenantsData(JToken data)
+        {
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<Tenant> tenantList = new();
+
+                foreach (var tenant in data)
+                {
+                    int tenantID = tenant["TenantID"] != null && tenant["TenantID"].Type != JTokenType.Null
+                        ? tenant["TenantID"].Value<int>() : -1;
+                    string FirstName = tenant["FirstName"]?.ToString() ?? "Unknown";
+                    string LastName = tenant["LastName"]?.ToString() ?? "Unknown";
+                    string HouseNo = tenant["HouseNo"]?.ToString() ?? "Unknown";
+                    string AddressLine1 = tenant["AddressLine1"]?.ToString() ?? "Unknown";
+                    string City = tenant["City"]?.ToString() ?? "Unknown";
+                    string PostCode = tenant["PostCode"]?.ToString() ?? "Unknown";
+                    string PhoneNumber = tenant["PhoneNumber"]?.ToString() ?? "Unknown";
+                    string Email = tenant["Email"]?.ToString() ?? "Unknown";
+                    string Notes = tenant["Notes"]?.ToString() ?? "Unknown";
+
+                    tenantList.Add(new Tenant(tenantID, FirstName, LastName, HouseNo, AddressLine1, City, PostCode, PhoneNumber, Email, Notes));
+                }
+
+                Global.Tenants = new Tenants(tenantList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // for admins
         public void RequestUsers()
         {
             var request = new
