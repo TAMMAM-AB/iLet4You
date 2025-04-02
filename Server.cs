@@ -7,12 +7,9 @@ namespace iLet4You
 {
     public class Server
     {
-        // server related
         public WebSocket ws;
-
-        // login related
         public bool IsLoggedIn = false;
-        public bool receivedResponce = false;
+        public bool receivedResponse = false;
 
         public Server(string ip, string port)
         {
@@ -26,7 +23,6 @@ namespace iLet4You
 
             // open the WebSocket connection
             ws.Connect();
-
         }
 
         // when connection is opened
@@ -51,7 +47,7 @@ namespace iLet4You
                 {
                     case "login_success":
                         IsLoggedIn = true;
-                        receivedResponce = true;
+                        receivedResponse = true;
 
                         string role = data["role"]?.ToString();
                         string username = data["username"]?.ToString();
@@ -62,7 +58,7 @@ namespace iLet4You
                         break;
 
                     case "login_failed":
-                        receivedResponce = true;
+                        receivedResponse = true;
                         MessageBox.Show("Login Failed. Please check your credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
@@ -115,7 +111,27 @@ namespace iLet4You
         // when connection is closed
         private void Ws_OnClose(object sender, CloseEventArgs e)
         {
+            // open login page again (and close everything else)? idk
+        }
 
+        public async Task AwaitResponse()
+        {
+            // wait for server response with a timeout
+            int timeoutMs = 5000; // 5 seconds max
+            int intervalMs = 100;
+            int waited = 0;
+
+            while (!Global.Server.receivedResponse && waited < timeoutMs)
+            {
+                await Task.Delay(intervalMs);
+                waited += intervalMs;
+            }
+
+            if (!Global.Server.receivedResponse)
+            {
+                MessageBox.Show("Failed to connect to the server!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         public void Login(string username, string password)
@@ -132,7 +148,7 @@ namespace iLet4You
             try
             {
                 ws.Send(jsonMessage);
-                receivedResponce = false; // reset here instead of in UI
+                receivedResponse = false; // reset here
             }
             catch (Exception e)
             {
@@ -153,6 +169,7 @@ namespace iLet4You
             try
             {
                 ws.Send(jsonMessage);
+                receivedResponse = false;
             }
             catch (Exception e)
             {
@@ -162,9 +179,30 @@ namespace iLet4You
 
         private void HandleUsersData(JToken data)
         {
-            List<User> userList = data.ToObject<List<User>>();
-            Global.Users = new Users(userList); // store in global users collection
-            MessageBox.Show($"Users received: {userList.Count}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid user data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<User> userList = new();
+
+                foreach (var user in data)
+                {
+                    string username = user["Username"]?.ToString() ?? "Unknown";
+                    string role = user["Role"]?.ToString() ?? "Unknown";
+
+                    userList.Add(new User(username, role));
+                }
+
+                Global.Users = new Users(userList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

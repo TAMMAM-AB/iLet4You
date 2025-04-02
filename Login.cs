@@ -32,26 +32,10 @@
             Cursor = Cursors.WaitCursor; // show loading cursor
 
             Global.Server.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
-
-            // wait for server response with a timeout
-            int timeoutMs = 5000; // 5 seconds max
-            int intervalMs = 100;
-            int waited = 0;
-
-            while (!Global.Server.receivedResponce && waited < timeoutMs)
-            {
-                await Task.Delay(intervalMs);
-                waited += intervalMs;
-            }
+            await Global.Server.AwaitResponse();
 
             btnLogin.Enabled = true; // re enable button
             Cursor = Cursors.Default; // restore cursor
-
-            if (!Global.Server.receivedResponce)
-            {
-                MessageBox.Show("Failed to connect to the server!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             if (Global.Server.IsLoggedIn)
             {
@@ -59,11 +43,8 @@
                 this.Close(); // close Login form (Main form will open)
             }
 
-            Thread.Sleep(1000); // avoid spam login attempts 
-
             // server responded, but login failed (wrong password, etc.)
             // MessageBox.Show("Incorrect username or password!", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
     }
 }

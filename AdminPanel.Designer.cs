@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            dgvUsers = new DataGridView();
+            usernameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            roleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            userBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             tabPage4 = new TabPage();
@@ -38,6 +43,8 @@
             button1 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -57,6 +64,7 @@
             // tabPage1
             // 
             tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(dgvUsers);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -64,6 +72,39 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvUsers
+            // 
+            dgvUsers.AllowUserToAddRows = false;
+            dgvUsers.AllowUserToDeleteRows = false;
+            dgvUsers.AutoGenerateColumns = false;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUsers.Columns.AddRange(new DataGridViewColumn[] { usernameDataGridViewTextBoxColumn, roleDataGridViewTextBoxColumn });
+            dgvUsers.DataSource = userBindingSource;
+            dgvUsers.Location = new Point(490, 68);
+            dgvUsers.Name = "dgvUsers";
+            dgvUsers.ReadOnly = true;
+            dgvUsers.Size = new Size(248, 248);
+            dgvUsers.TabIndex = 1;
+            // 
+            // usernameDataGridViewTextBoxColumn
+            // 
+            usernameDataGridViewTextBoxColumn.DataPropertyName = "Username";
+            usernameDataGridViewTextBoxColumn.HeaderText = "Username";
+            usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
+            usernameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // roleDataGridViewTextBoxColumn
+            // 
+            roleDataGridViewTextBoxColumn.DataPropertyName = "Role";
+            roleDataGridViewTextBoxColumn.HeaderText = "Role";
+            roleDataGridViewTextBoxColumn.Name = "roleDataGridViewTextBoxColumn";
+            roleDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // userBindingSource
+            // 
+            userBindingSource.DataSource = typeof(User);
             // 
             // tabPage2
             // 
@@ -117,11 +158,11 @@
             // 
             // button1
             // 
-            button1.Location = new Point(464, 152);
+            button1.Location = new Point(227, 320);
             button1.Name = "button1";
-            button1.Size = new Size(219, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Request Users TEST";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 2;
+            button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -135,6 +176,8 @@
             Text = "AdminPanel";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -147,6 +190,10 @@
         private TabPage tabPage4;
         private TabPage tabPage5;
         private TabPage tabPage6;
+        private DataGridView dgvUsers;
+        private DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
+        private BindingSource userBindingSource;
         private Button button1;
     }
 }

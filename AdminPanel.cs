@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace iLet4You
+﻿namespace iLet4You
 {
     public partial class AdminPanel : Form
     {
         public AdminPanel()
         {
             InitializeComponent();
+            RefreshUsers();
+        }
+
+        private async void RefreshUsers()
+        {
+            Global.Server.RequestUsers();
+            await Global.Server.AwaitResponse();
+            dgvUsers.DataSource = Global.Users?.GetAll();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Global.Server.RequestUsers();
+            RefreshUsers();
         }
     }
 }
