@@ -31,6 +31,14 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            btnUserCreate = new Button();
+            btnUserDelete = new Button();
+            txtbxPassword = new TextBox();
+            label3 = new Label();
+            label2 = new Label();
+            txtbxUsername = new TextBox();
+            label1 = new Label();
+            btnUserRefresh = new Button();
             dgvUsers = new DataGridView();
             usernameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             roleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -40,11 +48,13 @@
             tabPage4 = new TabPage();
             tabPage5 = new TabPage();
             tabPage6 = new TabPage();
-            button1 = new Button();
+            landlordBindingSource = new BindingSource(components);
+            cmbobxUserRoles = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)landlordBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -63,7 +73,15 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(cmbobxUserRoles);
+            tabPage1.Controls.Add(btnUserCreate);
+            tabPage1.Controls.Add(btnUserDelete);
+            tabPage1.Controls.Add(txtbxPassword);
+            tabPage1.Controls.Add(label3);
+            tabPage1.Controls.Add(label2);
+            tabPage1.Controls.Add(txtbxUsername);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(btnUserRefresh);
             tabPage1.Controls.Add(dgvUsers);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
@@ -72,6 +90,77 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnUserCreate
+            // 
+            btnUserCreate.Location = new Point(808, 395);
+            btnUserCreate.Name = "btnUserCreate";
+            btnUserCreate.Size = new Size(75, 23);
+            btnUserCreate.TabIndex = 10;
+            btnUserCreate.Text = "Create";
+            btnUserCreate.UseVisualStyleBackColor = true;
+            btnUserCreate.Click += btnUserCreate_Click;
+            // 
+            // btnUserDelete
+            // 
+            btnUserDelete.Location = new Point(652, 322);
+            btnUserDelete.Name = "btnUserDelete";
+            btnUserDelete.Size = new Size(75, 23);
+            btnUserDelete.TabIndex = 9;
+            btnUserDelete.Text = "Delete";
+            btnUserDelete.UseVisualStyleBackColor = true;
+            btnUserDelete.Click += btnUserDelete_Click;
+            // 
+            // txtbxPassword
+            // 
+            txtbxPassword.Location = new Point(596, 395);
+            txtbxPassword.Name = "txtbxPassword";
+            txtbxPassword.Size = new Size(100, 23);
+            txtbxPassword.TabIndex = 8;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(596, 377);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Password";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(702, 377);
+            label2.Name = "label2";
+            label2.Size = new Size(30, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Role";
+            // 
+            // txtbxUsername
+            // 
+            txtbxUsername.Location = new Point(490, 395);
+            txtbxUsername.Name = "txtbxUsername";
+            txtbxUsername.Size = new Size(100, 23);
+            txtbxUsername.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(490, 377);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Username";
+            // 
+            // btnUserRefresh
+            // 
+            btnUserRefresh.Location = new Point(490, 322);
+            btnUserRefresh.Name = "btnUserRefresh";
+            btnUserRefresh.Size = new Size(75, 23);
+            btnUserRefresh.TabIndex = 2;
+            btnUserRefresh.Text = "Refresh List";
+            btnUserRefresh.UseVisualStyleBackColor = true;
+            btnUserRefresh.Click += btnUserRefresh_Click;
             // 
             // dgvUsers
             // 
@@ -83,9 +172,11 @@
             dgvUsers.Columns.AddRange(new DataGridViewColumn[] { usernameDataGridViewTextBoxColumn, roleDataGridViewTextBoxColumn });
             dgvUsers.DataSource = userBindingSource;
             dgvUsers.Location = new Point(490, 68);
+            dgvUsers.MultiSelect = false;
             dgvUsers.Name = "dgvUsers";
             dgvUsers.ReadOnly = true;
-            dgvUsers.Size = new Size(248, 248);
+            dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsers.Size = new Size(237, 248);
             dgvUsers.TabIndex = 1;
             // 
             // usernameDataGridViewTextBoxColumn
@@ -156,15 +247,18 @@
             tabPage6.Text = "QuickLinks";
             tabPage6.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // landlordBindingSource
             // 
-            button1.Location = new Point(227, 320);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            landlordBindingSource.DataSource = typeof(Landlord);
+            // 
+            // cmbobxUserRoles
+            // 
+            cmbobxUserRoles.FormattingEnabled = true;
+            cmbobxUserRoles.Items.AddRange(new object[] { "agent", "admin" });
+            cmbobxUserRoles.Location = new Point(702, 395);
+            cmbobxUserRoles.Name = "cmbobxUserRoles";
+            cmbobxUserRoles.Size = new Size(100, 23);
+            cmbobxUserRoles.TabIndex = 11;
             // 
             // AdminPanel
             // 
@@ -176,8 +270,10 @@
             Text = "AdminPanel";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)landlordBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -194,6 +290,15 @@
         private DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
         private BindingSource userBindingSource;
-        private Button button1;
+        private Button btnUserRefresh;
+        private BindingSource landlordBindingSource;
+        private TextBox txtbxPassword;
+        private Label label3;
+        private Label label2;
+        private TextBox txtbxUsername;
+        private Label label1;
+        private Button btnUserCreate;
+        private Button btnUserDelete;
+        private ComboBox cmbobxUserRoles;
     }
 }

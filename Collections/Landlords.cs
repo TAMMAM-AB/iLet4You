@@ -1,4 +1,4 @@
-﻿public class Landlords
+﻿public class Landlords // collection class
 {
 
 }

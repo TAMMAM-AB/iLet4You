@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using WebSocketSharp;
 using Newtonsoft.Json.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iLet4You
 {
@@ -9,7 +8,6 @@ namespace iLet4You
     {
         public WebSocket ws;
         public bool IsLoggedIn = false;
-        public bool receivedResponse = false;
 
         public Server(string ip, string port)
         {
@@ -47,18 +45,17 @@ namespace iLet4You
                 {
                     case "login_success":
                         IsLoggedIn = true;
-                        receivedResponse = true;
+                        iLet4You.Login.ResultReceived(true);
 
                         string role = data["role"]?.ToString();
                         string username = data["username"]?.ToString();
-
                         Global.User = new User(username, role);
 
                         MessageBox.Show($"Login Successful! Role: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
 
                     case "login_failed":
-                        receivedResponse = true;
+                        iLet4You.Login.ResultReceived(false);
                         MessageBox.Show("Login Failed. Please check your credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
@@ -83,7 +80,12 @@ namespace iLet4You
                         break;
 
                     case "users_data":
+                        AdminPanel.ResultReceived(true);
                         HandleUsersData(data);
+                        break;
+
+                    case "delete_account_success":
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "error":
@@ -114,26 +116,6 @@ namespace iLet4You
             // open login page again (and close everything else)? idk
         }
 
-        public async Task AwaitResponse()
-        {
-            // wait for server response with a timeout
-            int timeoutMs = 5000; // 5 seconds max
-            int intervalMs = 100;
-            int waited = 0;
-
-            while (!Global.Server.receivedResponse && waited < timeoutMs)
-            {
-                await Task.Delay(intervalMs);
-                waited += intervalMs;
-            }
-
-            if (!Global.Server.receivedResponse)
-            {
-                MessageBox.Show("Failed to connect to the server!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-        }
-
         public void Login(string username, string password)
         {
             var loginData = new
@@ -148,7 +130,6 @@ namespace iLet4You
             try
             {
                 ws.Send(jsonMessage);
-                receivedResponse = false; // reset here
             }
             catch (Exception e)
             {
@@ -169,7 +150,6 @@ namespace iLet4You
             try
             {
                 ws.Send(jsonMessage);
-                receivedResponse = false;
             }
             catch (Exception e)
             {
@@ -202,6 +182,26 @@ namespace iLet4You
             catch (Exception ex)
             {
                 MessageBox.Show($"Error processing user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RequestDeleteUser(string username)
+        {
+            var request = new
+            {
+                action = "delete_account",
+                username = username
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

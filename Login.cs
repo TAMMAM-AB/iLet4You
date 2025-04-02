@@ -7,6 +7,24 @@
             InitializeComponent();
         }
 
+        // server response
+        private static TaskCompletionSource<bool> loginResult = new();
+        public static void ResultReceived(bool success)
+        {
+            if (!loginResult.Task.IsCompleted)
+            {
+                loginResult.SetResult(success);
+            }
+        }
+        private async Task<bool> AwaitResponse()
+        {
+            Task delayTask = Task.Delay(5000); // timeout after 5 seconds
+            Task completedTask = await Task.WhenAny(loginResult.Task, delayTask);
+
+            return completedTask == loginResult.Task && loginResult.Task.Result;
+        }
+
+        // win forms
         private void btnPass_Click(object sender, EventArgs e)
         {
             if (txtbxPass.PasswordChar == '*') { txtbxPass.PasswordChar = '\0'; btnPass.Text = "🔓"; }
@@ -28,23 +46,30 @@
             if (String.IsNullOrWhiteSpace(txtbxUser.Text))
                 return;
 
-            btnLogin.Enabled = false; // disable button to prevent multiple clicks
-            Cursor = Cursors.WaitCursor; // show loading cursor
+            btnLogin.Enabled = false; // Disable button
+            Cursor = Cursors.WaitCursor;
+
+            loginResult = new();
 
             Global.Server.Login(txtbxUser.Text.Trim(), txtbxPass.Text.Trim());
-            await Global.Server.AwaitResponse();
 
-            btnLogin.Enabled = true; // re enable button
-            Cursor = Cursors.Default; // restore cursor
+            bool success = await AwaitResponse(); // wait for response
 
-            if (Global.Server.IsLoggedIn)
+            btnLogin.Enabled = true;
+            Cursor = Cursors.Default;
+
+            if (success)
             {
-                this.DialogResult = DialogResult.OK; // signal success
-                this.Close(); // close Login form (Main form will open)
+                if (Global.Server.IsLoggedIn)
+                {
+                    this.DialogResult = DialogResult.OK; // signal success
+                    this.Close(); // close Login form (Main form will open)
+                }
             }
-
-            // server responded, but login failed (wrong password, etc.)
-            // MessageBox.Show("Incorrect username or password!", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                Thread.Sleep(1000); // avoid spam
+            }
         }
     }
 }
