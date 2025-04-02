@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            cmbobxUserRoles = new ComboBox();
             btnUserCreate = new Button();
             btnUserDelete = new Button();
             txtbxPassword = new TextBox();
@@ -49,7 +50,6 @@
             tabPage5 = new TabPage();
             tabPage6 = new TabPage();
             landlordBindingSource = new BindingSource(components);
-            cmbobxUserRoles = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -90,6 +90,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cmbobxUserRoles
+            // 
+            cmbobxUserRoles.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbobxUserRoles.FormattingEnabled = true;
+            cmbobxUserRoles.Items.AddRange(new object[] { "agent", "admin" });
+            cmbobxUserRoles.Location = new Point(702, 395);
+            cmbobxUserRoles.Name = "cmbobxUserRoles";
+            cmbobxUserRoles.Size = new Size(100, 23);
+            cmbobxUserRoles.TabIndex = 11;
             // 
             // btnUserCreate
             // 
@@ -250,15 +260,6 @@
             // landlordBindingSource
             // 
             landlordBindingSource.DataSource = typeof(Landlord);
-            // 
-            // cmbobxUserRoles
-            // 
-            cmbobxUserRoles.FormattingEnabled = true;
-            cmbobxUserRoles.Items.AddRange(new object[] { "agent", "admin" });
-            cmbobxUserRoles.Location = new Point(702, 395);
-            cmbobxUserRoles.Name = "cmbobxUserRoles";
-            cmbobxUserRoles.Size = new Size(100, 23);
-            cmbobxUserRoles.TabIndex = 11;
             // 
             // AdminPanel
             // 

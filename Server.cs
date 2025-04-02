@@ -88,6 +88,10 @@ namespace iLet4You
                         AdminPanel.ResultReceived(true);
                         break;
 
+                    case "create_account_success":
+                        AdminPanel.ResultReceived(true);
+                        break;
+
                     case "error":
                         string errorMessage = data["message"]?.ToString();
                         MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -191,6 +195,28 @@ namespace iLet4You
             {
                 action = "delete_account",
                 username = username
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RequestCreateUser(string username, string password, string role)
+        {
+            var request = new
+            {
+                action = "create_account",
+                username = username,
+                password = password,
+                role = role
             };
 
             string jsonMessage = JsonSerializer.Serialize(request);

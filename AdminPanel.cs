@@ -40,6 +40,12 @@
             bool success = await AwaitResponse();
         }
 
+        private async void CreateUser(string username, string password, string role)
+        {
+            Global.Server.RequestCreateUser(username, password, role);
+            bool success = await AwaitResponse();
+        }
+
         private void btnUserRefresh_Click(object sender, EventArgs e)
         {
             RefreshUsers();
@@ -55,7 +61,7 @@
 
         private void btnUserCreate_Click(object sender, EventArgs e)
         {
-            // CreateUser();
+            CreateUser(txtbxUsername.Text.Trim(), txtbxPassword.Text, cmbobxUserRoles.Text);
         }
 
 
