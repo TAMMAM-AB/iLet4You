@@ -107,6 +107,15 @@
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             uRLDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             quickLinkBindingSource = new BindingSource(components);
+            dgvMaintenances = new DataGridView();
+            maintenanceBindingSource = new BindingSource(components);
+            maintenanceIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            propertyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateReportedDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateCompletedDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            btnMaintenanceRefresh = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -120,9 +129,12 @@
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
+            tabPage5.SuspendLayout();
             tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)quickLinkBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMaintenances).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)maintenanceBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -738,6 +750,8 @@
             // 
             // tabPage5
             // 
+            tabPage5.Controls.Add(btnMaintenanceRefresh);
+            tabPage5.Controls.Add(dgvMaintenances);
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
@@ -810,6 +824,79 @@
             // 
             quickLinkBindingSource.DataSource = typeof(QuickLink);
             // 
+            // dgvMaintenances
+            // 
+            dgvMaintenances.AllowUserToAddRows = false;
+            dgvMaintenances.AllowUserToDeleteRows = false;
+            dgvMaintenances.AutoGenerateColumns = false;
+            dgvMaintenances.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvMaintenances.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMaintenances.Columns.AddRange(new DataGridViewColumn[] { maintenanceIdDataGridViewTextBoxColumn, propertyIdDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn, dateReportedDataGridViewTextBoxColumn, dateCompletedDataGridViewTextBoxColumn });
+            dgvMaintenances.DataSource = maintenanceBindingSource;
+            dgvMaintenances.Location = new Point(6, 6);
+            dgvMaintenances.MultiSelect = false;
+            dgvMaintenances.Name = "dgvMaintenances";
+            dgvMaintenances.ReadOnly = true;
+            dgvMaintenances.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMaintenances.Size = new Size(1118, 420);
+            dgvMaintenances.TabIndex = 13;
+            // 
+            // maintenanceBindingSource
+            // 
+            maintenanceBindingSource.DataSource = typeof(Maintenance);
+            // 
+            // maintenanceIdDataGridViewTextBoxColumn
+            // 
+            maintenanceIdDataGridViewTextBoxColumn.DataPropertyName = "MaintenanceId";
+            maintenanceIdDataGridViewTextBoxColumn.HeaderText = "Maintenance ID";
+            maintenanceIdDataGridViewTextBoxColumn.Name = "maintenanceIdDataGridViewTextBoxColumn";
+            maintenanceIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // propertyIdDataGridViewTextBoxColumn
+            // 
+            propertyIdDataGridViewTextBoxColumn.DataPropertyName = "PropertyId";
+            propertyIdDataGridViewTextBoxColumn.HeaderText = "Property ID";
+            propertyIdDataGridViewTextBoxColumn.Name = "propertyIdDataGridViewTextBoxColumn";
+            propertyIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            statusDataGridViewTextBoxColumn.HeaderText = "Status";
+            statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            statusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateReportedDataGridViewTextBoxColumn
+            // 
+            dateReportedDataGridViewTextBoxColumn.DataPropertyName = "DateReported";
+            dateReportedDataGridViewTextBoxColumn.HeaderText = "Date Reported";
+            dateReportedDataGridViewTextBoxColumn.Name = "dateReportedDataGridViewTextBoxColumn";
+            dateReportedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateCompletedDataGridViewTextBoxColumn
+            // 
+            dateCompletedDataGridViewTextBoxColumn.DataPropertyName = "DateCompleted";
+            dateCompletedDataGridViewTextBoxColumn.HeaderText = "Date Completed";
+            dateCompletedDataGridViewTextBoxColumn.Name = "dateCompletedDataGridViewTextBoxColumn";
+            dateCompletedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // btnMaintenanceRefresh
+            // 
+            btnMaintenanceRefresh.Location = new Point(874, 464);
+            btnMaintenanceRefresh.Name = "btnMaintenanceRefresh";
+            btnMaintenanceRefresh.Size = new Size(75, 23);
+            btnMaintenanceRefresh.TabIndex = 14;
+            btnMaintenanceRefresh.Text = "Refresh List";
+            btnMaintenanceRefresh.UseVisualStyleBackColor = true;
+            btnMaintenanceRefresh.Click += btnMaintenanceRefresh_Click;
+            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -833,9 +920,12 @@
             tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
+            tabPage5.ResumeLayout(false);
             tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)quickLinkBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMaintenances).EndInit();
+            ((System.ComponentModel.ISupportInitialize)maintenanceBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -919,5 +1009,14 @@
         private DataGridViewTextBoxColumn uRLDataGridViewTextBoxColumn;
         private BindingSource quickLinkBindingSource;
         private Button btnQuickLinkRefresh;
+        private DataGridView dgvMaintenances;
+        private DataGridViewTextBoxColumn maintenanceIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn propertyIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateReportedDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateCompletedDataGridViewTextBoxColumn;
+        private BindingSource maintenanceBindingSource;
+        private Button btnMaintenanceRefresh;
     }
 }

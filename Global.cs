@@ -8,5 +8,6 @@ public static class Global
     public static Landlords? Landlords { get; set; }
     public static Tenants? Tenants { get; set; }
     public static Properties? Properties { get; set; }
+    public static Maintenances? Maintenances { get; set; }
     public static QuickLinks? QuickLinks { get; set; }
 }

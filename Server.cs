@@ -78,7 +78,7 @@ namespace iLet4You
 
                     case "maintenances_data":
                         AdminPanel.ResultReceived(true);
-                        // HandleMaintenancesData(data);
+                        HandleMaintenancesData(data);
                         break;
 
                     case "quicklinks_data":
@@ -295,6 +295,45 @@ namespace iLet4You
                 }
 
                 Global.Properties = new Properties(propertyList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing property data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleMaintenancesData(JToken data)
+        {
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<Maintenance> maintenanceList = new();
+
+                foreach (var maintenance in data)
+                {
+                    int MaintenanceID = maintenance["MaintenanceID"] != null && maintenance["MaintenanceID"].Type != JTokenType.Null
+                        ? maintenance["MaintenanceID"].Value<int>() : -1;
+
+                    int PropertyID = maintenance["PropertyID"] != null && maintenance["PropertyID"].Type != JTokenType.Null
+                        ? maintenance["PropertyID"].Value<int>() : -1;
+
+                    string Description = maintenance["Description"]?.ToString() ?? "Unknown";
+                    string Status = maintenance["Status"]?.ToString() ?? "Unknown";
+
+                    DateTime DateReported = maintenance["DateReported"] != null &&
+                        DateTime.TryParse(maintenance["DateReported"].ToString(), out DateTime dateReported) ? dateReported : new DateTime(0000, 1, 1);
+                    DateTime? DateCompleted = maintenance["DateCompleted"] != null &&
+                        DateTime.TryParse(maintenance["DateCompleted"].ToString(), out DateTime dateCompleted) ? dateCompleted : null;
+
+                    maintenanceList.Add(new Maintenance(MaintenanceID, PropertyID, Description, Status, DateReported, DateCompleted));
+                }
+
+                Global.Maintenances = new Maintenances(maintenanceList);
             }
             catch (Exception ex)
             {
