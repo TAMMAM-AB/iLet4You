@@ -101,6 +101,12 @@
             propertyBindingSource = new BindingSource(components);
             tabPage5 = new TabPage();
             tabPage6 = new TabPage();
+            btnQuickLinkRefresh = new Button();
+            dgvQuickLinks = new DataGridView();
+            quickLinkIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            uRLDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            quickLinkBindingSource = new BindingSource(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -114,6 +120,9 @@
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
+            tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)quickLinkBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -739,13 +748,67 @@
             // 
             // tabPage6
             // 
+            tabPage6.Controls.Add(btnQuickLinkRefresh);
+            tabPage6.Controls.Add(dgvQuickLinks);
             tabPage6.Location = new Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new Padding(3);
             tabPage6.Size = new Size(1130, 568);
             tabPage6.TabIndex = 5;
-            tabPage6.Text = "QuickLinks";
+            tabPage6.Text = "Quick Links";
             tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // btnQuickLinkRefresh
+            // 
+            btnQuickLinkRefresh.Location = new Point(777, 468);
+            btnQuickLinkRefresh.Name = "btnQuickLinkRefresh";
+            btnQuickLinkRefresh.Size = new Size(75, 23);
+            btnQuickLinkRefresh.TabIndex = 14;
+            btnQuickLinkRefresh.Text = "Refresh List";
+            btnQuickLinkRefresh.UseVisualStyleBackColor = true;
+            btnQuickLinkRefresh.Click += btnQuickLinkRefresh_Click;
+            // 
+            // dgvQuickLinks
+            // 
+            dgvQuickLinks.AllowUserToAddRows = false;
+            dgvQuickLinks.AllowUserToDeleteRows = false;
+            dgvQuickLinks.AutoGenerateColumns = false;
+            dgvQuickLinks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvQuickLinks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvQuickLinks.Columns.AddRange(new DataGridViewColumn[] { quickLinkIdDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, uRLDataGridViewTextBoxColumn });
+            dgvQuickLinks.DataSource = quickLinkBindingSource;
+            dgvQuickLinks.Location = new Point(6, 6);
+            dgvQuickLinks.MultiSelect = false;
+            dgvQuickLinks.Name = "dgvQuickLinks";
+            dgvQuickLinks.ReadOnly = true;
+            dgvQuickLinks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvQuickLinks.Size = new Size(1118, 437);
+            dgvQuickLinks.TabIndex = 13;
+            // 
+            // quickLinkIdDataGridViewTextBoxColumn
+            // 
+            quickLinkIdDataGridViewTextBoxColumn.DataPropertyName = "QuickLinkId";
+            quickLinkIdDataGridViewTextBoxColumn.HeaderText = "Quick Link ID";
+            quickLinkIdDataGridViewTextBoxColumn.Name = "quickLinkIdDataGridViewTextBoxColumn";
+            quickLinkIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // uRLDataGridViewTextBoxColumn
+            // 
+            uRLDataGridViewTextBoxColumn.DataPropertyName = "URL";
+            uRLDataGridViewTextBoxColumn.HeaderText = "URL";
+            uRLDataGridViewTextBoxColumn.Name = "uRLDataGridViewTextBoxColumn";
+            uRLDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // quickLinkBindingSource
+            // 
+            quickLinkBindingSource.DataSource = typeof(QuickLink);
             // 
             // AdminPanel
             // 
@@ -770,6 +833,9 @@
             tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
+            tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).EndInit();
+            ((System.ComponentModel.ISupportInitialize)quickLinkBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -847,5 +913,11 @@
         private DataGridViewTextBoxColumn EPCRating;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private Button btnPropertyRefresh;
+        private DataGridView dgvQuickLinks;
+        private DataGridViewTextBoxColumn quickLinkIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn uRLDataGridViewTextBoxColumn;
+        private BindingSource quickLinkBindingSource;
+        private Button btnQuickLinkRefresh;
     }
 }

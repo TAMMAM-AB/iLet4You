@@ -76,6 +76,16 @@ namespace iLet4You
                         HandlePropertiesData(data);
                         break;
 
+                    case "maintenances_data":
+                        AdminPanel.ResultReceived(true);
+                        // HandleMaintenancesData(data);
+                        break;
+
+                    case "quicklinks_data":
+                        AdminPanel.ResultReceived(true);
+                        HandleQuickLinksData(data);
+                        break;
+
                     case "record_created":
                         MessageBox.Show("Record created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
@@ -285,6 +295,37 @@ namespace iLet4You
                 }
 
                 Global.Properties = new Properties(propertyList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing property data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleQuickLinksData(JToken data)
+        {
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<QuickLink> quickLinkList = new();
+
+                foreach (var quickLink in data)
+                {
+                    int QuickLinkID = quickLink["QuickLinkID"] != null && quickLink["QuickLinkID"].Type != JTokenType.Null
+                        ? quickLink["QuickLinkID"].Value<int>() : -1;
+
+                    string Name = quickLink["Name"]?.ToString() ?? "Unknown";
+                    string URL = quickLink["URL"]?.ToString() ?? "Unknown";
+
+                    quickLinkList.Add(new QuickLink(QuickLinkID, Name, URL));
+                }
+
+                Global.QuickLinks = new QuickLinks(quickLinkList);
             }
             catch (Exception ex)
             {
