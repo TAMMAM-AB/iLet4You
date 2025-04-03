@@ -27,12 +27,14 @@
             cmbobxUserRoles.SelectedIndex = 0;
 
             RefreshUsers();
+            Thread.Sleep(50);
             RefreshData();
         }
 
         // users
         private async void RefreshUsers()
         {
+            result = new TaskCompletionSource<bool>();
             Global.Server.RequestUsers();
             bool success = await AwaitResponse(); // wait for response
             dgvUsers.DataSource = Global.Users?.GetAll();
@@ -112,6 +114,7 @@
         // data
         private async void RefreshData()
         {
+            result = new TaskCompletionSource<bool>();
             Global.Server.RequestData();
             bool success = await AwaitResponse(); // wait for response
             dgvLandlords.DataSource = Global.Landlords?.GetAll();

@@ -63,28 +63,28 @@ namespace iLet4You
                         break;
 
                     case "landlords_data":
-                        AdminPanel.ResultReceived(true);
                         HandleLandlordsData(data);
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "tenants_data":
-                        AdminPanel.ResultReceived(true);
                         HandleTenantsData(data);
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "properties_data":
-                        AdminPanel.ResultReceived(true);
                         HandlePropertiesData(data);
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "maintenances_data":
-                        AdminPanel.ResultReceived(true);
                         HandleMaintenancesData(data);
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "quicklinks_data":
-                        AdminPanel.ResultReceived(true);
                         HandleQuickLinksData(data);
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "record_created":
@@ -100,8 +100,8 @@ namespace iLet4You
                         break;
 
                     case "users_data":
-                        AdminPanel.ResultReceived(true);
                         HandleUsersData(data);
+                        AdminPanel.ResultReceived(true);
                         break;
 
                     case "delete_account_success":
