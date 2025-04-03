@@ -22,5 +22,10 @@
             AdminPanel a = new AdminPanel();
             a.ShowDialog();
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }

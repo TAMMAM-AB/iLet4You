@@ -54,7 +54,7 @@ namespace iLet4You
                         string username = data["username"]?.ToString();
                         Global.User = new User(username, role);
 
-                        MessageBox.Show($"Login Successful! Role: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // MessageBox.Show($"Login Successful! Role: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
 
                     case "login_failed":

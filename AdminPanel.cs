@@ -85,6 +85,8 @@
                 if (result == DialogResult.Yes)
                 {
                     DeleteUser(username);
+                    Thread.Sleep(50);
+                    RefreshUsers();
                 }
             }
         }
@@ -92,6 +94,8 @@
         private void btnUserCreate_Click(object sender, EventArgs e)
         {
             CreateUser(txtbxUsername.Text.Trim(), txtbxPassword.Text, cmbobxUserRoles.Text);
+            Thread.Sleep(50);
+            RefreshUsers();
             txtbxUsername.Text = "";
             txtbxPassword.Text = "";
         }
@@ -107,6 +111,8 @@
             if (result == DialogResult.Yes)
             {
                 UpdatePassword(username, txtbxPassword.Text);
+                Thread.Sleep(50);
+                RefreshUsers();
             }
             txtbxPassword.Text = "";
         }

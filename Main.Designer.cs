@@ -54,6 +54,7 @@
             linkLabel2 = new LinkLabel();
             linkLabel1 = new LinkLabel();
             btnAdmin = new Button();
+            btnLogout = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -330,12 +331,23 @@
             btnAdmin.Visible = false;
             btnAdmin.Click += btnAdmin_Click;
             // 
+            // btnLogout
+            // 
+            btnLogout.Location = new Point(159, 670);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(75, 23);
+            btnLogout.TabIndex = 7;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(btnLogout);
             Controls.Add(btnAdmin);
             Controls.Add(panel1);
             Controls.Add(radioBtnTenant);
@@ -388,5 +400,6 @@
         private LinkLabel linkLabel1;
         private TabPage tabPage4;
         private Button btnAdmin;
+        private Button btnLogout;
     }
 }
