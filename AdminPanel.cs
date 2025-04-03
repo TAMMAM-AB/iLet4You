@@ -50,6 +50,20 @@
             bool success = await AwaitResponse();
         }
 
+        private async void UpdatePassword(string username, string password)
+        {
+            Global.Server.RequestUpdatePassword(username, password);
+            bool success = await AwaitResponse();
+        }
+
+        // landlords
+        private async void DeleteLandlord()
+        {
+            // CONTINUE
+            bool success = await AwaitResponse();
+        }
+
+
         private void btnUserRefresh_Click(object sender, EventArgs e)
         {
             RefreshUsers();
@@ -76,6 +90,23 @@
         private void btnUserCreate_Click(object sender, EventArgs e)
         {
             CreateUser(txtbxUsername.Text.Trim(), txtbxPassword.Text, cmbobxUserRoles.Text);
+            txtbxUsername.Text = "";
+            txtbxPassword.Text = "";
+        }
+        private void btnUserUpdatePass_Click(object sender, EventArgs e)
+        {
+            string username = dgvUsers.SelectedRows[0].Cells["usernameDataGridViewTextBoxColumn"].Value?.ToString().Trim();
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to update password for the account '{username}'?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                UpdatePassword(username, txtbxPassword.Text);
+            }
+            txtbxPassword.Text = "";
         }
 
         // data
@@ -114,5 +145,6 @@
         {
             RefreshData();
         }
+
     }
 }

@@ -3,6 +3,7 @@ using WebSocketSharp;
 using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Forms;
+using System.Data;
 
 namespace iLet4You
 {
@@ -108,6 +109,10 @@ namespace iLet4You
                         break;
 
                     case "create_account_success":
+                        AdminPanel.ResultReceived(true);
+                        break;
+
+                    case "update_password_success":
                         AdminPanel.ResultReceived(true);
                         break;
 
@@ -448,6 +453,27 @@ namespace iLet4You
                 username = username,
                 password = password,
                 role = role
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RequestUpdatePassword(string username, string password)
+        {
+            var request = new
+            {
+                action = "update_password",
+                username = username,
+                password = password,
             };
 
             string jsonMessage = JsonSerializer.Serialize(request);
