@@ -70,11 +70,8 @@
             notesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             landlordBindingSource = new BindingSource(components);
             tabPage3 = new TabPage();
-            tabPage4 = new TabPage();
-            tabPage5 = new TabPage();
-            tabPage6 = new TabPage();
+            btnTenantRefresh = new Button();
             dgvTenants = new DataGridView();
-            tenantBindingSource = new BindingSource(components);
             TenantId = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -85,7 +82,25 @@
             dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
-            btnTenantRefresh = new Button();
+            tenantBindingSource = new BindingSource(components);
+            tabPage4 = new TabPage();
+            btnPropertyRefresh = new Button();
+            dgvProperties = new DataGridView();
+            PropertyId = new DataGridViewTextBoxColumn();
+            LandlordId = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            RentAmount = new DataGridViewTextBoxColumn();
+            GasCertExpiry = new DataGridViewTextBoxColumn();
+            EPCExpiry = new DataGridViewTextBoxColumn();
+            EICRExpiry = new DataGridViewTextBoxColumn();
+            EPCRating = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
+            propertyBindingSource = new BindingSource(components);
+            tabPage5 = new TabPage();
+            tabPage6 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -96,6 +111,9 @@
             tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTenants).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).BeginInit();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -419,21 +437,21 @@
             // landlordIdDataGridViewTextBoxColumn
             // 
             landlordIdDataGridViewTextBoxColumn.DataPropertyName = "LandlordId";
-            landlordIdDataGridViewTextBoxColumn.HeaderText = "LandlordId";
+            landlordIdDataGridViewTextBoxColumn.HeaderText = "Landlord ID";
             landlordIdDataGridViewTextBoxColumn.Name = "landlordIdDataGridViewTextBoxColumn";
             landlordIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // firstNameDataGridViewTextBoxColumn
             // 
             firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
-            firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
+            firstNameDataGridViewTextBoxColumn.HeaderText = "First Name";
             firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
             firstNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lastNameDataGridViewTextBoxColumn
             // 
             lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
-            lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
+            lastNameDataGridViewTextBoxColumn.HeaderText = "Last Name";
             lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
             lastNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -447,7 +465,7 @@
             // phoneNumberDataGridViewTextBoxColumn
             // 
             phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
-            phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
+            phoneNumberDataGridViewTextBoxColumn.HeaderText = "Phone Number";
             phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
             phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -481,8 +499,111 @@
             tabPage3.Text = "Tenants";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // btnTenantRefresh
+            // 
+            btnTenantRefresh.Location = new Point(850, 428);
+            btnTenantRefresh.Name = "btnTenantRefresh";
+            btnTenantRefresh.Size = new Size(75, 23);
+            btnTenantRefresh.TabIndex = 14;
+            btnTenantRefresh.Text = "Refresh List";
+            btnTenantRefresh.UseVisualStyleBackColor = true;
+            btnTenantRefresh.Click += btnTenantRefresh_Click;
+            // 
+            // dgvTenants
+            // 
+            dgvTenants.AllowUserToAddRows = false;
+            dgvTenants.AllowUserToDeleteRows = false;
+            dgvTenants.AutoGenerateColumns = false;
+            dgvTenants.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTenants.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTenants.Columns.AddRange(new DataGridViewColumn[] { TenantId, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, HouseNo, AddressLine1, City, PostCode, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7 });
+            dgvTenants.DataSource = tenantBindingSource;
+            dgvTenants.Location = new Point(6, 6);
+            dgvTenants.MultiSelect = false;
+            dgvTenants.Name = "dgvTenants";
+            dgvTenants.ReadOnly = true;
+            dgvTenants.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvTenants.Size = new Size(1118, 403);
+            dgvTenants.TabIndex = 13;
+            // 
+            // TenantId
+            // 
+            TenantId.DataPropertyName = "TenantId";
+            TenantId.HeaderText = "Tenant ID";
+            TenantId.Name = "TenantId";
+            TenantId.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "FirstName";
+            dataGridViewTextBoxColumn2.HeaderText = "First Name";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "LastName";
+            dataGridViewTextBoxColumn3.HeaderText = "Last Name";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // HouseNo
+            // 
+            HouseNo.DataPropertyName = "HouseNo";
+            HouseNo.HeaderText = "House No";
+            HouseNo.Name = "HouseNo";
+            HouseNo.ReadOnly = true;
+            // 
+            // AddressLine1
+            // 
+            AddressLine1.DataPropertyName = "AddressLine1";
+            AddressLine1.HeaderText = "Address Line 1";
+            AddressLine1.Name = "AddressLine1";
+            AddressLine1.ReadOnly = true;
+            // 
+            // City
+            // 
+            City.DataPropertyName = "City";
+            City.HeaderText = "City";
+            City.Name = "City";
+            City.ReadOnly = true;
+            // 
+            // PostCode
+            // 
+            PostCode.DataPropertyName = "PostCode";
+            PostCode.HeaderText = "Postcode";
+            PostCode.Name = "PostCode";
+            PostCode.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "PhoneNumber";
+            dataGridViewTextBoxColumn5.HeaderText = "Phone No";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.DataPropertyName = "Email";
+            dataGridViewTextBoxColumn6.HeaderText = "Email";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.DataPropertyName = "Notes";
+            dataGridViewTextBoxColumn7.HeaderText = "Notes";
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // tenantBindingSource
+            // 
+            tenantBindingSource.DataSource = typeof(Tenant);
+            // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(btnPropertyRefresh);
+            tabPage4.Controls.Add(dgvProperties);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
@@ -490,6 +611,121 @@
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Properties";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnPropertyRefresh
+            // 
+            btnPropertyRefresh.Location = new Point(890, 441);
+            btnPropertyRefresh.Name = "btnPropertyRefresh";
+            btnPropertyRefresh.Size = new Size(75, 23);
+            btnPropertyRefresh.TabIndex = 15;
+            btnPropertyRefresh.Text = "Refresh List";
+            btnPropertyRefresh.UseVisualStyleBackColor = true;
+            btnPropertyRefresh.Click += btnPropertyRefresh_Click;
+            // 
+            // dgvProperties
+            // 
+            dgvProperties.AllowUserToAddRows = false;
+            dgvProperties.AllowUserToDeleteRows = false;
+            dgvProperties.AutoGenerateColumns = false;
+            dgvProperties.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProperties.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProperties.Columns.AddRange(new DataGridViewColumn[] { PropertyId, LandlordId, dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, dataGridViewTextBoxColumn15 });
+            dgvProperties.DataSource = propertyBindingSource;
+            dgvProperties.Location = new Point(3, 6);
+            dgvProperties.MultiSelect = false;
+            dgvProperties.Name = "dgvProperties";
+            dgvProperties.ReadOnly = true;
+            dgvProperties.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProperties.Size = new Size(1118, 429);
+            dgvProperties.TabIndex = 14;
+            // 
+            // PropertyId
+            // 
+            PropertyId.DataPropertyName = "PropertyId";
+            PropertyId.HeaderText = "Property ID";
+            PropertyId.Name = "PropertyId";
+            PropertyId.ReadOnly = true;
+            // 
+            // LandlordId
+            // 
+            LandlordId.DataPropertyName = "LandlordId";
+            LandlordId.HeaderText = "Landlord ID";
+            LandlordId.Name = "LandlordId";
+            LandlordId.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "TenantId";
+            dataGridViewTextBoxColumn1.HeaderText = "Tenant ID";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            dataGridViewTextBoxColumn10.DataPropertyName = "AddressLine1";
+            dataGridViewTextBoxColumn10.HeaderText = "Address Line 1";
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.DataPropertyName = "City";
+            dataGridViewTextBoxColumn11.HeaderText = "City";
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.DataPropertyName = "PostCode";
+            dataGridViewTextBoxColumn12.HeaderText = "Postcode";
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // RentAmount
+            // 
+            RentAmount.DataPropertyName = "RentAmount";
+            RentAmount.HeaderText = "Rent Amount";
+            RentAmount.Name = "RentAmount";
+            RentAmount.ReadOnly = true;
+            // 
+            // GasCertExpiry
+            // 
+            GasCertExpiry.DataPropertyName = "GasCertExpiry";
+            GasCertExpiry.HeaderText = "Gas Cert. Expiry";
+            GasCertExpiry.Name = "GasCertExpiry";
+            GasCertExpiry.ReadOnly = true;
+            // 
+            // EPCExpiry
+            // 
+            EPCExpiry.DataPropertyName = "EPCExpiry";
+            EPCExpiry.HeaderText = "EPC Expiry";
+            EPCExpiry.Name = "EPCExpiry";
+            EPCExpiry.ReadOnly = true;
+            // 
+            // EICRExpiry
+            // 
+            EICRExpiry.DataPropertyName = "EICRExpiry";
+            EICRExpiry.HeaderText = "EICR Expiry";
+            EICRExpiry.Name = "EICRExpiry";
+            EICRExpiry.ReadOnly = true;
+            // 
+            // EPCRating
+            // 
+            EPCRating.DataPropertyName = "EPCRating";
+            EPCRating.HeaderText = "EPC Rating";
+            EPCRating.Name = "EPCRating";
+            EPCRating.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            dataGridViewTextBoxColumn15.DataPropertyName = "Notes";
+            dataGridViewTextBoxColumn15.HeaderText = "Notes";
+            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // propertyBindingSource
+            // 
+            propertyBindingSource.DataSource = typeof(Property);
             // 
             // tabPage5
             // 
@@ -511,107 +747,6 @@
             tabPage6.Text = "QuickLinks";
             tabPage6.UseVisualStyleBackColor = true;
             // 
-            // dgvTenants
-            // 
-            dgvTenants.AllowUserToAddRows = false;
-            dgvTenants.AllowUserToDeleteRows = false;
-            dgvTenants.AutoGenerateColumns = false;
-            dgvTenants.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvTenants.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTenants.Columns.AddRange(new DataGridViewColumn[] { TenantId, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, HouseNo, AddressLine1, City, PostCode, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7 });
-            dgvTenants.DataSource = tenantBindingSource;
-            dgvTenants.Location = new Point(6, 6);
-            dgvTenants.MultiSelect = false;
-            dgvTenants.Name = "dgvTenants";
-            dgvTenants.ReadOnly = true;
-            dgvTenants.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTenants.Size = new Size(1118, 403);
-            dgvTenants.TabIndex = 13;
-            // 
-            // tenantBindingSource
-            // 
-            tenantBindingSource.DataSource = typeof(Tenant);
-            // 
-            // TenantId
-            // 
-            TenantId.DataPropertyName = "TenantId";
-            TenantId.HeaderText = "TenantId";
-            TenantId.Name = "TenantId";
-            TenantId.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "FirstName";
-            dataGridViewTextBoxColumn2.HeaderText = "FirstName";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "LastName";
-            dataGridViewTextBoxColumn3.HeaderText = "LastName";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // HouseNo
-            // 
-            HouseNo.DataPropertyName = "HouseNo";
-            HouseNo.HeaderText = "HouseNo";
-            HouseNo.Name = "HouseNo";
-            HouseNo.ReadOnly = true;
-            // 
-            // AddressLine1
-            // 
-            AddressLine1.DataPropertyName = "AddressLine1";
-            AddressLine1.HeaderText = "AddressLine1";
-            AddressLine1.Name = "AddressLine1";
-            AddressLine1.ReadOnly = true;
-            // 
-            // City
-            // 
-            City.DataPropertyName = "City";
-            City.HeaderText = "City";
-            City.Name = "City";
-            City.ReadOnly = true;
-            // 
-            // PostCode
-            // 
-            PostCode.DataPropertyName = "PostCode";
-            PostCode.HeaderText = "PostCode";
-            PostCode.Name = "PostCode";
-            PostCode.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.DataPropertyName = "PhoneNumber";
-            dataGridViewTextBoxColumn5.HeaderText = "PhoneNumber";
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.DataPropertyName = "Email";
-            dataGridViewTextBoxColumn6.HeaderText = "Email";
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewTextBoxColumn7.DataPropertyName = "Notes";
-            dataGridViewTextBoxColumn7.HeaderText = "Notes";
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // btnTenantRefresh
-            // 
-            btnTenantRefresh.Location = new Point(850, 428);
-            btnTenantRefresh.Name = "btnTenantRefresh";
-            btnTenantRefresh.Size = new Size(75, 23);
-            btnTenantRefresh.TabIndex = 14;
-            btnTenantRefresh.Text = "Refresh List";
-            btnTenantRefresh.UseVisualStyleBackColor = true;
-            btnTenantRefresh.Click += btnTenantRefresh_Click;
-            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -632,6 +767,9 @@
             tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvTenants).EndInit();
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).EndInit();
+            tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -667,13 +805,6 @@
         private Label label6;
         private Button btnLandlordRefresh;
         private DataGridView dgvLandlords;
-        private DataGridViewTextBoxColumn landlordIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
         private TextBox textBox3;
         private RichTextBox richTextBox1;
         private Label label9;
@@ -682,6 +813,17 @@
         private TextBox textBox4;
         private Label label7;
         private DataGridView dgvTenants;
+        private BindingSource tenantBindingSource;
+        private Button btnTenantRefresh;
+        private DataGridViewTextBoxColumn landlordIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
+        private DataGridView dgvProperties;
+        private BindingSource propertyBindingSource;
         private DataGridViewTextBoxColumn TenantId;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -692,7 +834,18 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private BindingSource tenantBindingSource;
-        private Button btnTenantRefresh;
+        private DataGridViewTextBoxColumn PropertyId;
+        private DataGridViewTextBoxColumn LandlordId;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridViewTextBoxColumn RentAmount;
+        private DataGridViewTextBoxColumn GasCertExpiry;
+        private DataGridViewTextBoxColumn EPCExpiry;
+        private DataGridViewTextBoxColumn EICRExpiry;
+        private DataGridViewTextBoxColumn EPCRating;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private Button btnPropertyRefresh;
     }
 }

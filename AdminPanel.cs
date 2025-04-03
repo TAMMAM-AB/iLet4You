@@ -85,6 +85,7 @@
             bool success = await AwaitResponse(); // wait for response
             dgvLandlords.DataSource = Global.Landlords?.GetAll();
             dgvTenants.DataSource = Global.Tenants?.GetAll();
+            dgvProperties.DataSource = Global.Properties?.GetAll();
         }
 
         private void btnLandlordRefresh_Click(object sender, EventArgs e)
@@ -93,6 +94,11 @@
         }
 
         private void btnTenantRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void btnPropertyRefresh_Click(object sender, EventArgs e)
         {
             RefreshData();
         }

@@ -7,4 +7,5 @@ public static class Global
     public static Users? Users { get; set; } // admins only can get users
     public static Landlords? Landlords { get; set; }
     public static Tenants? Tenants { get; set; }
+    public static Properties? Properties { get; set; }
 }

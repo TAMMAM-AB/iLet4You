@@ -2,6 +2,7 @@
 using WebSocketSharp;
 using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Windows.Forms;
 
 namespace iLet4You
 {
@@ -68,6 +69,11 @@ namespace iLet4You
                     case "tenants_data":
                         AdminPanel.ResultReceived(true);
                         HandleTenantsData(data);
+                        break;
+
+                    case "properties_data":
+                        AdminPanel.ResultReceived(true);
+                        HandlePropertiesData(data);
                         break;
 
                     case "record_created":
@@ -181,6 +187,7 @@ namespace iLet4You
                 {
                     int LandlordID = landlord["LandlordID"] != null && landlord["LandlordID"].Type != JTokenType.Null
                         ? landlord["LandlordID"].Value<int>() : -1; // -1 if somehow no Landlord ID
+
                     string FirstName = landlord["FirstName"]?.ToString() ?? "Unknown";
                     string LastName = landlord["LastName"]?.ToString() ?? "Unknown";
                     string Address = landlord["Address"]?.ToString() ?? "Unknown";
@@ -195,7 +202,7 @@ namespace iLet4You
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing landlord data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -215,6 +222,7 @@ namespace iLet4You
                 {
                     int tenantID = tenant["TenantID"] != null && tenant["TenantID"].Type != JTokenType.Null
                         ? tenant["TenantID"].Value<int>() : -1;
+
                     string FirstName = tenant["FirstName"]?.ToString() ?? "Unknown";
                     string LastName = tenant["LastName"]?.ToString() ?? "Unknown";
                     string HouseNo = tenant["HouseNo"]?.ToString() ?? "Unknown";
@@ -232,7 +240,55 @@ namespace iLet4You
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing tenant data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandlePropertiesData(JToken data)
+        {
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<Property> propertyList = new();
+
+                foreach (var property in data)
+                {
+                    int PropertyID = property["PropertyID"] != null && property["PropertyID"].Type != JTokenType.Null
+                        ? property["PropertyID"].Value<int>() : -1;
+
+                    int LandlordID = property["LandlordID"] != null && property["LandlordID"].Type != JTokenType.Null
+                        ? property["LandlordID"].Value<int>() : -1;
+                    int TenantID = property["TenantID"] != null && property["TenantID"].Type != JTokenType.Null
+                        ? property["TenantID"].Value<int>() : -1;
+
+                    string AddressLine1 = property["AddressLine1"]?.ToString() ?? "Unknown";
+                    string City = property["City"]?.ToString() ?? "Unknown";
+                    string PostCode = property["PostCode"]?.ToString() ?? "Unknown";
+
+                    double RentAmount = property["RentAmount"] != null &&
+                        double.TryParse(property["RentAmount"].ToString(), out double rent) ? rent : 0.0;
+                    DateTime? GasCertExpiry = property["GasCertExpiry"] != null &&
+                        DateTime.TryParse(property["GasCertExpiry"].ToString(), out DateTime gasExpiry) ? gasExpiry : null;
+                    DateTime? EPCExpiry = property["EPCExpiry"] != null &&
+                        DateTime.TryParse(property["EPCExpiry"].ToString(), out DateTime epcExpiry) ? epcExpiry : null;
+                    DateTime? EICRExpiry = property["EICRExpiry"] != null &&
+                        DateTime.TryParse(property["EICRExpiry"].ToString(), out DateTime eicrExpiry) ? eicrExpiry : null;
+                    string EPCRating = property["EPCRating"]?.ToString() ?? "Unknown";
+                    string Notes = property["Notes"]?.ToString() ?? "Unknown";
+
+                    propertyList.Add(new Property(PropertyID, LandlordID, TenantID, AddressLine1, City, PostCode, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, Notes));
+                }
+
+                Global.Properties = new Properties(propertyList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing property data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
