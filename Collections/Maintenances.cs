@@ -1,14 +1,12 @@
-﻿public class Maintenances // collection class
+﻿public class Maintenances
 {
-    private readonly List<Maintenance> _maintenances = new(); // stores user records
+    private readonly List<Maintenance> _maintenances = new();
 
-    // load users from a data source (e.g., database)
     public Maintenances(IEnumerable<Maintenance> maintenances)
     {
-        _maintenances = maintenances.ToList(); // convert to list for easy management
+        _maintenances = maintenances.ToList();
     }
 
-    // retrieve all users
     public List<Maintenance> GetAll()
     {
         return _maintenances;

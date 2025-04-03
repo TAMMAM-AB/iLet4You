@@ -128,6 +128,7 @@
             dgvProperties.DataSource = Global.Properties?.GetAll();
             dgvMaintenances.DataSource = Global.Maintenances?.GetAll();
             dgvQuickLinks.DataSource = Global.QuickLinks?.GetAll();
+            dgvRents.DataSource = Global.Rents?.GetAll();
         }
 
         private void btnLandlordRefresh_Click(object sender, EventArgs e)
@@ -155,5 +156,9 @@
             RefreshData();
         }
 
+        private void btnRentRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }

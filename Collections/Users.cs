@@ -2,7 +2,7 @@
 {
     private readonly List<User> _users = new(); // stores user records
 
-    // load users from a data source (e.g., database)
+    // load users from server database
     public Users(IEnumerable<User> users)
     {
         _users = users.ToList(); // convert to list for easy management

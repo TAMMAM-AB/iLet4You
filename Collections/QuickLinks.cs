@@ -1,14 +1,12 @@
-﻿public class QuickLinks // collection class
+﻿public class QuickLinks
 {
-    private readonly List<QuickLink> _quickLinks = new(); // stores user records
+    private readonly List<QuickLink> _quickLinks = new();
 
-    // load users from a data source (e.g., database)
     public QuickLinks(IEnumerable<QuickLink> quickLinks)
     {
-        _quickLinks = quickLinks.ToList(); // convert to list for easy management
+        _quickLinks = quickLinks.ToList();
     }
 
-    // retrieve all users
     public List<QuickLink> GetAll()
     {
         return _quickLinks;

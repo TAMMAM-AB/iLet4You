@@ -10,4 +10,5 @@ public static class Global
     public static Properties? Properties { get; set; }
     public static Maintenances? Maintenances { get; set; }
     public static QuickLinks? QuickLinks { get; set; }
+    public static Rents? Rents { get; set; }
 }

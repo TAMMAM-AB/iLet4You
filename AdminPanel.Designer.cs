@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            btnUserUpdatePass = new Button();
             cmbobxUserRoles = new ComboBox();
             btnUserCreate = new Button();
             btnUserDelete = new Button();
@@ -116,7 +117,16 @@
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             uRLDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             quickLinkBindingSource = new BindingSource(components);
-            btnUserUpdatePass = new Button();
+            tabPage7 = new TabPage();
+            dgvRents = new DataGridView();
+            btnRentRefresh = new Button();
+            rentBindingSource = new BindingSource(components);
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
+            notesDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -136,6 +146,9 @@
             tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)quickLinkBindingSource).BeginInit();
+            tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rentBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -146,6 +159,7 @@
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage6);
+            tabControl1.Controls.Add(tabPage7);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -172,6 +186,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnUserUpdatePass
+            // 
+            btnUserUpdatePass.Location = new Point(596, 424);
+            btnUserUpdatePass.Name = "btnUserUpdatePass";
+            btnUserUpdatePass.Size = new Size(100, 38);
+            btnUserUpdatePass.TabIndex = 12;
+            btnUserUpdatePass.Text = "Update Password";
+            btnUserUpdatePass.UseVisualStyleBackColor = true;
+            btnUserUpdatePass.Click += btnUserUpdatePass_Click;
             // 
             // cmbobxUserRoles
             // 
@@ -899,15 +923,90 @@
             // 
             quickLinkBindingSource.DataSource = typeof(QuickLink);
             // 
-            // btnUserUpdatePass
+            // tabPage7
             // 
-            btnUserUpdatePass.Location = new Point(596, 424);
-            btnUserUpdatePass.Name = "btnUserUpdatePass";
-            btnUserUpdatePass.Size = new Size(100, 38);
-            btnUserUpdatePass.TabIndex = 12;
-            btnUserUpdatePass.Text = "Update Password";
-            btnUserUpdatePass.UseVisualStyleBackColor = true;
-            btnUserUpdatePass.Click += btnUserUpdatePass_Click;
+            tabPage7.Controls.Add(dgvRents);
+            tabPage7.Controls.Add(btnRentRefresh);
+            tabPage7.Location = new Point(4, 24);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new Padding(3);
+            tabPage7.Size = new Size(1130, 568);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Rents";
+            tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // dgvRents
+            // 
+            dgvRents.AllowUserToAddRows = false;
+            dgvRents.AllowUserToDeleteRows = false;
+            dgvRents.AutoGenerateColumns = false;
+            dgvRents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRents.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, notesDataGridViewTextBoxColumn1 });
+            dgvRents.DataSource = rentBindingSource;
+            dgvRents.Location = new Point(6, 6);
+            dgvRents.MultiSelect = false;
+            dgvRents.Name = "dgvRents";
+            dgvRents.ReadOnly = true;
+            dgvRents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRents.Size = new Size(1118, 398);
+            dgvRents.TabIndex = 16;
+            // 
+            // btnRentRefresh
+            // 
+            btnRentRefresh.Location = new Point(786, 471);
+            btnRentRefresh.Name = "btnRentRefresh";
+            btnRentRefresh.Size = new Size(75, 23);
+            btnRentRefresh.TabIndex = 15;
+            btnRentRefresh.Text = "Refresh List";
+            btnRentRefresh.UseVisualStyleBackColor = true;
+            btnRentRefresh.Click += btnRentRefresh_Click;
+            // 
+            // rentBindingSource
+            // 
+            rentBindingSource.DataSource = typeof(Rent);
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "RentId";
+            dataGridViewTextBoxColumn4.HeaderText = "Rent ID";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.DataPropertyName = "DueDate";
+            dataGridViewTextBoxColumn8.HeaderText = "Due Date";
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            dataGridViewTextBoxColumn9.DataPropertyName = "DateReceived";
+            dataGridViewTextBoxColumn9.HeaderText = "Date Received";
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.DataPropertyName = "RentAmount";
+            dataGridViewTextBoxColumn13.HeaderText = "Rent Amount";
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            dataGridViewTextBoxColumn14.DataPropertyName = "RentAmountPaid";
+            dataGridViewTextBoxColumn14.HeaderText = "Rent Amount Paid";
+            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // notesDataGridViewTextBoxColumn1
+            // 
+            notesDataGridViewTextBoxColumn1.DataPropertyName = "Notes";
+            notesDataGridViewTextBoxColumn1.HeaderText = "Notes";
+            notesDataGridViewTextBoxColumn1.Name = "notesDataGridViewTextBoxColumn1";
+            notesDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // AdminPanel
             // 
@@ -938,6 +1037,9 @@
             tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)quickLinkBindingSource).EndInit();
+            tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvRents).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rentBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -1031,5 +1133,20 @@
         private BindingSource maintenanceBindingSource;
         private Button btnMaintenanceRefresh;
         private Button btnUserUpdatePass;
+        private TabPage tabPage7;
+        private Button btnRentRefresh;
+        private DataGridViewTextBoxColumn rentIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dueDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateReceivedDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rentAmountDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rentAmountPaidDataGridViewTextBoxColumn;
+        private DataGridView dgvRents;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn1;
+        private BindingSource rentBindingSource;
     }
 }

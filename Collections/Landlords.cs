@@ -1,14 +1,12 @@
-﻿public class Landlords // collection class
+﻿public class Landlords
 {
-    private readonly List<Landlord> _landlords = new(); // stores user records
+    private readonly List<Landlord> _landlords = new();
 
-    // load users from a data source (e.g., database)
     public Landlords(IEnumerable<Landlord> landlords)
     {
-        _landlords = landlords.ToList(); // convert to list for easy management
+        _landlords = landlords.ToList();
     }
 
-    // retrieve all users
     public List<Landlord> GetAll()
     {
         return _landlords;

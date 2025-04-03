@@ -87,6 +87,11 @@ namespace iLet4You
                         AdminPanel.ResultReceived(true);
                         break;
 
+                    case "rents_data":
+                        HandleRentsData(data);
+                        AdminPanel.ResultReceived(true);
+                        break;
+
                     case "record_created":
                         MessageBox.Show("Record created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
@@ -331,7 +336,7 @@ namespace iLet4You
                     string Status = maintenance["Status"]?.ToString() ?? "Unknown";
 
                     DateTime DateReported = maintenance["DateReported"] != null &&
-                        DateTime.TryParse(maintenance["DateReported"].ToString(), out DateTime dateReported) ? dateReported : new DateTime(0000, 1, 1);
+                        DateTime.TryParse(maintenance["DateReported"].ToString(), out DateTime dateReported) ? dateReported : default;
                     DateTime? DateCompleted = maintenance["DateCompleted"] != null &&
                         DateTime.TryParse(maintenance["DateCompleted"].ToString(), out DateTime dateCompleted) ? dateCompleted : null;
 
@@ -342,7 +347,7 @@ namespace iLet4You
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing property data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing maintenance data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -373,7 +378,47 @@ namespace iLet4You
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error processing property data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing quick link data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HandleRentsData(JToken data)
+        {
+            try
+            {
+                if (data == null || !data.HasValues)
+                {
+                    MessageBox.Show("Received empty or invalid data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                List<Rent> rentList = new();
+
+                foreach (var rent in data)
+                {
+                    int RentID = rent["RentID"] != null && rent["RentID"].Type != JTokenType.Null
+                        ? rent["RentID"].Value<int>() : -1;
+
+                    DateTime DueDate = rent["DueDate"] != null &&
+                        DateTime.TryParse(rent["DueDate"].ToString(), out DateTime dueDate) ? dueDate : default;
+                    DateTime? DateReceived = DateTime.TryParse(
+                        rent["DateReceived"]?.ToString(), out DateTime dateReceived) ? dateReceived : null;
+
+                    int RentAmount = rent["RentAmount"] != null && rent["RentAmount"].Type != JTokenType.Null
+                        ? rent["RentAmount"].Value<int>() : 0;
+                    int RentAmountPaid = rent["RentAmountPaid"] != null && rent["RentAmountPaid"].Type != JTokenType.Null
+                        ? rent["RentAmountPaid"].Value<int>() : 0;
+
+                    string Notes = rent["Notes"]?.ToString();
+
+                    rentList.Add(new Rent(RentID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
+                }
+
+                Global.Rents = new Rents(rentList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error processing rent data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
