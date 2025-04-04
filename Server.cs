@@ -348,15 +348,11 @@ namespace iLet4You
 
                     string FirstName = tenant["FirstName"]?.ToString() ?? "Unknown";
                     string LastName = tenant["LastName"]?.ToString() ?? "Unknown";
-                    string HouseNo = tenant["HouseNo"]?.ToString() ?? "Unknown";
-                    string AddressLine1 = tenant["AddressLine1"]?.ToString() ?? "Unknown";
-                    string City = tenant["City"]?.ToString() ?? "Unknown";
-                    string PostCode = tenant["PostCode"]?.ToString() ?? "Unknown";
                     string PhoneNumber = tenant["PhoneNumber"]?.ToString() ?? "Unknown";
                     string Email = tenant["Email"]?.ToString() ?? "Unknown";
                     string Notes = tenant["Notes"]?.ToString() ?? "Unknown";
 
-                    tenantList.Add(new Tenant(TenantID, FirstName, LastName, HouseNo, AddressLine1, City, PostCode, PhoneNumber, Email, Notes));
+                    tenantList.Add(new Tenant(TenantID, FirstName, LastName, PhoneNumber, Email, Notes));
                 }
 
                 Global.Tenants = new Tenants(tenantList);
@@ -510,10 +506,11 @@ namespace iLet4You
                     DateTime? DateReceived = DateTime.TryParse(
                         rent["DateReceived"]?.ToString(), out DateTime dateReceived) ? dateReceived : null;
 
-                    int RentAmount = rent["RentAmount"] != null && rent["RentAmount"].Type != JTokenType.Null
-                        ? rent["RentAmount"].Value<int>() : 0;
-                    int RentAmountPaid = rent["RentAmountPaid"] != null && rent["RentAmountPaid"].Type != JTokenType.Null
-                        ? rent["RentAmountPaid"].Value<int>() : 0;
+                    double RentAmount = rent["RentAmount"] != null &&
+                        double.TryParse(rent["RentAmount"].ToString(), out double rentAmount) ? rentAmount : 0.0;
+
+                    double RentAmountPaid = rent["RentAmountPaid"] != null &&
+                        double.TryParse(rent["RentAmountPaid"].ToString(), out double rentAmountPaid) ? rentAmountPaid : 0.0;
 
                     string Notes = rent["Notes"]?.ToString();
 

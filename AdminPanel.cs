@@ -115,16 +115,12 @@ namespace iLet4You
         }
 
         // tenants
-        private async void CreateTenant(string fName, string lName, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        private async void CreateTenant(string fName, string lName, string phone, string email, string notes)
         {
             var tenantValues = new Dictionary<string, object>
             {
                 { "FirstName", $"{fName}" },
                 { "LastName", $"{lName}" },
-                { "HouseNo", $"{houseNo}" },
-                { "AddressLine1", $"{address1}" },
-                { "City", $"{city}" },
-                { "PostCode", $"{postcode}" },
                 { "PhoneNumber", $"{phone}" },
                 { "Email", $"{email}" },
                 { "Notes", $"{notes}" }
@@ -135,16 +131,12 @@ namespace iLet4You
             bool success = await AwaitResponse();
         }
 
-        private async void UpdateTenant(int id, string fName, string lName, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        private async void UpdateTenant(int id, string fName, string lName, string phone, string email, string notes)
         {
             var tenantValues = new Dictionary<string, object>
             {
                 { "FirstName", $"{fName}" },
                 { "LastName", $"{lName}" },
-                { "HouseNo", $"{houseNo}" },
-                { "AddressLine1", $"{address1}" },
-                { "City", $"{city}" },
-                { "PostCode", $"{postcode}" },
                 { "PhoneNumber", $"{phone}" },
                 { "Email", $"{email}" },
                 { "Notes", $"{notes}" }
@@ -163,6 +155,54 @@ namespace iLet4You
         }
 
         // properties
+        /* CONTINUE
+        private async void CreateProperty(int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        {
+            var tenantValues = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "HouseNo", $"{houseNo}" },
+                { "AddressLine1", $"{address1}" },
+                { "City", $"{city}" },
+                { "PostCode", $"{postcode}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.propertiesTable, tenantValues);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateProperty(int id, string fName, string lName, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        {
+            var tenantValues = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "HouseNo", $"{houseNo}" },
+                { "AddressLine1", $"{address1}" },
+                { "City", $"{city}" },
+                { "PostCode", $"{postcode}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.propertiesTable, id, tenantValues);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteProperty(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.propertiesTable, id);
+            bool success = await AwaitResponse();
+        }
+        */
 
         // fetch
         private async void RefreshData()
@@ -422,26 +462,6 @@ namespace iLet4You
                 MessageBox.Show("Last Name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(txtbxtHNo.Text.Trim()))
-            {
-                MessageBox.Show("House No. is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtbxtAdrs1.Text.Trim()))
-            {
-                MessageBox.Show("Address is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtbxtCity.Text.Trim()))
-            {
-                MessageBox.Show("City is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtbxtPstcd.Text.Trim()))
-            {
-                MessageBox.Show("Postcode is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
             return true;
         }
 
@@ -451,24 +471,16 @@ namespace iLet4You
 
             string fName = txtbxtFName.Text.Trim();
             string lName = txtbxtLName.Text.Trim();
-            string house = txtbxtHNo.Text.Trim();
-            string address1 = txtbxtAdrs1.Text.Trim();
-            string city = txtbxtCity.Text.Trim();
-            string postcode = txtbxtPstcd.Text.Trim();
             string phone = txtbxtPhone.Text.Trim();
             string email = txtbxtEmail.Text.Trim();
             string notes = rchtxtbxtNotes.Text.Trim();
 
-            CreateTenant(fName, lName, house, address1, city, postcode, phone, email, notes);
+            CreateTenant(fName, lName, phone, email, notes);
             await Task.Delay(500);
             RefreshData();
 
             txtbxtFName.Text = "";
             txtbxtLName.Text = "";
-            txtbxtHNo.Text = "";
-            txtbxtAdrs1.Text = "";
-            txtbxtCity.Text = "";
-            txtbxtPstcd.Text = "";
             txtbxtPhone.Text = "";
             txtbxtEmail.Text = "";
             rchtxtbxtNotes.Text = "";
@@ -491,10 +503,6 @@ namespace iLet4You
 
             string fName = txtbxtFName.Text.Trim();
             string lName = txtbxtLName.Text.Trim();
-            string house = txtbxtHNo.Text.Trim();
-            string address1 = txtbxtAdrs1.Text.Trim();
-            string city = txtbxtCity.Text.Trim();
-            string postcode = txtbxtPstcd.Text.Trim();
             string phone = txtbxtPhone.Text.Trim();
             string email = txtbxtEmail.Text.Trim();
             string notes = rchtxtbxtNotes.Text.Trim();
@@ -507,16 +515,12 @@ namespace iLet4You
 
             if (result == DialogResult.Yes)
             {
-                UpdateTenant(id, fName, lName, house, address1, city, postcode, phone, email, notes);
+                UpdateTenant(id, fName, lName, phone, email, notes);
                 await Task.Delay(500);
                 RefreshData();
 
                 txtbxtFName.Text = "";
                 txtbxtLName.Text = "";
-                txtbxtHNo.Text = "";
-                txtbxtAdrs1.Text = "";
-                txtbxtCity.Text = "";
-                txtbxtPstcd.Text = "";
                 txtbxtPhone.Text = "";
                 txtbxtEmail.Text = "";
                 rchtxtbxtNotes.Text = "";
@@ -549,5 +553,7 @@ namespace iLet4You
                 RefreshData();
             }
         }
+
+
     }
 }

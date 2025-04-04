@@ -4,7 +4,7 @@
     int? PropertyId,
     DateTime DueDate,
     DateTime? DateReceived,
-    int RentAmount,
-    int RentAmountPaid,
+    double RentAmount,
+    double RentAmountPaid,
     string? Notes
 );

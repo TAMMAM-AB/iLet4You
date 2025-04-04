@@ -76,35 +76,17 @@
             label18 = new Label();
             txtbxtPhone = new TextBox();
             label17 = new Label();
-            txtbxtPstcd = new TextBox();
-            label16 = new Label();
             btnTenantUpdate = new Button();
             rchtxtbxtNotes = new RichTextBox();
             label10 = new Label();
-            txtbxtCity = new TextBox();
-            label11 = new Label();
-            txtbxtHNo = new TextBox();
-            label12 = new Label();
-            txtbxtAdrs1 = new TextBox();
             btnTenantCreate = new Button();
             btnTenantDelete = new Button();
             txtbxtLName = new TextBox();
             label13 = new Label();
-            label14 = new Label();
             txtbxtFName = new TextBox();
             label15 = new Label();
             btnTenantRefresh = new Button();
             dgvTenants = new DataGridView();
-            TenantId = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            HouseNo = new DataGridViewTextBoxColumn();
-            AddressLine1 = new DataGridViewTextBoxColumn();
-            City = new DataGridViewTextBoxColumn();
-            PostCode = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             tenantBindingSource = new BindingSource(components);
             tabPage4 = new TabPage();
             btnPropertyRefresh = new Button();
@@ -151,6 +133,12 @@
             notesDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             rentBindingSource = new BindingSource(components);
             btnRentRefresh = new Button();
+            TenantId = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -577,21 +565,13 @@
             tabPage3.Controls.Add(label18);
             tabPage3.Controls.Add(txtbxtPhone);
             tabPage3.Controls.Add(label17);
-            tabPage3.Controls.Add(txtbxtPstcd);
-            tabPage3.Controls.Add(label16);
             tabPage3.Controls.Add(btnTenantUpdate);
             tabPage3.Controls.Add(rchtxtbxtNotes);
             tabPage3.Controls.Add(label10);
-            tabPage3.Controls.Add(txtbxtCity);
-            tabPage3.Controls.Add(label11);
-            tabPage3.Controls.Add(txtbxtHNo);
-            tabPage3.Controls.Add(label12);
-            tabPage3.Controls.Add(txtbxtAdrs1);
             tabPage3.Controls.Add(btnTenantCreate);
             tabPage3.Controls.Add(btnTenantDelete);
             tabPage3.Controls.Add(txtbxtLName);
             tabPage3.Controls.Add(label13);
-            tabPage3.Controls.Add(label14);
             tabPage3.Controls.Add(txtbxtFName);
             tabPage3.Controls.Add(label15);
             tabPage3.Controls.Add(btnTenantRefresh);
@@ -606,7 +586,7 @@
             // 
             // txtbxtEmail
             // 
-            txtbxtEmail.Location = new Point(480, 418);
+            txtbxtEmail.Location = new Point(474, 373);
             txtbxtEmail.Name = "txtbxtEmail";
             txtbxtEmail.Size = new Size(150, 23);
             txtbxtEmail.TabIndex = 50;
@@ -614,7 +594,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(480, 401);
+            label18.Location = new Point(474, 356);
             label18.Name = "label18";
             label18.Size = new Size(36, 15);
             label18.TabIndex = 49;
@@ -622,7 +602,7 @@
             // 
             // txtbxtPhone
             // 
-            txtbxtPhone.Location = new Point(324, 418);
+            txtbxtPhone.Location = new Point(318, 373);
             txtbxtPhone.Name = "txtbxtPhone";
             txtbxtPhone.Size = new Size(150, 23);
             txtbxtPhone.TabIndex = 48;
@@ -630,27 +610,11 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(324, 401);
+            label17.Location = new Point(318, 356);
             label17.Name = "label17";
             label17.Size = new Size(63, 15);
             label17.TabIndex = 47;
             label17.Text = "Phone No.";
-            // 
-            // txtbxtPstcd
-            // 
-            txtbxtPstcd.Location = new Point(218, 418);
-            txtbxtPstcd.Name = "txtbxtPstcd";
-            txtbxtPstcd.Size = new Size(100, 23);
-            txtbxtPstcd.TabIndex = 46;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new Point(218, 401);
-            label16.Name = "label16";
-            label16.Size = new Size(56, 15);
-            label16.TabIndex = 45;
-            label16.Text = "Postcode";
             // 
             // btnTenantUpdate
             // 
@@ -679,45 +643,6 @@
             label10.TabIndex = 42;
             label10.Text = "Notes";
             // 
-            // txtbxtCity
-            // 
-            txtbxtCity.Location = new Point(480, 373);
-            txtbxtCity.Name = "txtbxtCity";
-            txtbxtCity.Size = new Size(150, 23);
-            txtbxtCity.TabIndex = 41;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(480, 356);
-            label11.Name = "label11";
-            label11.Size = new Size(28, 15);
-            label11.TabIndex = 40;
-            label11.Text = "City";
-            // 
-            // txtbxtHNo
-            // 
-            txtbxtHNo.Location = new Point(218, 373);
-            txtbxtHNo.Name = "txtbxtHNo";
-            txtbxtHNo.Size = new Size(100, 23);
-            txtbxtHNo.TabIndex = 39;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(218, 356);
-            label12.Name = "label12";
-            label12.Size = new Size(88, 15);
-            label12.TabIndex = 38;
-            label12.Text = "House Number";
-            // 
-            // txtbxtAdrs1
-            // 
-            txtbxtAdrs1.Location = new Point(324, 373);
-            txtbxtAdrs1.Name = "txtbxtAdrs1";
-            txtbxtAdrs1.Size = new Size(150, 23);
-            txtbxtAdrs1.TabIndex = 37;
-            // 
             // btnTenantCreate
             // 
             btnTenantCreate.Location = new Point(706, 373);
@@ -740,34 +665,25 @@
             // 
             // txtbxtLName
             // 
-            txtbxtLName.Location = new Point(112, 373);
+            txtbxtLName.Location = new Point(162, 373);
             txtbxtLName.Name = "txtbxtLName";
-            txtbxtLName.Size = new Size(100, 23);
+            txtbxtLName.Size = new Size(150, 23);
             txtbxtLName.TabIndex = 34;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(112, 355);
+            label13.Location = new Point(162, 355);
             label13.Name = "label13";
             label13.Size = new Size(63, 15);
             label13.TabIndex = 33;
             label13.Text = "Last Name";
             // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(324, 355);
-            label14.Name = "label14";
-            label14.Size = new Size(83, 15);
-            label14.TabIndex = 32;
-            label14.Text = "Address Line 1";
-            // 
             // txtbxtFName
             // 
             txtbxtFName.Location = new Point(6, 373);
             txtbxtFName.Name = "txtbxtFName";
-            txtbxtFName.Size = new Size(100, 23);
+            txtbxtFName.Size = new Size(150, 23);
             txtbxtFName.TabIndex = 31;
             // 
             // label15
@@ -781,7 +697,7 @@
             // 
             // btnTenantRefresh
             // 
-            btnTenantRefresh.Location = new Point(1024, 372);
+            btnTenantRefresh.Location = new Point(1024, 373);
             btnTenantRefresh.Name = "btnTenantRefresh";
             btnTenantRefresh.Size = new Size(100, 23);
             btnTenantRefresh.TabIndex = 14;
@@ -796,7 +712,7 @@
             dgvTenants.AutoGenerateColumns = false;
             dgvTenants.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTenants.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTenants.Columns.AddRange(new DataGridViewColumn[] { TenantId, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, HouseNo, AddressLine1, City, PostCode, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7 });
+            dgvTenants.Columns.AddRange(new DataGridViewColumn[] { TenantId, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7 });
             dgvTenants.DataSource = tenantBindingSource;
             dgvTenants.Location = new Point(6, 6);
             dgvTenants.MultiSelect = false;
@@ -805,76 +721,6 @@
             dgvTenants.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTenants.Size = new Size(1118, 346);
             dgvTenants.TabIndex = 13;
-            // 
-            // TenantId
-            // 
-            TenantId.DataPropertyName = "TenantId";
-            TenantId.HeaderText = "Tenant ID";
-            TenantId.Name = "TenantId";
-            TenantId.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "FirstName";
-            dataGridViewTextBoxColumn2.HeaderText = "First Name";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "LastName";
-            dataGridViewTextBoxColumn3.HeaderText = "Last Name";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // HouseNo
-            // 
-            HouseNo.DataPropertyName = "HouseNo";
-            HouseNo.HeaderText = "House No";
-            HouseNo.Name = "HouseNo";
-            HouseNo.ReadOnly = true;
-            // 
-            // AddressLine1
-            // 
-            AddressLine1.DataPropertyName = "AddressLine1";
-            AddressLine1.HeaderText = "Address Line 1";
-            AddressLine1.Name = "AddressLine1";
-            AddressLine1.ReadOnly = true;
-            // 
-            // City
-            // 
-            City.DataPropertyName = "City";
-            City.HeaderText = "City";
-            City.Name = "City";
-            City.ReadOnly = true;
-            // 
-            // PostCode
-            // 
-            PostCode.DataPropertyName = "PostCode";
-            PostCode.HeaderText = "Postcode";
-            PostCode.Name = "PostCode";
-            PostCode.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.DataPropertyName = "PhoneNumber";
-            dataGridViewTextBoxColumn5.HeaderText = "Phone No.";
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.DataPropertyName = "Email";
-            dataGridViewTextBoxColumn6.HeaderText = "Email";
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewTextBoxColumn7.DataPropertyName = "Notes";
-            dataGridViewTextBoxColumn7.HeaderText = "Notes";
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // tenantBindingSource
             // 
@@ -1255,6 +1101,48 @@
             btnRentRefresh.UseVisualStyleBackColor = true;
             btnRentRefresh.Click += btnRentRefresh_Click;
             // 
+            // TenantId
+            // 
+            TenantId.DataPropertyName = "TenantId";
+            TenantId.HeaderText = "Tenant ID";
+            TenantId.Name = "TenantId";
+            TenantId.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "FirstName";
+            dataGridViewTextBoxColumn2.HeaderText = "First Name";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "LastName";
+            dataGridViewTextBoxColumn3.HeaderText = "Last Name";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "PhoneNumber";
+            dataGridViewTextBoxColumn5.HeaderText = "Phone No.";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.DataPropertyName = "Email";
+            dataGridViewTextBoxColumn6.HeaderText = "Email";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.DataPropertyName = "Notes";
+            dataGridViewTextBoxColumn7.HeaderText = "Notes";
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1385,16 +1273,10 @@
         private Button btnTenantUpdate;
         private RichTextBox rchtxtbxtNotes;
         private Label label10;
-        private TextBox txtbxtCity;
-        private Label label11;
-        private TextBox txtbxtHNo;
-        private Label label12;
-        private TextBox txtbxtAdrs1;
         private Button btnTenantCreate;
         private Button btnTenantDelete;
         private TextBox txtbxtLName;
         private Label label13;
-        private Label label14;
         private TextBox txtbxtFName;
         private Label label15;
         private DataGridViewTextBoxColumn landlordIdDataGridViewTextBoxColumn;
@@ -1404,21 +1286,15 @@
         private DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn TenantId;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn HouseNo;
-        private DataGridViewTextBoxColumn AddressLine1;
-        private DataGridViewTextBoxColumn City;
-        private DataGridViewTextBoxColumn PostCode;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private TextBox txtbxtEmail;
         private Label label18;
         private TextBox txtbxtPhone;
         private Label label17;
-        private TextBox txtbxtPstcd;
-        private Label label16;
+        private DataGridViewTextBoxColumn TenantId;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }
