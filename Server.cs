@@ -194,8 +194,6 @@ namespace iLet4You
                 password = hashedPassword
             };
 
-            Clipboard.SetText(hashedPassword);
-
             string jsonMessage = JsonSerializer.Serialize(loginData);
 
             try
