@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Forms;
 using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace iLet4You
 {
@@ -121,6 +123,18 @@ namespace iLet4You
                         AdminPanel.ResultReceived(true);
                         break;
 
+                    case "create_success":
+                        // HANDLE CREATE RECORD SUCCESS? (a MessageBox.Show is enough?)
+                        break;
+
+                    case "update_success":
+                        // HANDLE UPDATE RECORD SUCCESS? (a MessageBox.Show is enough?)
+                        break;
+                    
+                    case "delete_success":
+                        // HANDLE DELETE RECORD SUCCESS? (a MessageBox.Show is enough?)
+                        break;
+
                     case "error":
                         string errorMessage = data["message"]?.ToString();
                         MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -149,15 +163,38 @@ namespace iLet4You
             // open login page again (and close everything else)? idk
         }
 
+        // hashing
+
+        public string GenerateHash(string input)
+        {
+            if (input == null || input.Length == 0)
+                return "";
+
+            MD5 md5 = MD5.Create(); // create md5 instance
+            byte[] cool = md5.ComputeHash(System.Text.Encoding.ASCII.GetBytes(input)); // get the bytes and make hash of it
+
+            StringBuilder sb = new StringBuilder(); // making a string from it
+            foreach (byte b in cool)
+            {
+                sb.Append(b.ToString("x2"));
+            }
+
+            string hashedpassword = sb.ToString();
+            return hashedpassword;
+        }
+
         // login
         public void Login(string username, string password)
         {
+            string hashedPassword = GenerateHash(password); // hash the password
             var loginData = new
             {
                 action = "login",
                 username = username,
-                password = password
+                password = hashedPassword
             };
+
+            Clipboard.SetText(hashedPassword);
 
             string jsonMessage = JsonSerializer.Serialize(loginData);
 
@@ -177,6 +214,71 @@ namespace iLet4You
             var request = new
             {
                 action = "fetch_data"
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // request server to create a record in db
+        public void RequestCreateRecord(string table, Dictionary<string, object> values)
+        {
+            var request = new
+            {
+                action = "create",
+                table = table,
+                values = values
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RequestUpdateRecord(string table, int id, Dictionary<string, object> values)
+        {
+            var request = new
+            {
+                action = "update",
+                table = table,
+                id = id,
+                values = values
+            };
+
+            string jsonMessage = JsonSerializer.Serialize(request);
+
+            try
+            {
+                ws.Send(jsonMessage);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RequestDeleteRecord(string table, int id)
+        {
+            var request = new
+            {
+                action = "delete",
+                table = table,
+                id = id
             };
 
             string jsonMessage = JsonSerializer.Serialize(request);
@@ -211,7 +313,7 @@ namespace iLet4You
                     string FirstName = landlord["FirstName"]?.ToString() ?? "Unknown";
                     string LastName = landlord["LastName"]?.ToString() ?? "Unknown";
                     string Address = landlord["Address"]?.ToString() ?? "Unknown";
-                    string PhoneNumber = landlord["Address"]?.ToString() ?? "Unknown";
+                    string PhoneNumber = landlord["PhoneNumber"]?.ToString() ?? "Unknown";
                     string Email = landlord["Email"]?.ToString() ?? "Unknown";
                     string Notes = landlord["Notes"]?.ToString() ?? "Unknown";
 
@@ -240,7 +342,7 @@ namespace iLet4You
 
                 foreach (var tenant in data)
                 {
-                    int tenantID = tenant["TenantID"] != null && tenant["TenantID"].Type != JTokenType.Null
+                    int TenantID = tenant["TenantID"] != null && tenant["TenantID"].Type != JTokenType.Null
                         ? tenant["TenantID"].Value<int>() : -1;
 
                     string FirstName = tenant["FirstName"]?.ToString() ?? "Unknown";
@@ -253,7 +355,7 @@ namespace iLet4You
                     string Email = tenant["Email"]?.ToString() ?? "Unknown";
                     string Notes = tenant["Notes"]?.ToString() ?? "Unknown";
 
-                    tenantList.Add(new Tenant(tenantID, FirstName, LastName, HouseNo, AddressLine1, City, PostCode, PhoneNumber, Email, Notes));
+                    tenantList.Add(new Tenant(TenantID, FirstName, LastName, HouseNo, AddressLine1, City, PostCode, PhoneNumber, Email, Notes));
                 }
 
                 Global.Tenants = new Tenants(tenantList);
@@ -399,6 +501,8 @@ namespace iLet4You
                     int RentID = rent["RentID"] != null && rent["RentID"].Type != JTokenType.Null
                         ? rent["RentID"].Value<int>() : -1;
 
+                    int? TenantID = rent["TenantID"]?.Value<int?>();
+
                     DateTime DueDate = rent["DueDate"] != null &&
                         DateTime.TryParse(rent["DueDate"].ToString(), out DateTime dueDate) ? dueDate : default;
                     DateTime? DateReceived = DateTime.TryParse(
@@ -411,7 +515,7 @@ namespace iLet4You
 
                     string Notes = rent["Notes"]?.ToString();
 
-                    rentList.Add(new Rent(RentID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
+                    rentList.Add(new Rent(RentID, TenantID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
                 }
 
                 Global.Rents = new Rents(rentList);
@@ -492,11 +596,12 @@ namespace iLet4You
 
         public void RequestCreateUser(string username, string password, string role)
         {
+            string hashedPassword = GenerateHash(password);
             var request = new
             {
                 action = "create_account",
                 username = username,
-                password = password,
+                password = hashedPassword,
                 role = role
             };
 
@@ -514,11 +619,12 @@ namespace iLet4You
 
         public void RequestUpdatePassword(string username, string password)
         {
+            string hashedPassword = GenerateHash(password);
             var request = new
             {
                 action = "update_password",
                 username = username,
-                password = password,
+                password = hashedPassword,
             };
 
             string jsonMessage = JsonSerializer.Serialize(request);
