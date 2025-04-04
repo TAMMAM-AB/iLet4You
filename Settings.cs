@@ -11,5 +11,5 @@
     public static string propertiesTable = "Properties";
     public static string quickLinksTable = "QuickLinks";
     public static string rentsTable = "Rents";
-    public static string tenntsTable = "Tenants";
+    public static string tenantsTable = "Tenants";
 }

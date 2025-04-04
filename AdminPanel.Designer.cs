@@ -72,6 +72,27 @@
             notesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             landlordBindingSource = new BindingSource(components);
             tabPage3 = new TabPage();
+            txtbxtEmail = new TextBox();
+            label18 = new Label();
+            txtbxtPhone = new TextBox();
+            label17 = new Label();
+            txtbxtPstcd = new TextBox();
+            label16 = new Label();
+            btnTenantUpdate = new Button();
+            rchtxtbxtNotes = new RichTextBox();
+            label10 = new Label();
+            txtbxtCity = new TextBox();
+            label11 = new Label();
+            txtbxtHNo = new TextBox();
+            label12 = new Label();
+            txtbxtAdrs1 = new TextBox();
+            btnTenantCreate = new Button();
+            btnTenantDelete = new Button();
+            txtbxtLName = new TextBox();
+            label13 = new Label();
+            label14 = new Label();
+            txtbxtFName = new TextBox();
+            label15 = new Label();
             btnTenantRefresh = new Button();
             dgvTenants = new DataGridView();
             TenantId = new DataGridViewTextBoxColumn();
@@ -120,8 +141,6 @@
             quickLinkBindingSource = new BindingSource(components);
             tabPage7 = new TabPage();
             dgvRents = new DataGridView();
-            rentBindingSource = new BindingSource(components);
-            btnRentRefresh = new Button();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -130,6 +149,8 @@
             dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
             notesDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            rentBindingSource = new BindingSource(components);
+            btnRentRefresh = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -166,7 +187,7 @@
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1138, 596);
+            tabControl1.Size = new Size(1138, 622);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -185,7 +206,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1130, 568);
+            tabPage1.Size = new Size(1130, 594);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Users";
             tabPage1.UseVisualStyleBackColor = true;
@@ -338,14 +359,14 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1130, 568);
+            tabPage2.Size = new Size(1130, 594);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Landlords";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnllUpdate
             // 
-            btnllUpdate.Location = new Point(652, 452);
+            btnllUpdate.Location = new Point(812, 384);
             btnllUpdate.Name = "btnllUpdate";
             btnllUpdate.Size = new Size(100, 23);
             btnllUpdate.TabIndex = 28;
@@ -355,16 +376,16 @@
             // 
             // rchtxtbxllNotes
             // 
-            rchtxtbxllNotes.Location = new Point(356, 394);
+            rchtxtbxllNotes.Location = new Point(6, 429);
             rchtxtbxllNotes.Name = "rchtxtbxllNotes";
-            rchtxtbxllNotes.Size = new Size(290, 171);
+            rchtxtbxllNotes.Size = new Size(1118, 159);
             rchtxtbxllNotes.TabIndex = 27;
             rchtxtbxllNotes.Text = "";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(356, 376);
+            label9.Location = new Point(6, 411);
             label9.Name = "label9";
             label9.Size = new Size(38, 15);
             label9.TabIndex = 26;
@@ -372,15 +393,15 @@
             // 
             // txtbxllEmail
             // 
-            txtbxllEmail.Location = new Point(112, 478);
+            txtbxllEmail.Location = new Point(530, 384);
             txtbxllEmail.Name = "txtbxllEmail";
-            txtbxllEmail.Size = new Size(100, 23);
+            txtbxllEmail.Size = new Size(150, 23);
             txtbxllEmail.TabIndex = 25;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(112, 460);
+            label8.Location = new Point(530, 367);
             label8.Name = "label8";
             label8.Size = new Size(36, 15);
             label8.TabIndex = 24;
@@ -388,30 +409,30 @@
             // 
             // txtbxllPhone
             // 
-            txtbxllPhone.Location = new Point(6, 478);
+            txtbxllPhone.Location = new Point(218, 384);
             txtbxllPhone.Name = "txtbxllPhone";
-            txtbxllPhone.Size = new Size(100, 23);
+            txtbxllPhone.Size = new Size(150, 23);
             txtbxllPhone.TabIndex = 23;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(6, 460);
+            label7.Location = new Point(218, 366);
             label7.Name = "label7";
-            label7.Size = new Size(88, 15);
+            label7.Size = new Size(63, 15);
             label7.TabIndex = 22;
-            label7.Text = "Phone Number";
+            label7.Text = "Phone No.";
             // 
             // txtbxllAddress
             // 
-            txtbxllAddress.Location = new Point(6, 434);
+            txtbxllAddress.Location = new Point(374, 384);
             txtbxllAddress.Name = "txtbxllAddress";
-            txtbxllAddress.Size = new Size(206, 23);
+            txtbxllAddress.Size = new Size(150, 23);
             txtbxllAddress.TabIndex = 21;
             // 
             // btnllCreate
             // 
-            btnllCreate.Location = new Point(652, 423);
+            btnllCreate.Location = new Point(706, 384);
             btnllCreate.Name = "btnllCreate";
             btnllCreate.Size = new Size(100, 23);
             btnllCreate.TabIndex = 20;
@@ -421,7 +442,7 @@
             // 
             // btnllDelete
             // 
-            btnllDelete.Location = new Point(652, 481);
+            btnllDelete.Location = new Point(918, 384);
             btnllDelete.Name = "btnllDelete";
             btnllDelete.Size = new Size(100, 23);
             btnllDelete.TabIndex = 19;
@@ -431,7 +452,7 @@
             // 
             // txtbxllLName
             // 
-            txtbxllLName.Location = new Point(112, 391);
+            txtbxllLName.Location = new Point(112, 384);
             txtbxllLName.Name = "txtbxllLName";
             txtbxllLName.Size = new Size(100, 23);
             txtbxllLName.TabIndex = 18;
@@ -439,7 +460,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(112, 373);
+            label4.Location = new Point(112, 366);
             label4.Name = "label4";
             label4.Size = new Size(63, 15);
             label4.TabIndex = 17;
@@ -448,7 +469,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(6, 416);
+            label5.Location = new Point(374, 366);
             label5.Name = "label5";
             label5.Size = new Size(49, 15);
             label5.TabIndex = 16;
@@ -456,7 +477,7 @@
             // 
             // txtbxllFName
             // 
-            txtbxllFName.Location = new Point(6, 391);
+            txtbxllFName.Location = new Point(6, 384);
             txtbxllFName.Name = "txtbxllFName";
             txtbxllFName.Size = new Size(100, 23);
             txtbxllFName.TabIndex = 15;
@@ -464,7 +485,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(6, 373);
+            label6.Location = new Point(6, 366);
             label6.Name = "label6";
             label6.Size = new Size(64, 15);
             label6.TabIndex = 14;
@@ -472,7 +493,7 @@
             // 
             // btnllRefresh
             // 
-            btnllRefresh.Location = new Point(652, 394);
+            btnllRefresh.Location = new Point(1024, 384);
             btnllRefresh.Name = "btnllRefresh";
             btnllRefresh.Size = new Size(100, 23);
             btnllRefresh.TabIndex = 13;
@@ -528,7 +549,7 @@
             // phoneNumberDataGridViewTextBoxColumn
             // 
             phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
-            phoneNumberDataGridViewTextBoxColumn.HeaderText = "Phone No";
+            phoneNumberDataGridViewTextBoxColumn.HeaderText = "Phone No.";
             phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
             phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -552,21 +573,217 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(txtbxtEmail);
+            tabPage3.Controls.Add(label18);
+            tabPage3.Controls.Add(txtbxtPhone);
+            tabPage3.Controls.Add(label17);
+            tabPage3.Controls.Add(txtbxtPstcd);
+            tabPage3.Controls.Add(label16);
+            tabPage3.Controls.Add(btnTenantUpdate);
+            tabPage3.Controls.Add(rchtxtbxtNotes);
+            tabPage3.Controls.Add(label10);
+            tabPage3.Controls.Add(txtbxtCity);
+            tabPage3.Controls.Add(label11);
+            tabPage3.Controls.Add(txtbxtHNo);
+            tabPage3.Controls.Add(label12);
+            tabPage3.Controls.Add(txtbxtAdrs1);
+            tabPage3.Controls.Add(btnTenantCreate);
+            tabPage3.Controls.Add(btnTenantDelete);
+            tabPage3.Controls.Add(txtbxtLName);
+            tabPage3.Controls.Add(label13);
+            tabPage3.Controls.Add(label14);
+            tabPage3.Controls.Add(txtbxtFName);
+            tabPage3.Controls.Add(label15);
             tabPage3.Controls.Add(btnTenantRefresh);
             tabPage3.Controls.Add(dgvTenants);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1130, 568);
+            tabPage3.Size = new Size(1130, 594);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Tenants";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // txtbxtEmail
+            // 
+            txtbxtEmail.Location = new Point(480, 418);
+            txtbxtEmail.Name = "txtbxtEmail";
+            txtbxtEmail.Size = new Size(150, 23);
+            txtbxtEmail.TabIndex = 50;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(480, 401);
+            label18.Name = "label18";
+            label18.Size = new Size(36, 15);
+            label18.TabIndex = 49;
+            label18.Text = "Email";
+            // 
+            // txtbxtPhone
+            // 
+            txtbxtPhone.Location = new Point(324, 418);
+            txtbxtPhone.Name = "txtbxtPhone";
+            txtbxtPhone.Size = new Size(150, 23);
+            txtbxtPhone.TabIndex = 48;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(324, 401);
+            label17.Name = "label17";
+            label17.Size = new Size(63, 15);
+            label17.TabIndex = 47;
+            label17.Text = "Phone No.";
+            // 
+            // txtbxtPstcd
+            // 
+            txtbxtPstcd.Location = new Point(218, 418);
+            txtbxtPstcd.Name = "txtbxtPstcd";
+            txtbxtPstcd.Size = new Size(100, 23);
+            txtbxtPstcd.TabIndex = 46;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(218, 401);
+            label16.Name = "label16";
+            label16.Size = new Size(56, 15);
+            label16.TabIndex = 45;
+            label16.Text = "Postcode";
+            // 
+            // btnTenantUpdate
+            // 
+            btnTenantUpdate.Location = new Point(812, 373);
+            btnTenantUpdate.Name = "btnTenantUpdate";
+            btnTenantUpdate.Size = new Size(100, 23);
+            btnTenantUpdate.TabIndex = 44;
+            btnTenantUpdate.Text = "Update";
+            btnTenantUpdate.UseVisualStyleBackColor = true;
+            btnTenantUpdate.Click += btnTenantUpdate_Click;
+            // 
+            // rchtxtbxtNotes
+            // 
+            rchtxtbxtNotes.Location = new Point(3, 444);
+            rchtxtbxtNotes.Name = "rchtxtbxtNotes";
+            rchtxtbxtNotes.Size = new Size(1121, 144);
+            rchtxtbxtNotes.TabIndex = 43;
+            rchtxtbxtNotes.Text = "";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(3, 426);
+            label10.Name = "label10";
+            label10.Size = new Size(38, 15);
+            label10.TabIndex = 42;
+            label10.Text = "Notes";
+            // 
+            // txtbxtCity
+            // 
+            txtbxtCity.Location = new Point(480, 373);
+            txtbxtCity.Name = "txtbxtCity";
+            txtbxtCity.Size = new Size(150, 23);
+            txtbxtCity.TabIndex = 41;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(480, 356);
+            label11.Name = "label11";
+            label11.Size = new Size(28, 15);
+            label11.TabIndex = 40;
+            label11.Text = "City";
+            // 
+            // txtbxtHNo
+            // 
+            txtbxtHNo.Location = new Point(218, 373);
+            txtbxtHNo.Name = "txtbxtHNo";
+            txtbxtHNo.Size = new Size(100, 23);
+            txtbxtHNo.TabIndex = 39;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(218, 356);
+            label12.Name = "label12";
+            label12.Size = new Size(88, 15);
+            label12.TabIndex = 38;
+            label12.Text = "House Number";
+            // 
+            // txtbxtAdrs1
+            // 
+            txtbxtAdrs1.Location = new Point(324, 373);
+            txtbxtAdrs1.Name = "txtbxtAdrs1";
+            txtbxtAdrs1.Size = new Size(150, 23);
+            txtbxtAdrs1.TabIndex = 37;
+            // 
+            // btnTenantCreate
+            // 
+            btnTenantCreate.Location = new Point(706, 373);
+            btnTenantCreate.Name = "btnTenantCreate";
+            btnTenantCreate.Size = new Size(100, 23);
+            btnTenantCreate.TabIndex = 36;
+            btnTenantCreate.Text = "Create";
+            btnTenantCreate.UseVisualStyleBackColor = true;
+            btnTenantCreate.Click += btnTenantCreate_Click;
+            // 
+            // btnTenantDelete
+            // 
+            btnTenantDelete.Location = new Point(918, 373);
+            btnTenantDelete.Name = "btnTenantDelete";
+            btnTenantDelete.Size = new Size(100, 23);
+            btnTenantDelete.TabIndex = 35;
+            btnTenantDelete.Text = "Delete";
+            btnTenantDelete.UseVisualStyleBackColor = true;
+            btnTenantDelete.Click += btnTenantDelete_Click;
+            // 
+            // txtbxtLName
+            // 
+            txtbxtLName.Location = new Point(112, 373);
+            txtbxtLName.Name = "txtbxtLName";
+            txtbxtLName.Size = new Size(100, 23);
+            txtbxtLName.TabIndex = 34;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(112, 355);
+            label13.Name = "label13";
+            label13.Size = new Size(63, 15);
+            label13.TabIndex = 33;
+            label13.Text = "Last Name";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(324, 355);
+            label14.Name = "label14";
+            label14.Size = new Size(83, 15);
+            label14.TabIndex = 32;
+            label14.Text = "Address Line 1";
+            // 
+            // txtbxtFName
+            // 
+            txtbxtFName.Location = new Point(6, 373);
+            txtbxtFName.Name = "txtbxtFName";
+            txtbxtFName.Size = new Size(100, 23);
+            txtbxtFName.TabIndex = 31;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(6, 355);
+            label15.Name = "label15";
+            label15.Size = new Size(64, 15);
+            label15.TabIndex = 30;
+            label15.Text = "First Name";
+            // 
             // btnTenantRefresh
             // 
-            btnTenantRefresh.Location = new Point(850, 428);
+            btnTenantRefresh.Location = new Point(1024, 372);
             btnTenantRefresh.Name = "btnTenantRefresh";
-            btnTenantRefresh.Size = new Size(75, 23);
+            btnTenantRefresh.Size = new Size(100, 23);
             btnTenantRefresh.TabIndex = 14;
             btnTenantRefresh.Text = "Refresh List";
             btnTenantRefresh.UseVisualStyleBackColor = true;
@@ -586,7 +803,7 @@
             dgvTenants.Name = "dgvTenants";
             dgvTenants.ReadOnly = true;
             dgvTenants.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTenants.Size = new Size(1118, 403);
+            dgvTenants.Size = new Size(1118, 346);
             dgvTenants.TabIndex = 13;
             // 
             // TenantId
@@ -641,7 +858,7 @@
             // dataGridViewTextBoxColumn5
             // 
             dataGridViewTextBoxColumn5.DataPropertyName = "PhoneNumber";
-            dataGridViewTextBoxColumn5.HeaderText = "Phone No";
+            dataGridViewTextBoxColumn5.HeaderText = "Phone No.";
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
@@ -670,7 +887,7 @@
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(1130, 568);
+            tabPage4.Size = new Size(1130, 594);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Properties";
             tabPage4.UseVisualStyleBackColor = true;
@@ -797,7 +1014,7 @@
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(1130, 568);
+            tabPage5.Size = new Size(1130, 594);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Maintenances";
             tabPage5.UseVisualStyleBackColor = true;
@@ -882,7 +1099,7 @@
             tabPage6.Location = new Point(4, 24);
             tabPage6.Name = "tabPage6";
             tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(1130, 568);
+            tabPage6.Size = new Size(1130, 594);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Quick Links";
             tabPage6.UseVisualStyleBackColor = true;
@@ -946,7 +1163,7 @@
             tabPage7.Location = new Point(4, 24);
             tabPage7.Name = "tabPage7";
             tabPage7.Padding = new Padding(3);
-            tabPage7.Size = new Size(1130, 568);
+            tabPage7.Size = new Size(1130, 594);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "Rents";
             tabPage7.UseVisualStyleBackColor = true;
@@ -967,20 +1184,6 @@
             dgvRents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRents.Size = new Size(1118, 398);
             dgvRents.TabIndex = 16;
-            // 
-            // rentBindingSource
-            // 
-            rentBindingSource.DataSource = typeof(Rent);
-            // 
-            // btnRentRefresh
-            // 
-            btnRentRefresh.Location = new Point(786, 471);
-            btnRentRefresh.Name = "btnRentRefresh";
-            btnRentRefresh.Size = new Size(75, 23);
-            btnRentRefresh.TabIndex = 15;
-            btnRentRefresh.Text = "Refresh List";
-            btnRentRefresh.UseVisualStyleBackColor = true;
-            btnRentRefresh.Click += btnRentRefresh_Click;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -1038,11 +1241,25 @@
             notesDataGridViewTextBoxColumn1.Name = "notesDataGridViewTextBoxColumn1";
             notesDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
+            // rentBindingSource
+            // 
+            rentBindingSource.DataSource = typeof(Rent);
+            // 
+            // btnRentRefresh
+            // 
+            btnRentRefresh.Location = new Point(786, 471);
+            btnRentRefresh.Name = "btnRentRefresh";
+            btnRentRefresh.Size = new Size(75, 23);
+            btnRentRefresh.TabIndex = 15;
+            btnRentRefresh.Text = "Refresh List";
+            btnRentRefresh.UseVisualStyleBackColor = true;
+            btnRentRefresh.Click += btnRentRefresh_Click;
+            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1162, 620);
+            ClientSize = new Size(1162, 646);
             Controls.Add(tabControl1);
             Name = "AdminPanel";
             Text = "AdminPanel";
@@ -1056,6 +1273,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvLandlords).EndInit();
             ((System.ComponentModel.ISupportInitialize)landlordBindingSource).EndInit();
             tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTenants).EndInit();
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).EndInit();
             tabPage4.ResumeLayout(false);
@@ -1117,16 +1335,6 @@
         private Button btnTenantRefresh;
         private DataGridView dgvProperties;
         private BindingSource propertyBindingSource;
-        private DataGridViewTextBoxColumn TenantId;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn HouseNo;
-        private DataGridViewTextBoxColumn AddressLine1;
-        private DataGridViewTextBoxColumn City;
-        private DataGridViewTextBoxColumn PostCode;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private DataGridViewTextBoxColumn PropertyId;
         private DataGridViewTextBoxColumn LandlordId;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1165,13 +1373,6 @@
         private DataGridViewTextBoxColumn rentAmountPaidDataGridViewTextBoxColumn;
         private DataGridView dgvRents;
         private BindingSource rentBindingSource;
-        private DataGridViewTextBoxColumn landlordIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
         private Button btnllUpdate;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn Column1;
@@ -1181,5 +1382,43 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn1;
+        private Button btnTenantUpdate;
+        private RichTextBox rchtxtbxtNotes;
+        private Label label10;
+        private TextBox txtbxtCity;
+        private Label label11;
+        private TextBox txtbxtHNo;
+        private Label label12;
+        private TextBox txtbxtAdrs1;
+        private Button btnTenantCreate;
+        private Button btnTenantDelete;
+        private TextBox txtbxtLName;
+        private Label label13;
+        private Label label14;
+        private TextBox txtbxtFName;
+        private Label label15;
+        private DataGridViewTextBoxColumn landlordIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn TenantId;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn HouseNo;
+        private DataGridViewTextBoxColumn AddressLine1;
+        private DataGridViewTextBoxColumn City;
+        private DataGridViewTextBoxColumn PostCode;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private TextBox txtbxtEmail;
+        private Label label18;
+        private TextBox txtbxtPhone;
+        private Label label17;
+        private TextBox txtbxtPstcd;
+        private Label label16;
     }
 }

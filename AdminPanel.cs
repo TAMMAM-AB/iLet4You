@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iLet4You
@@ -113,32 +114,114 @@ namespace iLet4You
             bool success = await AwaitResponse();
         }
 
-        // tenants - FIX DATABASE BEFORE DOING THIS
+        // tenants
+        private async void CreateTenant(string fName, string lName, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        {
+            var tenantValues = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "HouseNo", $"{houseNo}" },
+                { "AddressLine1", $"{address1}" },
+                { "City", $"{city}" },
+                { "PostCode", $"{postcode}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.tenantsTable, tenantValues);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateTenant(int id, string fName, string lName, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        {
+            var tenantValues = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "HouseNo", $"{houseNo}" },
+                { "AddressLine1", $"{address1}" },
+                { "City", $"{city}" },
+                { "PostCode", $"{postcode}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.tenantsTable, id, tenantValues);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteTenant(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.tenantsTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // properties
+
+        // fetch
+        private async void RefreshData()
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestData();
+            bool success = await AwaitResponse(); // wait for response
+
+            dgvLandlords.DataSource = null;
+            dgvTenants.DataSource = null;
+            dgvProperties.DataSource = null;
+            dgvMaintenances.DataSource = null;
+            dgvQuickLinks.DataSource = null;
+            dgvRents.DataSource = null;
+
+            dgvLandlords.DataSource = Global.Landlords?.GetAll();
+            dgvTenants.DataSource = Global.Tenants?.GetAll();
+            dgvProperties.DataSource = Global.Properties?.GetAll();
+            dgvMaintenances.DataSource = Global.Maintenances?.GetAll();
+            dgvQuickLinks.DataSource = Global.QuickLinks?.GetAll();
+            dgvRents.DataSource = Global.Rents?.GetAll();
+        }
 
         private void btnUserRefresh_Click(object sender, EventArgs e)
         {
             RefreshUsers();
         }
 
-        private async void btnUserDelete_Click(object sender, EventArgs e)
+        private void btnLandlordRefresh_Click(object sender, EventArgs e)
         {
-            if (dgvUsers.SelectedRows.Count > 0)
-            {
-                string username = dgvUsers.SelectedRows[0].Cells["usernameDataGridViewTextBoxColumn"].Value?.ToString().Trim();
-                DialogResult result = MessageBox.Show(
-                    $"Are you sure you want to delete the account '{username}'?",
-                    "Confirm Deletion",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    DeleteUser(username);
-                    await Task.Delay(500);
-                    RefreshUsers();
-                }
-            }
+            RefreshData();
         }
+
+        private void btnTenantRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void btnPropertyRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void btnQuickLinkRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void btnMaintenanceRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void btnRentRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        // users
 
         private async void btnUserCreate_Click(object sender, EventArgs e)
         {
@@ -189,60 +272,27 @@ namespace iLet4You
             }
         }
 
-        // fetch
-        private async void RefreshData()
+        private async void btnUserDelete_Click(object sender, EventArgs e)
         {
-            result = new TaskCompletionSource<bool>();
-            Global.Server.RequestData();
-            bool success = await AwaitResponse(); // wait for response
+            if (dgvUsers.SelectedRows.Count > 0)
+            {
+                string username = dgvUsers.SelectedRows[0].Cells["usernameDataGridViewTextBoxColumn"].Value?.ToString().Trim();
+                DialogResult result = MessageBox.Show(
+                    $"Are you sure you want to delete the account '{username}'?",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
 
-            dgvLandlords.DataSource = null;
-            dgvTenants.DataSource = null;
-            dgvProperties.DataSource = null;
-            dgvMaintenances.DataSource = null;
-            dgvQuickLinks.DataSource = null;
-            dgvRents.DataSource = null;
-
-            dgvLandlords.DataSource = Global.Landlords?.GetAll();
-            dgvTenants.DataSource = Global.Tenants?.GetAll();
-            dgvProperties.DataSource = Global.Properties?.GetAll();
-            dgvMaintenances.DataSource = Global.Maintenances?.GetAll();
-            dgvQuickLinks.DataSource = Global.QuickLinks?.GetAll();
-            dgvRents.DataSource = Global.Rents?.GetAll();
-        }
-
-        private void btnLandlordRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshData();
-        }
-
-        private void btnTenantRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshData();
-        }
-
-        private void btnPropertyRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshData();
-        }
-
-        private void btnQuickLinkRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshData();
-        }
-
-        private void btnMaintenanceRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshData();
-        }
-
-        private void btnRentRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshData();
+                if (result == DialogResult.Yes)
+                {
+                    DeleteUser(username);
+                    await Task.Delay(500);
+                    RefreshUsers();
+                }
+            }
         }
 
         // landlords
-
         private bool CheckLandlordFields()
         {
             if (string.IsNullOrEmpty(txtbxllFName.Text.Trim()))
@@ -265,6 +315,8 @@ namespace iLet4You
 
         private async void btnllCreate_Click(object sender, EventArgs e)
         {
+            if (!CheckLandlordFields()) return;
+
             string fName = txtbxllFName.Text.Trim();
             string lName = txtbxllLName.Text.Trim();
             string address = txtbxllAddress.Text.Trim();
@@ -272,7 +324,6 @@ namespace iLet4You
             string email = txtbxllEmail.Text.Trim();
             string notes = rchtxtbxllNotes.Text.Trim();
 
-            if (!CheckLandlordFields()) return;
 
             CreateLandlord(fName, lName, address, phone, email, notes);
             await Task.Delay(500);
@@ -288,7 +339,19 @@ namespace iLet4You
 
         private async void btnllUpdate_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dgvLandlords.SelectedRows[0].Cells["landlordIdDataGridViewTextBoxColumn"].Value?.ToString().Trim());
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvLandlords.SelectedRows[0].Cells["landlordIdDataGridViewTextBoxColumn"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a landlord to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!CheckLandlordFields()) return;
+
             string fName = txtbxllFName.Text.Trim();
             string lName = txtbxllLName.Text.Trim();
             string address = txtbxllAddress.Text.Trim();
@@ -296,13 +359,12 @@ namespace iLet4You
             string email = txtbxllEmail.Text.Trim();
             string notes = rchtxtbxllNotes.Text.Trim();
 
-            if (!CheckLandlordFields()) return;
 
             DialogResult result = MessageBox.Show(
-            $"Are you sure you want to update details for selected landlord? (Landlord ID: '{id}')",
-            "Confirm Update",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning);
+                $"Are you sure you want to update details for selected landlord? (Landlord ID: '{id}')",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
@@ -324,7 +386,7 @@ namespace iLet4You
             int id;
             try
             {
-                id = Convert.ToInt32(dgvLandlords.SelectedRows[0].Cells["landlordIdDataGridViewTextBoxColumn"].Value?.ToString().Trim());
+                id = Convert.ToInt32(dgvLandlords.SelectedRows[0].Cells["landlordIdDataGridViewTextBoxColumn"].Value.ToString().Trim());
             }
             catch
             {
@@ -333,14 +395,156 @@ namespace iLet4You
             }
 
             DialogResult result = MessageBox.Show(
-            $"Are you sure you want to delete selected landlord? (Landlord ID: '{id}')",
-            "Confirm Deletion",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning);
+                $"Are you sure you want to delete selected landlord? (Landlord ID: '{id}')",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
                 DeleteLandlord(id);
+                await Task.Delay(500);
+                RefreshData();
+            }
+        }
+
+        // tenants
+
+        private bool CheckTenantFields()
+        {
+            if (string.IsNullOrEmpty(txtbxtFName.Text.Trim()))
+            {
+                MessageBox.Show("First Name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxtLName.Text.Trim()))
+            {
+                MessageBox.Show("Last Name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxtHNo.Text.Trim()))
+            {
+                MessageBox.Show("House No. is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxtAdrs1.Text.Trim()))
+            {
+                MessageBox.Show("Address is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxtCity.Text.Trim()))
+            {
+                MessageBox.Show("City is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxtPstcd.Text.Trim()))
+            {
+                MessageBox.Show("Postcode is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private async void btnTenantCreate_Click(object sender, EventArgs e)
+        {
+            if (!CheckTenantFields()) return;
+
+            string fName = txtbxtFName.Text.Trim();
+            string lName = txtbxtLName.Text.Trim();
+            string house = txtbxtHNo.Text.Trim();
+            string address1 = txtbxtAdrs1.Text.Trim();
+            string city = txtbxtCity.Text.Trim();
+            string postcode = txtbxtPstcd.Text.Trim();
+            string phone = txtbxtPhone.Text.Trim();
+            string email = txtbxtEmail.Text.Trim();
+            string notes = rchtxtbxtNotes.Text.Trim();
+
+            CreateTenant(fName, lName, house, address1, city, postcode, phone, email, notes);
+            await Task.Delay(500);
+            RefreshData();
+
+            txtbxtFName.Text = "";
+            txtbxtLName.Text = "";
+            txtbxtHNo.Text = "";
+            txtbxtAdrs1.Text = "";
+            txtbxtCity.Text = "";
+            txtbxtPstcd.Text = "";
+            txtbxtPhone.Text = "";
+            txtbxtEmail.Text = "";
+            rchtxtbxtNotes.Text = "";
+        }
+
+        private async void btnTenantUpdate_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvTenants.SelectedRows[0].Cells["TenantId"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a tenant to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!CheckTenantFields()) return;
+
+            string fName = txtbxtFName.Text.Trim();
+            string lName = txtbxtLName.Text.Trim();
+            string house = txtbxtHNo.Text.Trim();
+            string address1 = txtbxtAdrs1.Text.Trim();
+            string city = txtbxtCity.Text.Trim();
+            string postcode = txtbxtPstcd.Text.Trim();
+            string phone = txtbxtPhone.Text.Trim();
+            string email = txtbxtEmail.Text.Trim();
+            string notes = rchtxtbxtNotes.Text.Trim();
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to update selected tenant? (Tenant ID: '{id}')",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                UpdateTenant(id, fName, lName, house, address1, city, postcode, phone, email, notes);
+                await Task.Delay(500);
+                RefreshData();
+
+                txtbxtFName.Text = "";
+                txtbxtLName.Text = "";
+                txtbxtHNo.Text = "";
+                txtbxtAdrs1.Text = "";
+                txtbxtCity.Text = "";
+                txtbxtPstcd.Text = "";
+                txtbxtPhone.Text = "";
+                txtbxtEmail.Text = "";
+                rchtxtbxtNotes.Text = "";
+            }
+        }
+
+        private async void btnTenantDelete_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvTenants.SelectedRows[0].Cells["TenantId"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a tenant to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to delete selected tenant? (Tenant ID: '{id}')",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                DeleteTenant(id);
                 await Task.Delay(500);
                 RefreshData();
             }

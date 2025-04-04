@@ -248,6 +248,7 @@ namespace iLet4You
             }
         }
 
+        // request server to update a record
         public void RequestUpdateRecord(string table, int id, Dictionary<string, object> values)
         {
             var request = new
@@ -270,6 +271,7 @@ namespace iLet4You
             }
         }
 
+        // request server to delete a record
         public void RequestDeleteRecord(string table, int id)
         {
             var request = new
@@ -291,6 +293,7 @@ namespace iLet4You
             }
         }
 
+        // handle data from server
         private void HandleLandlordsData(JToken data)
         {
             try

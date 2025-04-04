@@ -55,6 +55,7 @@
             linkLabel1 = new LinkLabel();
             btnAdmin = new Button();
             btnLogout = new Button();
+            tabPage5 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             // tabControl1
             // 
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
@@ -341,6 +343,16 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
+            // tabPage5
+            // 
+            tabPage5.Location = new Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(1241, 497);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Home";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -401,5 +413,6 @@
         private TabPage tabPage4;
         private Button btnAdmin;
         private Button btnLogout;
+        private TabPage tabPage5;
     }
 }
