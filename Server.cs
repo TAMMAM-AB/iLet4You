@@ -502,6 +502,7 @@ namespace iLet4You
                         ? rent["RentID"].Value<int>() : -1;
 
                     int? TenantID = rent["TenantID"]?.Value<int?>();
+                    int? PropertyID = rent["PropertyID"]?.Value<int?>();
 
                     DateTime DueDate = rent["DueDate"] != null &&
                         DateTime.TryParse(rent["DueDate"].ToString(), out DateTime dueDate) ? dueDate : default;
@@ -515,7 +516,7 @@ namespace iLet4You
 
                     string Notes = rent["Notes"]?.ToString();
 
-                    rentList.Add(new Rent(RentID, TenantID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
+                    rentList.Add(new Rent(RentID, PropertyID, TenantID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
                 }
 
                 Global.Rents = new Rents(rentList);

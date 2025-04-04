@@ -124,6 +124,7 @@
             btnRentRefresh = new Button();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
@@ -957,7 +958,7 @@
             dgvRents.AutoGenerateColumns = false;
             dgvRents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRents.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Column1, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, notesDataGridViewTextBoxColumn1 });
+            dgvRents.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Column1, Column2, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, notesDataGridViewTextBoxColumn1 });
             dgvRents.DataSource = rentBindingSource;
             dgvRents.Location = new Point(6, 6);
             dgvRents.MultiSelect = false;
@@ -994,6 +995,13 @@
             Column1.HeaderText = "Tenant ID";
             Column1.Name = "Column1";
             Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.DataPropertyName = "PropertyId";
+            Column2.HeaderText = "Property ID";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -1167,6 +1175,7 @@
         private Button btnllUpdate;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;

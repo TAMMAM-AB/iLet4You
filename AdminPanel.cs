@@ -143,7 +143,7 @@ namespace iLet4You
         private async void btnUserCreate_Click(object sender, EventArgs e)
         {
             string username = txtbxUsername.Text.Trim();
-            string password = txtbxPassword.Text;
+            string password = txtbxPassword.Text.Trim();
 
             if (string.IsNullOrEmpty(username))
             {
@@ -162,9 +162,10 @@ namespace iLet4You
             txtbxUsername.Text = "";
             txtbxPassword.Text = "";
         }
+
         private async void btnUserUpdatePass_Click(object sender, EventArgs e)
         {
-            string password = txtbxPassword.Text;
+            string password = txtbxPassword.Text.Trim();
             string username = dgvUsers.SelectedRows[0].Cells["usernameDataGridViewTextBoxColumn"].Value?.ToString().Trim();
 
             if (string.IsNullOrWhiteSpace(password))
