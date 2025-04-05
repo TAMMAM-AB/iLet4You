@@ -385,6 +385,7 @@ namespace iLet4You
                     int TenantID = property["TenantID"] != null && property["TenantID"].Type != JTokenType.Null
                         ? property["TenantID"].Value<int>() : -1;
 
+                    string HouseNo = property["HouseNo"]?.ToString() ?? "Unknown";
                     string AddressLine1 = property["AddressLine1"]?.ToString() ?? "Unknown";
                     string City = property["City"]?.ToString() ?? "Unknown";
                     string PostCode = property["PostCode"]?.ToString() ?? "Unknown";
@@ -400,7 +401,7 @@ namespace iLet4You
                     string EPCRating = property["EPCRating"]?.ToString() ?? "Unknown";
                     string Notes = property["Notes"]?.ToString() ?? "Unknown";
 
-                    propertyList.Add(new Property(PropertyID, LandlordID, TenantID, AddressLine1, City, PostCode, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, Notes));
+                    propertyList.Add(new Property(PropertyID, LandlordID, TenantID, HouseNo, AddressLine1, City, PostCode, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, Notes));
                 }
 
                 Global.Properties = new Properties(propertyList);

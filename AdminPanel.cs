@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iLet4You
@@ -75,7 +76,7 @@ namespace iLet4You
         // landlords
         private async void CreateLandlord(string fName, string lName, string address, string phone, string email, string notes)
         {
-            var landlordValues = new Dictionary<string, object>
+            var data = new Dictionary<string, object>
             {
                 { "FirstName", $"{fName}" },
                 { "LastName", $"{lName}" },
@@ -86,13 +87,13 @@ namespace iLet4You
             };
 
             result = new TaskCompletionSource<bool>();
-            Global.Server.RequestCreateRecord(Settings.landlordsTable, landlordValues);
+            Global.Server.RequestCreateRecord(Settings.landlordsTable, data);
             bool success = await AwaitResponse();
         }
 
         private async void UpdateLandlord(int id, string fName, string lName, string address, string phone, string email, string notes)
         {
-            var landlordValues = new Dictionary<string, object>
+            var data = new Dictionary<string, object>
             {
                 { "FirstName", $"{fName}" },
                 { "LastName", $"{lName}" },
@@ -103,7 +104,7 @@ namespace iLet4You
             };
 
             result = new TaskCompletionSource<bool>();
-            Global.Server.RequestUpdateRecord(Settings.landlordsTable, id, landlordValues);
+            Global.Server.RequestUpdateRecord(Settings.landlordsTable, id, data);
             bool success = await AwaitResponse();
         }
 
@@ -117,7 +118,7 @@ namespace iLet4You
         // tenants
         private async void CreateTenant(string fName, string lName, string phone, string email, string notes)
         {
-            var tenantValues = new Dictionary<string, object>
+            var data = new Dictionary<string, object>
             {
                 { "FirstName", $"{fName}" },
                 { "LastName", $"{lName}" },
@@ -127,13 +128,13 @@ namespace iLet4You
             };
 
             result = new TaskCompletionSource<bool>();
-            Global.Server.RequestCreateRecord(Settings.tenantsTable, tenantValues);
+            Global.Server.RequestCreateRecord(Settings.tenantsTable, data);
             bool success = await AwaitResponse();
         }
 
         private async void UpdateTenant(int id, string fName, string lName, string phone, string email, string notes)
         {
-            var tenantValues = new Dictionary<string, object>
+            var data = new Dictionary<string, object>
             {
                 { "FirstName", $"{fName}" },
                 { "LastName", $"{lName}" },
@@ -143,7 +144,7 @@ namespace iLet4You
             };
 
             result = new TaskCompletionSource<bool>();
-            Global.Server.RequestUpdateRecord(Settings.tenantsTable, id, tenantValues);
+            Global.Server.RequestUpdateRecord(Settings.tenantsTable, id, data);
             bool success = await AwaitResponse();
         }
 
@@ -155,44 +156,49 @@ namespace iLet4You
         }
 
         // properties
-        /* CONTINUE
-        private async void CreateProperty(int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        private async void CreateProperty(int landLordId, int tenantId,string houseNo, string address1, string city, string postcode, double rentAmount,DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
         {
-            var tenantValues = new Dictionary<string, object>
+            var data = new Dictionary<string, object>
             {
-                { "FirstName", $"{fName}" },
-                { "LastName", $"{lName}" },
+                { "LandlordID", $"{landLordId}" },
+                { "TenantID", $"{tenantId}" },
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },
                 { "PostCode", $"{postcode}" },
-                { "PhoneNumber", $"{phone}" },
-                { "Email", $"{email}" },
+                { "RentAmount", $"{rentAmount}" },
+                { "GasCertExpiry", gasCertExpiry?.ToString("yyyy-MM-dd") }, // nullable
+                { "EPCExpiry", epcExpiry?.ToString("yyyy-MM-dd") },
+                { "EICRExpiry", eicrExpiry?.ToString("yyyy-MM-dd") },
+                { "EPCRating", $"{epcRating}" },
                 { "Notes", $"{notes}" }
             };
 
             result = new TaskCompletionSource<bool>();
-            Global.Server.RequestCreateRecord(Settings.propertiesTable, tenantValues);
+            Global.Server.RequestCreateRecord(Settings.propertiesTable, data);
             bool success = await AwaitResponse();
         }
 
-        private async void UpdateProperty(int id, string fName, string lName, string houseNo, string address1, string city, string postcode, string phone, string email, string notes)
+        private async void UpdateProperty(int id, int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
         {
-            var tenantValues = new Dictionary<string, object>
+            var data = new Dictionary<string, object>
             {
-                { "FirstName", $"{fName}" },
-                { "LastName", $"{lName}" },
+                { "LandlordID", $"{landLordId}" },
+                { "TenantID", $"{tenantId}" },
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },
                 { "PostCode", $"{postcode}" },
-                { "PhoneNumber", $"{phone}" },
-                { "Email", $"{email}" },
+                { "RentAmount", $"{rentAmount}" },
+                { "GasCertExpiry", gasCertExpiry?.ToString("yyyy-MM-dd") },
+                { "EPCExpiry", epcExpiry?.ToString("yyyy-MM-dd") },
+                { "EICRExpiry", eicrExpiry?.ToString("yyyy-MM-dd") },
+                { "EPCRating", $"{epcRating}" },
                 { "Notes", $"{notes}" }
             };
 
             result = new TaskCompletionSource<bool>();
-            Global.Server.RequestUpdateRecord(Settings.propertiesTable, id, tenantValues);
+            Global.Server.RequestUpdateRecord(Settings.propertiesTable, id, data);
             bool success = await AwaitResponse();
         }
 
@@ -202,7 +208,121 @@ namespace iLet4You
             Global.Server.RequestDeleteRecord(Settings.propertiesTable, id);
             bool success = await AwaitResponse();
         }
-        */
+
+        // maintenances
+        private async void CreateMaintenance(int propertyId, string description, string status, DateTime dateReported, DateTime? dateCompleted)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "PropertyID", $"{propertyId}" },
+                { "Description", $"{description}" },
+                { "Status", $"{status}" },
+                { "DateReported", $"{dateReported:yyyy-MM-dd}" },
+                { "DateCompleted", dateCompleted?.ToString("yyyy-MM-dd") }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.maintenancesTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateMaintenance(int id, int propertyId, string description, string status, DateTime dateReported, DateTime? dateCompleted)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "PropertyID", $"{propertyId}" },
+                { "Description", $"{description}" },
+                { "Status", $"{status}" },
+                { "DateReported", $"{dateReported:yyyy-MM-dd}" },
+                { "DateCompleted", dateCompleted?.ToString("yyyy-MM-dd") }
+            };
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.maintenancesTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteMaintenance(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.maintenancesTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // quick links
+        private async void CreateQuickLink(string name, string url)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "Name", $"{name}" },
+                { "URL", $"{url}" }
+            };
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.quickLinksTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateQuickLink(int id, string name, string url)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "Name", $"{name}" },
+                { "URL", $"{url}" }
+            };
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.quickLinksTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteQuickLink(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.quickLinksTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // rents
+        private async void CreateRent(int tenantId, int propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "TenantID", tenantId },
+                { "PropertyID", propertyId },
+                { "DueDate", dueDate.ToString("yyyy-MM-dd") },
+                { "DateReceived", dateReceived?.ToString("yyyy-MM-dd") },
+                { "RentAmount", rentAmount },
+                { "RentAmountPaid", rentAmountPaid },
+                { "Notes", notes }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.rentsTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateRent(int id, int tenantId, int propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "TenantID", tenantId },
+                { "PropertyID", propertyId },
+                { "DueDate", dueDate.ToString("yyyy-MM-dd") },
+                { "DateReceived", dateReceived?.ToString("yyyy-MM-dd") },
+                { "RentAmount", rentAmount },
+                { "RentAmountPaid", rentAmountPaid },
+                { "Notes", notes }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.rentsTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteRent(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.rentsTable, id);
+            bool success = await AwaitResponse();
+        }
 
         // fetch
         private async void RefreshData()
@@ -553,6 +673,8 @@ namespace iLet4You
                 RefreshData();
             }
         }
+
+        // properties
 
 
     }
