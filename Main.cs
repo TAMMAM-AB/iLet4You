@@ -2,6 +2,7 @@
 {
     public partial class Main : Form
     {
+        public Panel QuickLinkPanel => panel1;
         public Main()
         {
             string username = Global.User?.Username;
@@ -14,6 +15,7 @@
             // show and enable admin controls button is user is admin
             btnAdmin.Enabled = (role == "admin");
             btnAdmin.Visible = (role == "admin");
+            Global.Server.RequestData();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)

@@ -475,6 +475,19 @@ namespace iLet4You
                 }
 
                 Global.QuickLinks = new QuickLinks(quickLinkList);
+
+                Main mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();
+
+                while (mainForm == null || mainForm.QuickLinkPanel == null || !mainForm.QuickLinkPanel.IsHandleCreated)
+                {
+                    Application.DoEvents();  // Process UI messages to keep the app responsive
+                    mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();  // Refresh mainForm reference
+                }
+
+                mainForm.Invoke(() =>
+                {
+                    QuickLinkRenderer.PopulateQuickLinks(mainForm.QuickLinkPanel, Global.QuickLinks.GetAll());
+                });
             }
             catch (Exception ex)
             {

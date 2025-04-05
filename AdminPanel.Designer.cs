@@ -95,7 +95,19 @@
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             tenantBindingSource = new BindingSource(components);
             tabPage4 = new TabPage();
-            numericUpDown1 = new NumericUpDown();
+            comboBox1 = new ComboBox();
+            label26 = new Label();
+            dateTimePicker3 = new DateTimePicker();
+            label25 = new Label();
+            dateTimePicker2 = new DateTimePicker();
+            label24 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            numericUpDown2 = new NumericUpDown();
+            label23 = new Label();
+            label22 = new Label();
+            textBox5 = new TextBox();
+            label21 = new Label();
+            numpLLid = new NumericUpDown();
             label20 = new Label();
             button1 = new Button();
             richTextBox1 = new RichTextBox();
@@ -112,6 +124,19 @@
             label19 = new Label();
             btnPropertyRefresh = new Button();
             dgvProperties = new DataGridView();
+            PropertyId = new DataGridViewTextBoxColumn();
+            LandlordId = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            RentAmount = new DataGridViewTextBoxColumn();
+            GasCertExpiry = new DataGridViewTextBoxColumn();
+            EPCExpiry = new DataGridViewTextBoxColumn();
+            EICRExpiry = new DataGridViewTextBoxColumn();
+            EPCRating = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
             propertyBindingSource = new BindingSource(components);
             tabPage5 = new TabPage();
             btnMaintenanceRefresh = new Button();
@@ -142,31 +167,6 @@
             notesDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             rentBindingSource = new BindingSource(components);
             btnRentRefresh = new Button();
-            PropertyId = new DataGridViewTextBoxColumn();
-            LandlordId = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
-            RentAmount = new DataGridViewTextBoxColumn();
-            GasCertExpiry = new DataGridViewTextBoxColumn();
-            EPCExpiry = new DataGridViewTextBoxColumn();
-            EICRExpiry = new DataGridViewTextBoxColumn();
-            EPCRating = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
-            textBox5 = new TextBox();
-            label21 = new Label();
-            label22 = new Label();
-            label23 = new Label();
-            numericUpDown2 = new NumericUpDown();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            label24 = new Label();
-            dateTimePicker3 = new DateTimePicker();
-            label25 = new Label();
-            label26 = new Label();
-            comboBox1 = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -178,7 +178,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvTenants).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).BeginInit();
             tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numpLLid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
             tabPage5.SuspendLayout();
@@ -190,7 +191,6 @@
             tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rentBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -812,7 +812,7 @@
             tabPage4.Controls.Add(label22);
             tabPage4.Controls.Add(textBox5);
             tabPage4.Controls.Add(label21);
-            tabPage4.Controls.Add(numericUpDown1);
+            tabPage4.Controls.Add(numpLLid);
             tabPage4.Controls.Add(label20);
             tabPage4.Controls.Add(button1);
             tabPage4.Controls.Add(richTextBox1);
@@ -837,12 +837,116 @@
             tabPage4.Text = "Properties";
             tabPage4.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // comboBox1
             // 
-            numericUpDown1.Location = new Point(6, 377);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(100, 23);
-            numericUpDown1.TabIndex = 44;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G" });
+            comboBox1.Location = new Point(686, 430);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(100, 23);
+            comboBox1.TabIndex = 58;
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(686, 414);
+            label26.Name = "label26";
+            label26.Size = new Size(65, 15);
+            label26.TabIndex = 57;
+            label26.Text = "EPC Rating";
+            // 
+            // dateTimePicker3
+            // 
+            dateTimePicker3.Location = new Point(547, 431);
+            dateTimePicker3.Name = "dateTimePicker3";
+            dateTimePicker3.Size = new Size(133, 23);
+            dateTimePicker3.TabIndex = 56;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(547, 415);
+            label25.Name = "label25";
+            label25.Size = new Size(65, 15);
+            label25.TabIndex = 55;
+            label25.Text = "EICR Expiry";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(408, 430);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(133, 23);
+            dateTimePicker2.TabIndex = 54;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(408, 414);
+            label24.Name = "label24";
+            label24.Size = new Size(62, 15);
+            label24.TabIndex = 53;
+            label24.Text = "EPC Expiry";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(269, 431);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(133, 23);
+            dateTimePicker1.TabIndex = 52;
+            // 
+            // numericUpDown2
+            // 
+            numericUpDown2.DecimalPlaces = 2;
+            numericUpDown2.Increment = new decimal(new int[] { 5, 0, 0, 0 });
+            numericUpDown2.Location = new Point(163, 431);
+            numericUpDown2.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(100, 23);
+            numericUpDown2.TabIndex = 51;
+            numericUpDown2.ThousandsSeparator = true;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(269, 415);
+            label23.Name = "label23";
+            label23.Size = new Size(88, 15);
+            label23.TabIndex = 49;
+            label23.Text = "Gas Cert. Expiry";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(163, 413);
+            label22.Name = "label22";
+            label22.Size = new Size(78, 15);
+            label22.TabIndex = 47;
+            label22.Text = "Rent Amount";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(6, 430);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(150, 23);
+            textBox5.TabIndex = 46;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(6, 413);
+            label21.Name = "label21";
+            label21.Size = new Size(56, 15);
+            label21.TabIndex = 45;
+            label21.Text = "Postcode";
+            // 
+            // numpLLid
+            // 
+            numpLLid.Location = new Point(6, 377);
+            numpLLid.Maximum = new decimal(new int[] { 1661992959, 1808227885, 5, 0 });
+            numpLLid.Name = "numpLLid";
+            numpLLid.Size = new Size(100, 23);
+            numpLLid.TabIndex = 44;
             // 
             // label20
             // 
@@ -987,6 +1091,97 @@
             dgvProperties.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProperties.Size = new Size(1118, 351);
             dgvProperties.TabIndex = 14;
+            // 
+            // PropertyId
+            // 
+            PropertyId.DataPropertyName = "PropertyId";
+            PropertyId.HeaderText = "Property ID";
+            PropertyId.Name = "PropertyId";
+            PropertyId.ReadOnly = true;
+            // 
+            // LandlordId
+            // 
+            LandlordId.DataPropertyName = "LandlordId";
+            LandlordId.HeaderText = "Landlord ID";
+            LandlordId.Name = "LandlordId";
+            LandlordId.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "TenantId";
+            dataGridViewTextBoxColumn1.HeaderText = "Tenant ID";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            Column3.DataPropertyName = "HouseNo";
+            Column3.HeaderText = "House No.";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            dataGridViewTextBoxColumn10.DataPropertyName = "AddressLine1";
+            dataGridViewTextBoxColumn10.HeaderText = "Address Line 1";
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.DataPropertyName = "City";
+            dataGridViewTextBoxColumn11.HeaderText = "City";
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.DataPropertyName = "PostCode";
+            dataGridViewTextBoxColumn12.HeaderText = "Postcode";
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // RentAmount
+            // 
+            RentAmount.DataPropertyName = "RentAmount";
+            RentAmount.HeaderText = "Rent Amount";
+            RentAmount.Name = "RentAmount";
+            RentAmount.ReadOnly = true;
+            // 
+            // GasCertExpiry
+            // 
+            GasCertExpiry.DataPropertyName = "GasCertExpiry";
+            GasCertExpiry.HeaderText = "Gas Cert. Expiry";
+            GasCertExpiry.Name = "GasCertExpiry";
+            GasCertExpiry.ReadOnly = true;
+            // 
+            // EPCExpiry
+            // 
+            EPCExpiry.DataPropertyName = "EPCExpiry";
+            EPCExpiry.HeaderText = "EPC Expiry";
+            EPCExpiry.Name = "EPCExpiry";
+            EPCExpiry.ReadOnly = true;
+            // 
+            // EICRExpiry
+            // 
+            EICRExpiry.DataPropertyName = "EICRExpiry";
+            EICRExpiry.HeaderText = "EICR Expiry";
+            EICRExpiry.Name = "EICRExpiry";
+            EICRExpiry.ReadOnly = true;
+            // 
+            // EPCRating
+            // 
+            EPCRating.DataPropertyName = "EPCRating";
+            EPCRating.HeaderText = "EPC Rating";
+            EPCRating.Name = "EPCRating";
+            EPCRating.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            dataGridViewTextBoxColumn15.DataPropertyName = "Notes";
+            dataGridViewTextBoxColumn15.HeaderText = "Notes";
+            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            dataGridViewTextBoxColumn15.ReadOnly = true;
             // 
             // propertyBindingSource
             // 
@@ -1240,196 +1435,6 @@
             btnRentRefresh.UseVisualStyleBackColor = true;
             btnRentRefresh.Click += btnRentRefresh_Click;
             // 
-            // PropertyId
-            // 
-            PropertyId.DataPropertyName = "PropertyId";
-            PropertyId.HeaderText = "Property ID";
-            PropertyId.Name = "PropertyId";
-            PropertyId.ReadOnly = true;
-            // 
-            // LandlordId
-            // 
-            LandlordId.DataPropertyName = "LandlordId";
-            LandlordId.HeaderText = "Landlord ID";
-            LandlordId.Name = "LandlordId";
-            LandlordId.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "TenantId";
-            dataGridViewTextBoxColumn1.HeaderText = "Tenant ID";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            Column3.DataPropertyName = "HouseNo";
-            Column3.HeaderText = "House No.";
-            Column3.Name = "Column3";
-            Column3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            dataGridViewTextBoxColumn10.DataPropertyName = "AddressLine1";
-            dataGridViewTextBoxColumn10.HeaderText = "Address Line 1";
-            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            dataGridViewTextBoxColumn11.DataPropertyName = "City";
-            dataGridViewTextBoxColumn11.HeaderText = "City";
-            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            dataGridViewTextBoxColumn12.DataPropertyName = "PostCode";
-            dataGridViewTextBoxColumn12.HeaderText = "Postcode";
-            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // RentAmount
-            // 
-            RentAmount.DataPropertyName = "RentAmount";
-            RentAmount.HeaderText = "Rent Amount";
-            RentAmount.Name = "RentAmount";
-            RentAmount.ReadOnly = true;
-            // 
-            // GasCertExpiry
-            // 
-            GasCertExpiry.DataPropertyName = "GasCertExpiry";
-            GasCertExpiry.HeaderText = "Gas Cert. Expiry";
-            GasCertExpiry.Name = "GasCertExpiry";
-            GasCertExpiry.ReadOnly = true;
-            // 
-            // EPCExpiry
-            // 
-            EPCExpiry.DataPropertyName = "EPCExpiry";
-            EPCExpiry.HeaderText = "EPC Expiry";
-            EPCExpiry.Name = "EPCExpiry";
-            EPCExpiry.ReadOnly = true;
-            // 
-            // EICRExpiry
-            // 
-            EICRExpiry.DataPropertyName = "EICRExpiry";
-            EICRExpiry.HeaderText = "EICR Expiry";
-            EICRExpiry.Name = "EICRExpiry";
-            EICRExpiry.ReadOnly = true;
-            // 
-            // EPCRating
-            // 
-            EPCRating.DataPropertyName = "EPCRating";
-            EPCRating.HeaderText = "EPC Rating";
-            EPCRating.Name = "EPCRating";
-            EPCRating.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            dataGridViewTextBoxColumn15.DataPropertyName = "Notes";
-            dataGridViewTextBoxColumn15.HeaderText = "Notes";
-            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(6, 430);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(150, 23);
-            textBox5.TabIndex = 46;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new Point(6, 413);
-            label21.Name = "label21";
-            label21.Size = new Size(56, 15);
-            label21.TabIndex = 45;
-            label21.Text = "Postcode";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new Point(163, 413);
-            label22.Name = "label22";
-            label22.Size = new Size(78, 15);
-            label22.TabIndex = 47;
-            label22.Text = "Rent Amount";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(269, 415);
-            label23.Name = "label23";
-            label23.Size = new Size(88, 15);
-            label23.TabIndex = 49;
-            label23.Text = "Gas Cert. Expiry";
-            // 
-            // numericUpDown2
-            // 
-            numericUpDown2.Location = new Point(163, 431);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(100, 23);
-            numericUpDown2.TabIndex = 51;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(269, 431);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(133, 23);
-            dateTimePicker1.TabIndex = 52;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(408, 430);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(133, 23);
-            dateTimePicker2.TabIndex = 54;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(408, 414);
-            label24.Name = "label24";
-            label24.Size = new Size(62, 15);
-            label24.TabIndex = 53;
-            label24.Text = "EPC Expiry";
-            // 
-            // dateTimePicker3
-            // 
-            dateTimePicker3.Location = new Point(547, 431);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(133, 23);
-            dateTimePicker3.TabIndex = 56;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(547, 415);
-            label25.Name = "label25";
-            label25.Size = new Size(65, 15);
-            label25.TabIndex = 55;
-            label25.Text = "EICR Expiry";
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new Point(686, 414);
-            label26.Name = "label26";
-            label26.Size = new Size(65, 15);
-            label26.TabIndex = 57;
-            label26.Text = "EPC Rating";
-            // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G" });
-            comboBox1.Location = new Point(686, 430);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(100, 23);
-            comboBox1.TabIndex = 58;
-            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1453,7 +1458,8 @@
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).EndInit();
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numpLLid).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
             tabPage5.ResumeLayout(false);
@@ -1465,7 +1471,6 @@
             tabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvRents).EndInit();
             ((System.ComponentModel.ISupportInitialize)rentBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);
         }
 
@@ -1588,7 +1593,7 @@
         private Label label14;
         private Label label16;
         private Label label19;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numpLLid;
         private Label label23;
         private Label label22;
         private TextBox textBox5;
