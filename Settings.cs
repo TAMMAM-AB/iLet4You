@@ -3,7 +3,7 @@
 public static class Settings
 {
     // server
-    public static string ip = "192.168.1.173";
+    public static string ip = "127.0.0.1";
     public static string port = "8080";
 
     public static string landlordsTable = "Landlords";
@@ -24,7 +24,6 @@ public static class Settings
     {
         if (!File.Exists(filePath))
         {
-            // Create default config file if it doesn't exist
             var defaultConfig = new ConfigData { ip = ip, port = port };
             File.WriteAllText(filePath, JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true }));
             return;
@@ -40,7 +39,6 @@ public static class Settings
         }
         catch (Exception ex)
         {
-            // Log error or show message
             MessageBox.Show($"Failed to load config: {ex.Message}");
         }
     }
