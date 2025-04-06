@@ -30,6 +30,7 @@
         {
             textBox1 = new TextBox();
             tabControl1 = new TabControl();
+            tabPage5 = new TabPage();
             tabPage1 = new TabPage();
             button3 = new Button();
             label4 = new Label();
@@ -55,8 +56,11 @@
             linkLabel1 = new LinkLabel();
             btnAdmin = new Button();
             btnLogout = new Button();
-            tabPage5 = new TabPage();
+            labelTotalTenants = new Label();
+            labelTotalProperties = new Label();
+            labelTotalLandlords = new Label();
             tabControl1.SuspendLayout();
+            tabPage5.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -86,6 +90,19 @@
             tabControl1.Size = new Size(1249, 525);
             tabControl1.TabIndex = 1;
             // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(labelTotalLandlords);
+            tabPage5.Controls.Add(labelTotalProperties);
+            tabPage5.Controls.Add(labelTotalTenants);
+            tabPage5.Location = new Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(1241, 497);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Home";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
             // tabPage1
             // 
             tabPage1.Controls.Add(button3);
@@ -99,6 +116,7 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Property Details";
             tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Click += tabPage1_Click;
             // 
             // button3
             // 
@@ -343,15 +361,35 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
-            // tabPage5
+            // labelTotalTenants
             // 
-            tabPage5.Location = new Point(4, 24);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(1241, 497);
-            tabPage5.TabIndex = 4;
-            tabPage5.Text = "Home";
-            tabPage5.UseVisualStyleBackColor = true;
+            labelTotalTenants.AutoSize = true;
+            labelTotalTenants.Font = new Font("Segoe UI", 16F);
+            labelTotalTenants.Location = new Point(22, 41);
+            labelTotalTenants.Name = "labelTotalTenants";
+            labelTotalTenants.Size = new Size(149, 30);
+            labelTotalTenants.TabIndex = 0;
+            labelTotalTenants.Text = "Total Tenants: ";
+            // 
+            // labelTotalProperties
+            // 
+            labelTotalProperties.AutoSize = true;
+            labelTotalProperties.Font = new Font("Segoe UI", 16F);
+            labelTotalProperties.Location = new Point(22, 99);
+            labelTotalProperties.Name = "labelTotalProperties";
+            labelTotalProperties.Size = new Size(175, 30);
+            labelTotalProperties.TabIndex = 1;
+            labelTotalProperties.Text = "Total Properties: ";
+            // 
+            // labelTotalLandlords
+            // 
+            labelTotalLandlords.AutoSize = true;
+            labelTotalLandlords.Font = new Font("Segoe UI", 16F);
+            labelTotalLandlords.Location = new Point(22, 151);
+            labelTotalLandlords.Name = "labelTotalLandlords";
+            labelTotalLandlords.Size = new Size(164, 30);
+            labelTotalLandlords.TabIndex = 2;
+            labelTotalLandlords.Text = "Total Landlords:";
             // 
             // Main
             // 
@@ -372,6 +410,8 @@
             Text = "iLet4You";
             WindowState = FormWindowState.Maximized;
             tabControl1.ResumeLayout(false);
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
@@ -414,5 +454,8 @@
         private Button btnAdmin;
         private Button btnLogout;
         private TabPage tabPage5;
+        private Label labelTotalLandlords;
+        private Label labelTotalProperties;
+        private Label labelTotalTenants;
     }
 }

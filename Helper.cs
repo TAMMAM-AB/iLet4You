@@ -43,3 +43,27 @@ public static class QuickLinkRenderer
         }
     }
 }
+
+public static class UIUpdater
+{
+    public static void UpdateHomeTabStats(TabPage parentControl)
+    {
+        // Find the labels by name
+        var labelLandlords = parentControl.Controls.Find("labelTotalLandlords", true).FirstOrDefault() as Label;
+        var labelTenants = parentControl.Controls.Find("labelTotalTenants", true).FirstOrDefault() as Label;
+        var labelProperties = parentControl.Controls.Find("labelTotalProperties", true).FirstOrDefault() as Label;
+
+        int totalLandlords = Global.Landlords?.GetAll().Count ?? 0;
+        int totalTenants = Global.Tenants?.GetAll().Count ?? 0;
+        int totalProperties = Global.Properties?.GetAll().Count ?? 0;
+
+        if (labelLandlords != null)
+            labelLandlords.Text = $"Total Landlords: {totalLandlords}";
+
+        if (labelTenants != null)
+            labelTenants.Text = $"Total Tenants: {totalTenants}";
+
+        if (labelProperties != null)
+            labelProperties.Text = $"Total Properties: {totalProperties}";
+    }
+}

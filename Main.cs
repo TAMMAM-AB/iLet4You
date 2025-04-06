@@ -3,6 +3,8 @@
     public partial class Main : Form
     {
         public Panel QuickLinkPanel => panel1;
+        public TabPage DashboardTab => tabPage5;
+
         public Main()
         {
             string username = Global.User?.Username;
@@ -28,6 +30,11 @@
         private void btnLogout_Click(object sender, EventArgs e)
         {
             Application.Restart();
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

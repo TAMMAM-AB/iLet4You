@@ -405,6 +405,21 @@ namespace iLet4You
                 }
 
                 Global.Properties = new Properties(propertyList);
+
+                Main mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();
+
+                while (mainForm == null || mainForm.DashboardTab == null || !mainForm.DashboardTab.IsHandleCreated)
+                {
+                    Application.DoEvents();  // Process UI messages to keep the app responsive
+                    mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();  // Refresh mainForm reference
+                }
+
+                mainForm.Invoke(() =>
+                {
+                    UIUpdater.UpdateHomeTabStats(mainForm.DashboardTab);
+                });
+
+                
             }
             catch (Exception ex)
             {
