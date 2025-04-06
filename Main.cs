@@ -36,5 +36,194 @@
         {
 
         }
+
+        private Label CreateLabel(string text)
+        {
+            return new Label
+            {
+                AutoSize = true,
+                Text = text,
+                Font = new Font("Segoe UI", 16f, FontStyle.Regular),
+                Margin = new Padding(10)
+            };
+        }
+
+        private Control CreateSpacer()
+        {
+            return new Label
+            {
+                Text = "",
+                Height = 15 
+            };
+        }
+
+        private void DisplayLandlordResultsWithRelations(List<Landlord> landlords)
+        {
+            tabPage2.Controls.Clear();  
+            tabPage1.Controls.Clear(); 
+            tabPage3.Controls.Clear();  
+
+            foreach (var landlord in landlords)
+            {
+                tabPage2.Controls.Add(CreateLabel(
+                    $"#{landlord.LandlordId} - {landlord.FirstName} {landlord.LastName}, {landlord.Address}"
+                ));
+
+                var properties = Global.Properties?.GetAll()
+                    .Where(p => p.LandlordId == landlord.LandlordId)
+                    .ToList() ?? [];
+
+                foreach (var property in properties)
+                {
+                    tabPage1.Controls.Add(CreateLabel(
+                        $"#{property.PropertyId} - {property.HouseNo} {property.AddressLine1}, {property.City}, {property.PostCode}, Rent: £{property.RentAmount:F2}"
+                    ));
+
+                    if (property.TenantId.HasValue)
+                    {
+                        var tenant = Global.Tenants?.GetAll()
+                            .FirstOrDefault(t => t.TenantId == property.TenantId.Value);
+
+                        if (tenant is not null)
+                        {
+                            tabPage3.Controls.Add(CreateLabel(
+                                $"#{tenant?.TenantId} - {tenant?.FirstName} {tenant?.LastName}, Phone: {tenant?.PhoneNumber}, Email: {tenant?.Email}"
+                            ));
+                        }
+                    }
+
+                    tabPage3.Controls.Add(CreateSpacer());
+                    tabPage1.Controls.Add(CreateSpacer());
+                }
+
+                tabPage2.Controls.Add(CreateSpacer());
+            }
+        }
+
+
+        private void DisplayTenantResultsWithRelations(List<Tenant> tenants)
+        {
+            tabPage3.Controls.Clear();  
+            tabPage1.Controls.Clear();  
+            tabPage2.Controls.Clear();  
+
+            foreach (var tenant in tenants)
+            {
+                tabPage3.Controls.Add(CreateLabel(
+                    $"#{tenant.TenantId} - {tenant.FirstName} {tenant.LastName}, Phone: {tenant.PhoneNumber}, Email: {tenant.Email}"
+                ));
+
+                var property = Global.Properties?.GetAll()
+                    .FirstOrDefault(p => p.TenantId == tenant.TenantId);
+
+                if (property is not null)
+                {
+                    tabPage1.Controls.Add(CreateLabel(
+                        $"#{property?.PropertyId} - {property?.HouseNo} {property?.AddressLine1}, {property?.City}, {property?.PostCode}, Rent: £{property?.RentAmount:F2}"
+                    ));
+
+                    var landlord = Global.Landlords?.GetAll()
+                        .FirstOrDefault(l => l.LandlordId == property?.LandlordId);
+
+                    if (landlord is not null)
+                    {
+                        tabPage2.Controls.Add(CreateLabel(
+                            $"#{landlord?.LandlordId} - {landlord?.FirstName} {landlord?.LastName}, {landlord?.Address}"
+                        ));
+                    }
+
+                    tabPage2.Controls.Add(CreateSpacer());
+                    tabPage1.Controls.Add(CreateSpacer());
+                }
+
+                tabPage3.Controls.Add(CreateSpacer());
+            }
+        }
+
+
+        private void DisplayPropertyResultsWithRelations(List<Property> properties)
+        {
+            tabPage1.Controls.Clear();  
+            tabPage2.Controls.Clear(); 
+            tabPage3.Controls.Clear();  
+
+            foreach (var property in properties)
+            {
+                tabPage1.Controls.Add(CreateLabel(
+                    $"#{property.PropertyId} - {property.HouseNo} {property.AddressLine1}, {property.City}, {property.PostCode}, Rent: £{property.RentAmount:F2}"
+                ));
+
+                var landlord = Global.Landlords?.GetAll()
+                    .FirstOrDefault(l => l.LandlordId == property.LandlordId);
+
+                if (landlord is not null)
+                {
+                    tabPage2.Controls.Add(CreateLabel(
+                        $"#{landlord?.LandlordId} - {landlord?.FirstName} {landlord?.LastName}, {landlord?.Address}"
+                    ));
+                }
+
+                if (property.TenantId.HasValue)
+                {
+                    var tenant = Global.Tenants?.GetAll()
+                        .FirstOrDefault(t => t.TenantId == property.TenantId.Value);
+
+                    if (tenant is not null)
+                    {
+                        tabPage3.Controls.Add(CreateLabel(
+                            $"#{tenant?.TenantId} - {tenant?.FirstName} {tenant?.LastName}, Phone: {tenant?.PhoneNumber}, Email: {tenant?.Email}"
+                        ));
+                    }
+                }
+
+                tabPage2.Controls.Add(CreateSpacer());
+                tabPage3.Controls.Add(CreateSpacer());
+                tabPage1.Controls.Add(CreateSpacer());
+            }
+        }
+
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string query = textBox1.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(query))
+                return;
+
+            if (radioBtnLandlord.Checked && Global.Landlords != null)
+            {
+                var results = Global.Landlords.GetAll()
+                    .Where(l => l.FirstName.ToLower().Contains(query)
+                             || l.LastName.ToLower().Contains(query)
+                             || l.Address.ToLower().Contains(query))
+                    .ToList();
+
+                DisplayLandlordResultsWithRelations(results);
+            }
+            else if (radioBtnTenant.Checked && Global.Tenants != null)
+            {
+                var results = Global.Tenants.GetAll()
+                    .Where(t => t.FirstName.ToLower().Contains(query)
+                             || t.LastName.ToLower().Contains(query)
+                             || (t.Email?.ToLower().Contains(query) ?? false)
+                             || (t.PhoneNumber?.ToLower().Contains(query) ?? false))
+                    .ToList();
+
+                DisplayTenantResultsWithRelations(results);
+            }
+            else if (radioBtnProperty.Checked && Global.Properties != null)
+            {
+                var results = Global.Properties.GetAll()
+                    .Where(p =>
+                        (p.HouseNo?.ToLower().Contains(query) ?? false)
+                        || p.AddressLine1.ToLower().Contains(query)
+                        || p.City.ToLower().Contains(query)
+                        || p.PostCode.ToLower().Contains(query))
+                    .ToList();
+
+                DisplayPropertyResultsWithRelations(results);
+            }
+        }
     }
 }

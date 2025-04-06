@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             textBox1 = new TextBox();
             tabControl1 = new TabControl();
             tabPage5 = new TabPage();
@@ -60,6 +61,7 @@
             btnAdmin = new Button();
             btnLogout = new Button();
             pictureBox1 = new PictureBox();
+            bindingSource1 = new BindingSource(components);
             tabControl1.SuspendLayout();
             tabPage5.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -67,6 +69,7 @@
             tabPage3.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -77,6 +80,7 @@
             textBox1.Size = new Size(621, 23);
             textBox1.TabIndex = 0;
             textBox1.Text = "Search...";
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // tabControl1
             // 
@@ -434,6 +438,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -472,5 +477,6 @@
         private Label labelTotalProperties;
         private Label labelTotalTenants;
         private PictureBox pictureBox1;
+        private BindingSource bindingSource1;
     }
 }
