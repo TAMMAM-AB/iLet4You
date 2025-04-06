@@ -404,7 +404,7 @@ namespace iLet4You
                     propertyList.Add(new Property(PropertyID, LandlordID, TenantID, HouseNo, AddressLine1, City, PostCode, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, Notes));
                 }
 
-                Global.Properties = new Properties(propertyList);
+                Global.Properties = new global::Properties(propertyList);
 
                 Main mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();
 

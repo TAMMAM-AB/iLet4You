@@ -31,6 +31,9 @@
             textBox1 = new TextBox();
             tabControl1 = new TabControl();
             tabPage5 = new TabPage();
+            labelTotalLandlords = new Label();
+            labelTotalProperties = new Label();
+            labelTotalTenants = new Label();
             tabPage1 = new TabPage();
             button3 = new Button();
             label4 = new Label();
@@ -56,15 +59,14 @@
             linkLabel1 = new LinkLabel();
             btnAdmin = new Button();
             btnLogout = new Button();
-            labelTotalTenants = new Label();
-            labelTotalProperties = new Label();
-            labelTotalLandlords = new Label();
+            pictureBox1 = new PictureBox();
             tabControl1.SuspendLayout();
             tabPage5.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -102,6 +104,36 @@
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Home";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // labelTotalLandlords
+            // 
+            labelTotalLandlords.AutoSize = true;
+            labelTotalLandlords.Font = new Font("Segoe UI", 16F);
+            labelTotalLandlords.Location = new Point(22, 151);
+            labelTotalLandlords.Name = "labelTotalLandlords";
+            labelTotalLandlords.Size = new Size(164, 30);
+            labelTotalLandlords.TabIndex = 2;
+            labelTotalLandlords.Text = "Total Landlords:";
+            // 
+            // labelTotalProperties
+            // 
+            labelTotalProperties.AutoSize = true;
+            labelTotalProperties.Font = new Font("Segoe UI", 16F);
+            labelTotalProperties.Location = new Point(22, 99);
+            labelTotalProperties.Name = "labelTotalProperties";
+            labelTotalProperties.Size = new Size(175, 30);
+            labelTotalProperties.TabIndex = 1;
+            labelTotalProperties.Text = "Total Properties: ";
+            // 
+            // labelTotalTenants
+            // 
+            labelTotalTenants.AutoSize = true;
+            labelTotalTenants.Font = new Font("Segoe UI", 16F);
+            labelTotalTenants.Location = new Point(22, 41);
+            labelTotalTenants.Name = "labelTotalTenants";
+            labelTotalTenants.Size = new Size(149, 30);
+            labelTotalTenants.TabIndex = 0;
+            labelTotalTenants.Text = "Total Tenants: ";
             // 
             // tabPage1
             // 
@@ -361,35 +393,15 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
-            // labelTotalTenants
+            // pictureBox1
             // 
-            labelTotalTenants.AutoSize = true;
-            labelTotalTenants.Font = new Font("Segoe UI", 16F);
-            labelTotalTenants.Location = new Point(22, 41);
-            labelTotalTenants.Name = "labelTotalTenants";
-            labelTotalTenants.Size = new Size(149, 30);
-            labelTotalTenants.TabIndex = 0;
-            labelTotalTenants.Text = "Total Tenants: ";
-            // 
-            // labelTotalProperties
-            // 
-            labelTotalProperties.AutoSize = true;
-            labelTotalProperties.Font = new Font("Segoe UI", 16F);
-            labelTotalProperties.Location = new Point(22, 99);
-            labelTotalProperties.Name = "labelTotalProperties";
-            labelTotalProperties.Size = new Size(175, 30);
-            labelTotalProperties.TabIndex = 1;
-            labelTotalProperties.Text = "Total Properties: ";
-            // 
-            // labelTotalLandlords
-            // 
-            labelTotalLandlords.AutoSize = true;
-            labelTotalLandlords.Font = new Font("Segoe UI", 16F);
-            labelTotalLandlords.Location = new Point(22, 151);
-            labelTotalLandlords.Name = "labelTotalLandlords";
-            labelTotalLandlords.Size = new Size(164, 30);
-            labelTotalLandlords.TabIndex = 2;
-            labelTotalLandlords.Text = "Total Landlords:";
+            pictureBox1.Image = Properties.Resources.iLet4You;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(223, 63);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
             // 
             // Main
             // 
@@ -397,6 +409,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(pictureBox1);
             Controls.Add(btnLogout);
             Controls.Add(btnAdmin);
             Controls.Add(panel1);
@@ -420,6 +433,7 @@
             tabPage3.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -457,5 +471,6 @@
         private Label labelTotalLandlords;
         private Label labelTotalProperties;
         private Label labelTotalTenants;
+        private PictureBox pictureBox1;
     }
 }
