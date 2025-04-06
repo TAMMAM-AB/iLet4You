@@ -44,7 +44,8 @@
                 AutoSize = true,
                 Text = text,
                 Font = new Font("Segoe UI", 16f, FontStyle.Regular),
-                Margin = new Padding(10)
+                Margin = new Padding(10),
+                TextAlign = ContentAlignment.MiddleLeft
             };
         }
 
@@ -53,15 +54,15 @@
             return new Label
             {
                 Text = "",
-                Height = 15 
+                Height = 15
             };
         }
 
         private void DisplayLandlordResultsWithRelations(List<Landlord> landlords)
         {
-            tabPage2.Controls.Clear();  
-            tabPage1.Controls.Clear(); 
-            tabPage3.Controls.Clear();  
+            tabPage2.Controls.Clear();
+            tabPage1.Controls.Clear();
+            tabPage3.Controls.Clear();
 
             foreach (var landlord in landlords)
             {
@@ -69,9 +70,21 @@
                     $"#{landlord.LandlordId} - {landlord.FirstName} {landlord.LastName}, {landlord.Address}"
                 ));
 
+                var landlordNotesBox = new RichTextBox
+                {
+                    Text = landlord.Notes ?? "No notes available",
+                    Font = new Font("Segoe UI", 12f),
+                    Width = tabPage2.Width - 40,
+                    Height = 100,
+                    ReadOnly = true,
+                    Margin = new Padding(10),
+                };
+                landlordNotesBox.Top = 30;
+                tabPage2.Controls.Add(landlordNotesBox);
+
                 var properties = Global.Properties?.GetAll()
                     .Where(p => p.LandlordId == landlord.LandlordId)
-                    .ToList() ?? [];
+                    .ToList() ?? new List<Property>();
 
                 foreach (var property in properties)
                 {
@@ -79,16 +92,40 @@
                         $"#{property.PropertyId} - {property.HouseNo} {property.AddressLine1}, {property.City}, {property.PostCode}, Rent: £{property.RentAmount:F2}"
                     ));
 
-                    if (property.TenantId.HasValue)
+                    var propertyNotesBox = new RichTextBox
+                    {
+                        Text = property.Notes ?? "No notes available",
+                        Font = new Font("Segoe UI", 12f),
+                        Width = tabPage1.Width - 40,
+                        Height = 100,
+                        ReadOnly = true,
+                        Margin = new Padding(10),
+                    };
+                    propertyNotesBox.Top = 30;
+                    tabPage1.Controls.Add(propertyNotesBox);
+
+                    if (property.TenantId.HasValue == true)
                     {
                         var tenant = Global.Tenants?.GetAll()
                             .FirstOrDefault(t => t.TenantId == property.TenantId.Value);
 
-                        if (tenant is not null)
+                        if (tenant != null)
                         {
                             tabPage3.Controls.Add(CreateLabel(
                                 $"#{tenant?.TenantId} - {tenant?.FirstName} {tenant?.LastName}, Phone: {tenant?.PhoneNumber}, Email: {tenant?.Email}"
                             ));
+
+                            var tenantNotesBox = new RichTextBox
+                            {
+                                Text = tenant?.Notes ?? "No notes available",
+                                Font = new Font("Segoe UI", 12f),
+                                Width = tabPage3.Width - 40,
+                                Height = 100,
+                                ReadOnly = true,
+                                Margin = new Padding(10),
+                            };
+                            tenantNotesBox.Top = 30;
+                            tabPage3.Controls.Add(tenantNotesBox);
                         }
                     }
 
@@ -100,12 +137,11 @@
             }
         }
 
-
         private void DisplayTenantResultsWithRelations(List<Tenant> tenants)
         {
-            tabPage3.Controls.Clear();  
-            tabPage1.Controls.Clear();  
-            tabPage2.Controls.Clear();  
+            tabPage3.Controls.Clear();
+            tabPage1.Controls.Clear();
+            tabPage2.Controls.Clear();
 
             foreach (var tenant in tenants)
             {
@@ -113,23 +149,59 @@
                     $"#{tenant.TenantId} - {tenant.FirstName} {tenant.LastName}, Phone: {tenant.PhoneNumber}, Email: {tenant.Email}"
                 ));
 
+                var tenantNotesBox = new RichTextBox
+                {
+                    Text = tenant.Notes ?? "No notes available",
+                    Font = new Font("Segoe UI", 12f),
+                    Width = tabPage3.Width - 40,
+                    Height = 100,
+                    ReadOnly = true,
+                    Margin = new Padding(10),
+                };
+                tenantNotesBox.Top = 30;
+                tabPage3.Controls.Add(tenantNotesBox);
+
                 var property = Global.Properties?.GetAll()
                     .FirstOrDefault(p => p.TenantId == tenant.TenantId);
 
-                if (property is not null)
+                if (property != null)
                 {
                     tabPage1.Controls.Add(CreateLabel(
                         $"#{property?.PropertyId} - {property?.HouseNo} {property?.AddressLine1}, {property?.City}, {property?.PostCode}, Rent: £{property?.RentAmount:F2}"
                     ));
 
+                    var propertyNotesBox = new RichTextBox
+                    {
+                        Text = property?.Notes ?? "No notes available",
+                        Font = new Font("Segoe UI", 12f),
+                        Width = tabPage1.Width - 40,
+                        Height = 100,
+                        ReadOnly = true,
+                        Margin = new Padding(10),
+                    };
+                    propertyNotesBox.Top = 30;
+                    tabPage1.Controls.Add(propertyNotesBox);
+
                     var landlord = Global.Landlords?.GetAll()
                         .FirstOrDefault(l => l.LandlordId == property?.LandlordId);
 
-                    if (landlord is not null)
+                    if (landlord != null)
                     {
                         tabPage2.Controls.Add(CreateLabel(
                             $"#{landlord?.LandlordId} - {landlord?.FirstName} {landlord?.LastName}, {landlord?.Address}"
                         ));
+
+                        var landlordNotesBox = new RichTextBox
+                        {
+                            Text = landlord?.Notes ?? "No notes available",
+                            Font = new Font("Segoe UI", 12f),
+                            Width = tabPage2.Width - 40,
+                            Height = 100,
+                            ReadOnly = true,
+                            Margin = new Padding(10),
+                        };
+                        landlordNotesBox.Top = 30;
+                        tabPage2.Controls.Add(landlordNotesBox);
                     }
 
                     tabPage2.Controls.Add(CreateSpacer());
@@ -140,12 +212,11 @@
             }
         }
 
-
         private void DisplayPropertyResultsWithRelations(List<Property> properties)
         {
-            tabPage1.Controls.Clear();  
-            tabPage2.Controls.Clear(); 
-            tabPage3.Controls.Clear();  
+            tabPage1.Controls.Clear();
+            tabPage2.Controls.Clear();
+            tabPage3.Controls.Clear();
 
             foreach (var property in properties)
             {
@@ -153,26 +224,62 @@
                     $"#{property.PropertyId} - {property.HouseNo} {property.AddressLine1}, {property.City}, {property.PostCode}, Rent: £{property.RentAmount:F2}"
                 ));
 
+                var propertyNotesBox = new RichTextBox
+                {
+                    Text = property.Notes ?? "No notes available",
+                    Font = new Font("Segoe UI", 12f),
+                    Width = tabPage1.Width - 40,
+                    Height = 100,
+                    ReadOnly = true,
+                    Margin = new Padding(10),
+                };
+                propertyNotesBox.Top = 30;
+                tabPage1.Controls.Add(propertyNotesBox);
+
                 var landlord = Global.Landlords?.GetAll()
                     .FirstOrDefault(l => l.LandlordId == property.LandlordId);
 
-                if (landlord is not null)
+                if (landlord != null)
                 {
                     tabPage2.Controls.Add(CreateLabel(
                         $"#{landlord?.LandlordId} - {landlord?.FirstName} {landlord?.LastName}, {landlord?.Address}"
                     ));
+
+                    var landlordNotesBox = new RichTextBox
+                    {
+                        Text = landlord?.Notes ?? "No notes available",
+                        Font = new Font("Segoe UI", 12f),
+                        Width = tabPage2.Width - 40,
+                        Height = 100,
+                        ReadOnly = true,
+                        Margin = new Padding(10),
+                    };
+                    landlordNotesBox.Top = 30;
+                    tabPage2.Controls.Add(landlordNotesBox);
                 }
 
-                if (property.TenantId.HasValue)
+                if (property.TenantId.HasValue == true)
                 {
                     var tenant = Global.Tenants?.GetAll()
                         .FirstOrDefault(t => t.TenantId == property.TenantId.Value);
 
-                    if (tenant is not null)
+                    if (tenant != null)
                     {
                         tabPage3.Controls.Add(CreateLabel(
                             $"#{tenant?.TenantId} - {tenant?.FirstName} {tenant?.LastName}, Phone: {tenant?.PhoneNumber}, Email: {tenant?.Email}"
                         ));
+
+                        var tenantNotesBox = new RichTextBox
+                        {
+                            Text = tenant?.Notes ?? "No notes available",
+                            Font = new Font("Segoe UI", 12f),
+                            Width = tabPage3.Width - 40,
+                            Height = 100,
+                            ReadOnly = true,
+                            Margin = new Padding(10),
+                        };
+                        tenantNotesBox.Top = 30;
+                        tabPage3.Controls.Add(tenantNotesBox);
                     }
                 }
 
@@ -181,8 +288,6 @@
                 tabPage1.Controls.Add(CreateSpacer());
             }
         }
-
-
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
