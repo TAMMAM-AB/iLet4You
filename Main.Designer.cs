@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            textBox1 = new TextBox();
+            txtbxSearch = new TextBox();
             tabControl1 = new TabControl();
             tabPage5 = new TabPage();
             labelTotalLandlords = new Label();
@@ -73,15 +73,14 @@
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
-            // textBox1
+            // txtbxSearch
             // 
-            textBox1.Location = new Point(241, 13);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(621, 23);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Search...";
-            textBox1.TextChanged += textBox1_TextChanged;
+            txtbxSearch.Location = new Point(241, 13);
+            txtbxSearch.Margin = new Padding(3, 2, 3, 2);
+            txtbxSearch.Name = "txtbxSearch";
+            txtbxSearch.Size = new Size(621, 23);
+            txtbxSearch.TabIndex = 0;
+            txtbxSearch.TextChanged += txtbxSearch_TextChanged;
             // 
             // tabControl1
             // 
@@ -404,7 +403,7 @@
             pictureBox1.Location = new Point(12, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(223, 63);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
@@ -422,7 +421,7 @@
             Controls.Add(radioBtnLandlord);
             Controls.Add(radioBtnProperty);
             Controls.Add(tabControl1);
-            Controls.Add(textBox1);
+            Controls.Add(txtbxSearch);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Main";
@@ -447,7 +446,7 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox txtbxSearch;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;

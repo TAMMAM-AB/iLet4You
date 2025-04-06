@@ -288,9 +288,9 @@
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void txtbxSearch_TextChanged(object sender, EventArgs e)
         {
-            string query = textBox1.Text.Trim().ToLower();
+            string query = txtbxSearch.Text.Trim().ToLower();
 
             if (string.IsNullOrEmpty(query))
                 return;
