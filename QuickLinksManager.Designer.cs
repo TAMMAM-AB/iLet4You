@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuickLinksManager));
             btnQuickLinkRefresh = new Button();
             dgvQuickLinks = new DataGridView();
             quickLinkIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -174,6 +175,7 @@
             Controls.Add(label1);
             Controls.Add(btnQuickLinkRefresh);
             Controls.Add(dgvQuickLinks);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "QuickLinksManager";
             Text = "QuickLinksManager";
             ((System.ComponentModel.ISupportInitialize)dgvQuickLinks).EndInit();
