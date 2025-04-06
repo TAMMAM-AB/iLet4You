@@ -404,6 +404,7 @@ namespace iLet4You
                     propertyList.Add(new Property(PropertyID, LandlordID, TenantID, HouseNo, AddressLine1, City, PostCode, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, Notes));
                 }
 
+                // changhed to global::properties because i was getting an error if it was just proprties not sure why?
                 Global.Properties = new global::Properties(propertyList);
 
                 Main mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();
