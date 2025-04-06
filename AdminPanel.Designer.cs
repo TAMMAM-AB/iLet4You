@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminPanel));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             btnUserUpdatePass = new Button();
@@ -1441,6 +1442,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1162, 646);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminPanel";
             Text = "AdminPanel";
             tabControl1.ResumeLayout(false);

@@ -22,7 +22,6 @@
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-
             AdminPanel a = new AdminPanel();
             a.ShowDialog();
         }

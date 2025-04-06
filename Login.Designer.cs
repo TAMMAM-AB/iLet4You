@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             label1 = new Label();
             txtbxUser = new TextBox();
             label2 = new Label();
@@ -107,6 +108,7 @@
             Controls.Add(label2);
             Controls.Add(txtbxUser);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Login";
             Text = "iLet4You - Login";

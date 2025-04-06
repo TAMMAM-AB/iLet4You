@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             textBox1 = new TextBox();
             tabControl1 = new TabControl();
             tabPage5 = new TabPage();
@@ -422,6 +423,7 @@
             Controls.Add(radioBtnProperty);
             Controls.Add(tabControl1);
             Controls.Add(textBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Main";
             Text = "iLet4You";
