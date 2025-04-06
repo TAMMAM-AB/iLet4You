@@ -85,6 +85,35 @@
         private void OnSearchResultClicked(object selectedItem)
         {
             txtbxSearch.Text = "";
+
+            txtbxLandlordFName.Text = "";
+            txtbxLandlordLName.Text = "";
+            txtbxLandlordAddress.Text = "";
+            txtbxLandlordPhone.Text = "";
+            txtbxLandlordEmail.Text = "";
+            richtxtbxLandlord.Text = "";
+
+            txtbxTenantFName.Text = "";
+            txtbxTenantLName.Text = "";
+            txtbxTenantPhone.Text = "";
+            txtbxTenantEmail.Text = "";
+            richtxtbxTenant.Text = "";
+
+            txtbxHNo.Text = "";
+            txtbxAddress.Text = "";
+            txtbxCity.Text = "";
+            txtbxPostcode.Text = "";
+
+            numRent.Value = 0;
+
+            dateGas.Value = DateTime.Now;
+            dateEPC.Value = DateTime.Now;
+            dateEICR.Value = DateTime.Now;
+
+            cmbobxEPC.SelectedItem = null;
+
+            richtxtbxProperty.Text = "";
+
             if (selectedItem is Landlord landlord)
             {
                 panelSearchResults.Visible = false;
@@ -194,14 +223,10 @@
             }
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnQuickLinks_Click(object sender, EventArgs e)
         {
-
+            QuickLinksManager q = new QuickLinksManager();
+            q.ShowDialog();
         }
     }
 }

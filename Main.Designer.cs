@@ -188,7 +188,7 @@
             // 
             panelSearchResults.AutoSize = true;
             panelSearchResults.Location = new Point(241, 33);
-            panelSearchResults.MaximumSize = new Size(621, 50);
+            panelSearchResults.MaximumSize = new Size(621, 150);
             panelSearchResults.Name = "panelSearchResults";
             panelSearchResults.Size = new Size(621, 19);
             panelSearchResults.TabIndex = 6;
@@ -732,7 +732,6 @@
             Name = "Main";
             Text = "iLet4You";
             WindowState = FormWindowState.Maximized;
-            Load += Main_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             tabPage3.ResumeLayout(false);

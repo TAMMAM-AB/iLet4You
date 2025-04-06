@@ -87,6 +87,7 @@ namespace iLet4You
                     case "quicklinks_data":
                         HandleQuickLinksData(data);
                         AdminPanel.ResultReceived(true);
+                        QuickLinksManager.ResultReceived(true);
                         break;
 
                     case "rents_data":
