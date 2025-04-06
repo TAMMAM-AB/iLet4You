@@ -31,261 +31,119 @@
             Application.Restart();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        // populate search results panel
+        private void PopulateSearchResultsPanel(Panel targetPanel, List<object> searchResults, string resultType)
         {
+            targetPanel.Controls.Clear();
+            targetPanel.AutoScroll = true;
 
-        }
+            int yOffset = 10;
 
-        private Label CreateLabel(string text)
-        {
-            return new Label
+            foreach (var result in searchResults)
             {
-                AutoSize = true,
-                Text = text,
-                Font = new Font("Segoe UI", 16f, FontStyle.Regular),
-                Margin = new Padding(10),
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-        }
+                Control resultControl = null;
 
-        private Control CreateSpacer()
-        {
-            return new Label
-            {
-                Text = "",
-                Height = 15
-            };
-        }
-
-        private void DisplayLandlordResultsWithRelations(List<Landlord> landlords)
-        {
-            tabPage2.Controls.Clear();
-            tabPage1.Controls.Clear();
-            tabPage3.Controls.Clear();
-
-            foreach (var landlord in landlords)
-            {
-                tabPage2.Controls.Add(CreateLabel(
-                    $"#{landlord.LandlordId} - {landlord.FirstName} {landlord.LastName}, {landlord.Address}"
-                ));
-
-                var landlordNotesBox = new RichTextBox
+                if (resultType == "Landlord" && result is Landlord landlord)
                 {
-                    Text = landlord.Notes ?? "No notes available",
-                    Font = new Font("Segoe UI", 12f),
-                    Width = tabPage2.Width - 40,
-                    Height = 100,
-                    ReadOnly = true,
-                    Margin = new Padding(10),
-                };
-                landlordNotesBox.Top = 30;
-                tabPage2.Controls.Add(landlordNotesBox);
-
-                var properties = Global.Properties?.GetAll()
-                    .Where(p => p.LandlordId == landlord.LandlordId)
-                    .ToList() ?? new List<Property>();
-
-                foreach (var property in properties)
-                {
-                    tabPage1.Controls.Add(CreateLabel(
-                        $"#{property.PropertyId} - {property.HouseNo} {property.AddressLine1}, {property.City}, {property.PostCode}, Rent: £{property.RentAmount:F2}"
-                    ));
-
-                    var propertyNotesBox = new RichTextBox
+                    resultControl = new Label
                     {
-                        Text = property.Notes ?? "No notes available",
-                        Font = new Font("Segoe UI", 12f),
-                        Width = tabPage1.Width - 40,
-                        Height = 100,
-                        ReadOnly = true,
-                        Margin = new Padding(10),
+                        Text = $"{landlord.FirstName} {landlord.LastName} - {landlord.Address}",
+                        AutoSize = true,
+                        Location = new Point(10, yOffset)
                     };
-                    propertyNotesBox.Top = 30;
-                    tabPage1.Controls.Add(propertyNotesBox);
-
-                    if (property.TenantId.HasValue == true)
+                    resultControl.Click += (sender, e) => OnSearchResultClicked(landlord); // Click event for Landlord
+                }
+                else if (resultType == "Tenant" && result is Tenant tenant)
+                {
+                    resultControl = new Label
                     {
-                        var tenant = Global.Tenants?.GetAll()
-                            .FirstOrDefault(t => t.TenantId == property.TenantId.Value);
-
-                        if (tenant != null)
-                        {
-                            tabPage3.Controls.Add(CreateLabel(
-                                $"#{tenant?.TenantId} - {tenant?.FirstName} {tenant?.LastName}, Phone: {tenant?.PhoneNumber}, Email: {tenant?.Email}"
-                            ));
-
-                            var tenantNotesBox = new RichTextBox
-                            {
-                                Text = tenant?.Notes ?? "No notes available",
-                                Font = new Font("Segoe UI", 12f),
-                                Width = tabPage3.Width - 40,
-                                Height = 100,
-                                ReadOnly = true,
-                                Margin = new Padding(10),
-                            };
-                            tenantNotesBox.Top = 30;
-                            tabPage3.Controls.Add(tenantNotesBox);
-                        }
-                    }
-
-                    tabPage3.Controls.Add(CreateSpacer());
-                    tabPage1.Controls.Add(CreateSpacer());
+                        Text = $"{tenant.FirstName} {tenant.LastName} - {tenant.Email}",
+                        AutoSize = true,
+                        Location = new Point(10, yOffset)
+                    };
+                    resultControl.Click += (sender, e) => OnSearchResultClicked(tenant); // Click event for Tenant
+                }
+                else if (resultType == "Property" && result is Property property)
+                {
+                    resultControl = new Label
+                    {
+                        Text = $"{property.AddressLine1}, {property.City} - Rent: {property.RentAmount}",
+                        AutoSize = true,
+                        Location = new Point(10, yOffset)
+                    };
+                    resultControl.Click += (sender, e) => OnSearchResultClicked(property); // Click event for Property
                 }
 
-                tabPage2.Controls.Add(CreateSpacer());
+                if (resultControl != null)
+                {
+                    targetPanel.Controls.Add(resultControl);
+                    yOffset += resultControl.Height + 5;
+                }
             }
         }
 
-        private void DisplayTenantResultsWithRelations(List<Tenant> tenants)
+        private void OnSearchResultClicked(object selectedItem)
         {
-            tabPage3.Controls.Clear();
-            tabPage1.Controls.Clear();
-            tabPage2.Controls.Clear();
-
-            foreach (var tenant in tenants)
+            txtbxSearch.Text = "";
+            if (selectedItem is Landlord landlord)
             {
-                tabPage3.Controls.Add(CreateLabel(
-                    $"#{tenant.TenantId} - {tenant.FirstName} {tenant.LastName}, Phone: {tenant.PhoneNumber}, Email: {tenant.Email}"
-                ));
-
-                var tenantNotesBox = new RichTextBox
-                {
-                    Text = tenant.Notes ?? "No notes available",
-                    Font = new Font("Segoe UI", 12f),
-                    Width = tabPage3.Width - 40,
-                    Height = 100,
-                    ReadOnly = true,
-                    Margin = new Padding(10),
-                };
-                tenantNotesBox.Top = 30;
-                tabPage3.Controls.Add(tenantNotesBox);
-
-                var property = Global.Properties?.GetAll()
-                    .FirstOrDefault(p => p.TenantId == tenant.TenantId);
-
-                if (property != null)
-                {
-                    tabPage1.Controls.Add(CreateLabel(
-                        $"#{property?.PropertyId} - {property?.HouseNo} {property?.AddressLine1}, {property?.City}, {property?.PostCode}, Rent: £{property?.RentAmount:F2}"
-                    ));
-
-                    var propertyNotesBox = new RichTextBox
-                    {
-                        Text = property?.Notes ?? "No notes available",
-                        Font = new Font("Segoe UI", 12f),
-                        Width = tabPage1.Width - 40,
-                        Height = 100,
-                        ReadOnly = true,
-                        Margin = new Padding(10),
-                    };
-                    propertyNotesBox.Top = 30;
-                    tabPage1.Controls.Add(propertyNotesBox);
-
-                    var landlord = Global.Landlords?.GetAll()
-                        .FirstOrDefault(l => l.LandlordId == property?.LandlordId);
-
-                    if (landlord != null)
-                    {
-                        tabPage2.Controls.Add(CreateLabel(
-                            $"#{landlord?.LandlordId} - {landlord?.FirstName} {landlord?.LastName}, {landlord?.Address}"
-                        ));
-
-                        var landlordNotesBox = new RichTextBox
-                        {
-                            Text = landlord?.Notes ?? "No notes available",
-                            Font = new Font("Segoe UI", 12f),
-                            Width = tabPage2.Width - 40,
-                            Height = 100,
-                            ReadOnly = true,
-                            Margin = new Padding(10),
-                        };
-                        landlordNotesBox.Top = 30;
-                        tabPage2.Controls.Add(landlordNotesBox);
-                    }
-
-                    tabPage2.Controls.Add(CreateSpacer());
-                    tabPage1.Controls.Add(CreateSpacer());
-                }
-
-                tabPage3.Controls.Add(CreateSpacer());
+                panelSearchResults.Visible = false;
+                ShowLandlordDetails(landlord);
+            }
+            else if (selectedItem is Tenant tenant)
+            {
+                panelSearchResults.Visible = false;
+                ShowTenantDetails(tenant);
+            }
+            else if (selectedItem is Property property)
+            {
+                panelSearchResults.Visible = false;
+                ShowPropertyDetails(property);
             }
         }
 
-        private void DisplayPropertyResultsWithRelations(List<Property> properties)
+        private void ShowLandlordDetails(Landlord landlord)
         {
-            tabPage1.Controls.Clear();
-            tabPage2.Controls.Clear();
-            tabPage3.Controls.Clear();
+            txtbxLandlordFName.Text = landlord.FirstName;
+            txtbxLandlordLName.Text = landlord.LastName;
+            txtbxLandlordAddress.Text = landlord.Address;
+            txtbxLandlordPhone.Text = landlord.PhoneNumber;
+            txtbxLandlordEmail.Text = landlord.Email;
+            richtxtbxLandlord.Text = landlord.Notes;
+        }
 
-            foreach (var property in properties)
+        private void ShowTenantDetails(Tenant tenant)
+        {
+            txtbxTenantFName.Text = tenant.FirstName;
+            txtbxTenantLName.Text = tenant.LastName;
+            txtbxTenantPhone.Text = tenant.PhoneNumber;
+            txtbxTenantEmail.Text = tenant.Email;
+            richtxtbxTenant.Text = tenant.Notes;
+        }
+
+        private void ShowPropertyDetails(Property property)
+        {
+            txtbxHNo.Text = property.HouseNo;
+            txtbxAddress.Text = property.AddressLine1;
+            txtbxCity.Text = property.City;
+            txtbxPostcode.Text = property.PostCode;
+
+            numRent.Value = (decimal)property.RentAmount;
+
+            dateGas.Value = property.GasCertExpiry;
+            dateEPC.Value = property.EPCExpiry;
+            dateEICR.Value = property.EICRExpiry;
+
+            cmbobxEPC.SelectedItem = property.EPCRating;
+
+            richtxtbxProperty.Text = property.Notes;
+
+            if (property.TenantId.HasValue)
             {
-                tabPage1.Controls.Add(CreateLabel(
-                    $"#{property.PropertyId} - {property.HouseNo} {property.AddressLine1}, {property.City}, {property.PostCode}, Rent: £{property.RentAmount:F2}"
-                ));
-
-                var propertyNotesBox = new RichTextBox
-                {
-                    Text = property.Notes ?? "No notes available",
-                    Font = new Font("Segoe UI", 12f),
-                    Width = tabPage1.Width - 40,
-                    Height = 100,
-                    ReadOnly = true,
-                    Margin = new Padding(10),
-                };
-                propertyNotesBox.Top = 30;
-                tabPage1.Controls.Add(propertyNotesBox);
-
-                var landlord = Global.Landlords?.GetAll()
-                    .FirstOrDefault(l => l.LandlordId == property.LandlordId);
-
-                if (landlord != null)
-                {
-                    tabPage2.Controls.Add(CreateLabel(
-                        $"#{landlord?.LandlordId} - {landlord?.FirstName} {landlord?.LastName}, {landlord?.Address}"
-                    ));
-
-                    var landlordNotesBox = new RichTextBox
-                    {
-                        Text = landlord?.Notes ?? "No notes available",
-                        Font = new Font("Segoe UI", 12f),
-                        Width = tabPage2.Width - 40,
-                        Height = 100,
-                        ReadOnly = true,
-                        Margin = new Padding(10),
-                    };
-                    landlordNotesBox.Top = 30;
-                    tabPage2.Controls.Add(landlordNotesBox);
-                }
-
-                if (property.TenantId.HasValue == true)
-                {
-                    var tenant = Global.Tenants?.GetAll()
-                        .FirstOrDefault(t => t.TenantId == property.TenantId.Value);
-
-                    if (tenant != null)
-                    {
-                        tabPage3.Controls.Add(CreateLabel(
-                            $"#{tenant?.TenantId} - {tenant?.FirstName} {tenant?.LastName}, Phone: {tenant?.PhoneNumber}, Email: {tenant?.Email}"
-                        ));
-
-                        var tenantNotesBox = new RichTextBox
-                        {
-                            Text = tenant?.Notes ?? "No notes available",
-                            Font = new Font("Segoe UI", 12f),
-                            Width = tabPage3.Width - 40,
-                            Height = 100,
-                            ReadOnly = true,
-                            Margin = new Padding(10),
-                        };
-                        tenantNotesBox.Top = 30;
-                        tabPage3.Controls.Add(tenantNotesBox);
-                    }
-                }
-
-                tabPage2.Controls.Add(CreateSpacer());
-                tabPage3.Controls.Add(CreateSpacer());
-                tabPage1.Controls.Add(CreateSpacer());
+                ShowTenantDetails(Global.Tenants.FindById(property.TenantId.Value));
             }
+
+            ShowLandlordDetails(Global.Landlords.FindById(property.LandlordId));
         }
 
         private void txtbxSearch_TextChanged(object sender, EventArgs e)
@@ -293,7 +151,13 @@
             string query = txtbxSearch.Text.Trim().ToLower();
 
             if (string.IsNullOrEmpty(query))
+            {
+                panelSearchResults.Controls.Clear();
+                panelSearchResults.Visible = false;
                 return;
+            }
+
+            panelSearchResults.Visible = true;
 
             if (radioBtnLandlord.Checked && Global.Landlords != null)
             {
@@ -303,7 +167,7 @@
                              || l.Address.ToLower().Contains(query))
                     .ToList();
 
-                DisplayLandlordResultsWithRelations(results);
+                PopulateSearchResultsPanel(panelSearchResults, results.Cast<object>().ToList(), "Landlord");
             }
             else if (radioBtnTenant.Checked && Global.Tenants != null)
             {
@@ -314,7 +178,7 @@
                              || (t.PhoneNumber?.ToLower().Contains(query) ?? false))
                     .ToList();
 
-                DisplayTenantResultsWithRelations(results);
+                PopulateSearchResultsPanel(panelSearchResults, results.Cast<object>().ToList(), "Tenant");
             }
             else if (radioBtnProperty.Checked && Global.Properties != null)
             {
@@ -326,8 +190,18 @@
                         || p.PostCode.ToLower().Contains(query))
                     .ToList();
 
-                DisplayPropertyResultsWithRelations(results);
+                PopulateSearchResultsPanel(panelSearchResults, results.Cast<object>().ToList(), "Property");
             }
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnQuickLinks_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

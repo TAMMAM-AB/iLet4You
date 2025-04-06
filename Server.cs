@@ -392,12 +392,19 @@ namespace iLet4You
 
                     double RentAmount = property["RentAmount"] != null &&
                         double.TryParse(property["RentAmount"].ToString(), out double rent) ? rent : 0.0;
-                    DateTime? GasCertExpiry = property["GasCertExpiry"] != null &&
-                        DateTime.TryParse(property["GasCertExpiry"].ToString(), out DateTime gasExpiry) ? gasExpiry : null;
-                    DateTime? EPCExpiry = property["EPCExpiry"] != null &&
-                        DateTime.TryParse(property["EPCExpiry"].ToString(), out DateTime epcExpiry) ? epcExpiry : null;
-                    DateTime? EICRExpiry = property["EICRExpiry"] != null &&
-                        DateTime.TryParse(property["EICRExpiry"].ToString(), out DateTime eicrExpiry) ? eicrExpiry : null;
+
+                    DateTime GasCertExpiry = property["GasCertExpiry"] != null &&
+                        DateTime.TryParse(property["GasCertExpiry"].ToString(), out DateTime gasExpiry)
+                            ? gasExpiry : DateTime.MinValue;
+
+                    DateTime EPCExpiry = property["EPCExpiry"] != null &&
+                        DateTime.TryParse(property["EPCExpiry"].ToString(), out DateTime epcExpiry)
+                            ? epcExpiry : DateTime.MinValue;
+
+                    DateTime EICRExpiry = property["EICRExpiry"] != null &&
+                        DateTime.TryParse(property["EICRExpiry"].ToString(), out DateTime eicrExpiry)
+                            ? eicrExpiry : DateTime.MinValue;
+
                     string EPCRating = property["EPCRating"]?.ToString() ?? "Unknown";
                     string Notes = property["Notes"]?.ToString() ?? "Unknown";
 

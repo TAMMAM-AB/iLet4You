@@ -11,4 +11,9 @@
     {
         return _tenants;
     }
+
+    public Tenant FindById(int id)
+    {
+        return _tenants.FirstOrDefault(t => t.TenantId == id);
+    }
 }
