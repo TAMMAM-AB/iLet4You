@@ -86,6 +86,9 @@
         {
             txtbxSearch.Text = "";
 
+            lblPropertyTenant.Text = "";
+            lblPropertyLandord.Text = "";
+
             txtbxLandlordFName.Text = "";
             txtbxLandlordLName.Text = "";
             txtbxLandlordAddress.Text = "";
