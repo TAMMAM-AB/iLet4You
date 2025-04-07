@@ -170,9 +170,11 @@
             if (property.TenantId.HasValue)
             {
                 ShowTenantDetails(Global.Tenants.FindById(property.TenantId.Value));
+                lblPropertyTenant.Text = $"{Global.Tenants.FindById(property.TenantId.Value).FirstName} {Global.Tenants.FindById(property.TenantId.Value).LastName}";
             }
 
             ShowLandlordDetails(Global.Landlords.FindById(property.LandlordId));
+            lblPropertyLandord.Text = $"{Global.Landlords.FindById(property.LandlordId).FirstName} {Global.Landlords.FindById(property.LandlordId).LastName}";
         }
 
         private void txtbxSearch_TextChanged(object sender, EventArgs e)

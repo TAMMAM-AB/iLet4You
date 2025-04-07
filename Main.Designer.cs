@@ -94,6 +94,10 @@
             labelTotalTenants = new Label();
             tabControl1 = new TabControl();
             btnQuickLinks = new Button();
+            label23 = new Label();
+            label14 = new Label();
+            lblPropertyLandord = new Label();
+            lblPropertyTenant = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             tabPage3.SuspendLayout();
@@ -438,6 +442,10 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(lblPropertyTenant);
+            tabPage1.Controls.Add(lblPropertyLandord);
+            tabPage1.Controls.Add(label14);
+            tabPage1.Controls.Add(label23);
             tabPage1.Controls.Add(cmbobxEPC);
             tabPage1.Controls.Add(dateEICR);
             tabPage1.Controls.Add(dateEPC);
@@ -710,6 +718,38 @@
             btnQuickLinks.UseVisualStyleBackColor = true;
             btnQuickLinks.Click += btnQuickLinks_Click;
             // 
+            // label23
+            // 
+            label23.Location = new Point(7, 371);
+            label23.Name = "label23";
+            label23.Size = new Size(100, 18);
+            label23.TabIndex = 82;
+            label23.Text = "Landlord:";
+            label23.TextAlign = ContentAlignment.TopRight;
+            // 
+            // label14
+            // 
+            label14.Location = new Point(7, 389);
+            label14.Name = "label14";
+            label14.Size = new Size(100, 18);
+            label14.TabIndex = 83;
+            label14.Text = "Tenant:";
+            label14.TextAlign = ContentAlignment.TopRight;
+            // 
+            // lblPropertyLandord
+            // 
+            lblPropertyLandord.Location = new Point(113, 371);
+            lblPropertyLandord.Name = "lblPropertyLandord";
+            lblPropertyLandord.Size = new Size(120, 18);
+            lblPropertyLandord.TabIndex = 84;
+            // 
+            // lblPropertyTenant
+            // 
+            lblPropertyTenant.Location = new Point(113, 389);
+            lblPropertyTenant.Name = "lblPropertyTenant";
+            lblPropertyTenant.Size = new Size(120, 18);
+            lblPropertyTenant.TabIndex = 85;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -814,5 +854,9 @@
         private Label labelTotalTenants;
         private TabControl tabControl1;
         private Button btnQuickLinks;
+        private Label lblPropertyTenant;
+        private Label lblPropertyLandord;
+        private Label label14;
+        private Label label23;
     }
 }
