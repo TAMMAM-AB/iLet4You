@@ -51,7 +51,7 @@
                         AutoSize = true,
                         Location = new Point(10, yOffset)
                     };
-                    resultControl.Click += (sender, e) => OnSearchResultClicked(landlord); // Click event for Landlord
+                    resultControl.Click += (sender, e) => OnSearchResultClicked(landlord);
                 }
                 else if (resultType == "Tenant" && result is Tenant tenant)
                 {
@@ -61,7 +61,7 @@
                         AutoSize = true,
                         Location = new Point(10, yOffset)
                     };
-                    resultControl.Click += (sender, e) => OnSearchResultClicked(tenant); // Click event for Tenant
+                    resultControl.Click += (sender, e) => OnSearchResultClicked(tenant);
                 }
                 else if (resultType == "Property" && result is Property property)
                 {
@@ -71,7 +71,7 @@
                         AutoSize = true,
                         Location = new Point(10, yOffset)
                     };
-                    resultControl.Click += (sender, e) => OnSearchResultClicked(property); // Click event for Property
+                    resultControl.Click += (sender, e) => OnSearchResultClicked(property);
                 }
 
                 if (resultControl != null)
@@ -178,6 +178,8 @@
 
             ShowLandlordDetails(Global.Landlords.FindById(property.LandlordId));
             lblPropertyLandord.Text = $"{Global.Landlords.FindById(property.LandlordId).FirstName} {Global.Landlords.FindById(property.LandlordId).LastName}";
+
+            dgvMaintenances.DataSource = Global.Properties.FindMaintenancesFromId(property.PropertyId);
         }
 
         private void txtbxSearch_TextChanged(object sender, EventArgs e)

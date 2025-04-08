@@ -67,6 +67,18 @@
             label21 = new Label();
             button2 = new Button();
             tabPage1 = new TabPage();
+            dgvMaintenances = new DataGridView();
+            maintenanceIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            propertyIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateReportedDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateCompletedDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            maintenanceBindingSource = new BindingSource(components);
+            lblPropertyTenant = new Label();
+            lblPropertyLandord = new Label();
+            label14 = new Label();
+            label23 = new Label();
             cmbobxEPC = new ComboBox();
             dateEICR = new DateTimePicker();
             dateEPC = new DateTimePicker();
@@ -94,15 +106,14 @@
             labelTotalTenants = new Label();
             tabControl1 = new TabControl();
             btnQuickLinks = new Button();
-            label23 = new Label();
-            label14 = new Label();
-            lblPropertyLandord = new Label();
-            lblPropertyTenant = new Label();
+            label24 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             tabPage3.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvMaintenances).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)maintenanceBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numRent).BeginInit();
             tabPage5.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -442,6 +453,8 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(label24);
+            tabPage1.Controls.Add(dgvMaintenances);
             tabPage1.Controls.Add(lblPropertyTenant);
             tabPage1.Controls.Add(lblPropertyLandord);
             tabPage1.Controls.Add(label14);
@@ -475,6 +488,101 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Property Details";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvMaintenances
+            // 
+            dgvMaintenances.AllowUserToAddRows = false;
+            dgvMaintenances.AllowUserToDeleteRows = false;
+            dgvMaintenances.AutoGenerateColumns = false;
+            dgvMaintenances.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvMaintenances.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMaintenances.Columns.AddRange(new DataGridViewColumn[] { maintenanceIdDataGridViewTextBoxColumn, propertyIdDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn, dateReportedDataGridViewTextBoxColumn, dateCompletedDataGridViewTextBoxColumn });
+            dgvMaintenances.DataSource = maintenanceBindingSource;
+            dgvMaintenances.Location = new Point(552, 38);
+            dgvMaintenances.MultiSelect = false;
+            dgvMaintenances.Name = "dgvMaintenances";
+            dgvMaintenances.ReadOnly = true;
+            dgvMaintenances.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMaintenances.Size = new Size(683, 394);
+            dgvMaintenances.TabIndex = 86;
+            // 
+            // maintenanceIdDataGridViewTextBoxColumn
+            // 
+            maintenanceIdDataGridViewTextBoxColumn.DataPropertyName = "MaintenanceId";
+            maintenanceIdDataGridViewTextBoxColumn.HeaderText = "Maintenance ID";
+            maintenanceIdDataGridViewTextBoxColumn.Name = "maintenanceIdDataGridViewTextBoxColumn";
+            maintenanceIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // propertyIdDataGridViewTextBoxColumn
+            // 
+            propertyIdDataGridViewTextBoxColumn.DataPropertyName = "PropertyId";
+            propertyIdDataGridViewTextBoxColumn.HeaderText = "Property ID";
+            propertyIdDataGridViewTextBoxColumn.Name = "propertyIdDataGridViewTextBoxColumn";
+            propertyIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            statusDataGridViewTextBoxColumn.HeaderText = "Status";
+            statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            statusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateReportedDataGridViewTextBoxColumn
+            // 
+            dateReportedDataGridViewTextBoxColumn.DataPropertyName = "DateReported";
+            dateReportedDataGridViewTextBoxColumn.HeaderText = "Date Reported";
+            dateReportedDataGridViewTextBoxColumn.Name = "dateReportedDataGridViewTextBoxColumn";
+            dateReportedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateCompletedDataGridViewTextBoxColumn
+            // 
+            dateCompletedDataGridViewTextBoxColumn.DataPropertyName = "DateCompleted";
+            dateCompletedDataGridViewTextBoxColumn.HeaderText = "Date Completed";
+            dateCompletedDataGridViewTextBoxColumn.Name = "dateCompletedDataGridViewTextBoxColumn";
+            dateCompletedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // maintenanceBindingSource
+            // 
+            maintenanceBindingSource.DataSource = typeof(Maintenance);
+            // 
+            // lblPropertyTenant
+            // 
+            lblPropertyTenant.Location = new Point(113, 389);
+            lblPropertyTenant.Name = "lblPropertyTenant";
+            lblPropertyTenant.Size = new Size(120, 18);
+            lblPropertyTenant.TabIndex = 85;
+            // 
+            // lblPropertyLandord
+            // 
+            lblPropertyLandord.Location = new Point(113, 371);
+            lblPropertyLandord.Name = "lblPropertyLandord";
+            lblPropertyLandord.Size = new Size(120, 18);
+            lblPropertyLandord.TabIndex = 84;
+            // 
+            // label14
+            // 
+            label14.Location = new Point(7, 389);
+            label14.Name = "label14";
+            label14.Size = new Size(100, 18);
+            label14.TabIndex = 83;
+            label14.Text = "Tenant:";
+            label14.TextAlign = ContentAlignment.TopRight;
+            // 
+            // label23
+            // 
+            label23.Location = new Point(7, 371);
+            label23.Name = "label23";
+            label23.Size = new Size(100, 18);
+            label23.TabIndex = 82;
+            label23.Text = "Landlord:";
+            label23.TextAlign = ContentAlignment.TopRight;
             // 
             // cmbobxEPC
             // 
@@ -639,9 +747,9 @@
             label13.AutoSize = true;
             label13.Location = new Point(239, 19);
             label13.Name = "label13";
-            label13.Size = new Size(38, 15);
+            label13.Size = new Size(41, 15);
             label13.TabIndex = 62;
-            label13.Text = "Notes";
+            label13.Text = "Notes:";
             // 
             // button3
             // 
@@ -718,37 +826,13 @@
             btnQuickLinks.UseVisualStyleBackColor = true;
             btnQuickLinks.Click += btnQuickLinks_Click;
             // 
-            // label23
+            // label24
             // 
-            label23.Location = new Point(7, 371);
-            label23.Name = "label23";
-            label23.Size = new Size(100, 18);
-            label23.TabIndex = 82;
-            label23.Text = "Landlord:";
-            label23.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label14
-            // 
-            label14.Location = new Point(7, 389);
-            label14.Name = "label14";
-            label14.Size = new Size(100, 18);
-            label14.TabIndex = 83;
-            label14.Text = "Tenant:";
-            label14.TextAlign = ContentAlignment.TopRight;
-            // 
-            // lblPropertyLandord
-            // 
-            lblPropertyLandord.Location = new Point(113, 371);
-            lblPropertyLandord.Name = "lblPropertyLandord";
-            lblPropertyLandord.Size = new Size(120, 18);
-            lblPropertyLandord.TabIndex = 84;
-            // 
-            // lblPropertyTenant
-            // 
-            lblPropertyTenant.Location = new Point(113, 389);
-            lblPropertyTenant.Name = "lblPropertyTenant";
-            lblPropertyTenant.Size = new Size(120, 18);
-            lblPropertyTenant.TabIndex = 85;
+            label24.Location = new Point(552, 19);
+            label24.Name = "label24";
+            label24.Size = new Size(100, 18);
+            label24.TabIndex = 87;
+            label24.Text = "Maintenance:";
             // 
             // Main
             // 
@@ -780,6 +864,8 @@
             tabPage2.PerformLayout();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvMaintenances).EndInit();
+            ((System.ComponentModel.ISupportInitialize)maintenanceBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)numRent).EndInit();
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
@@ -858,5 +944,14 @@
         private Label lblPropertyLandord;
         private Label label14;
         private Label label23;
+        private DataGridView dgvMaintenances;
+        private BindingSource maintenanceBindingSource;
+        private DataGridViewTextBoxColumn maintenanceIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn propertyIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateReportedDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateCompletedDataGridViewTextBoxColumn;
+        private Label label24;
     }
 }
