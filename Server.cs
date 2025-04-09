@@ -55,8 +55,6 @@ namespace iLet4You
                         string role = data["role"]?.ToString();
                         string username = data["username"]?.ToString();
                         Global.User = new User(username, role);
-
-                        // MessageBox.Show($"Login Successful! Role: {role}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
 
                     case "login_failed":
@@ -67,21 +65,25 @@ namespace iLet4You
                     case "landlords_data":
                         HandleLandlordsData(data);
                         AdminPanel.ResultReceived(true);
+                        Main.ResultReceived(true);
                         break;
 
                     case "tenants_data":
                         HandleTenantsData(data);
                         AdminPanel.ResultReceived(true);
+                        Main.ResultReceived(true);
                         break;
 
                     case "properties_data":
                         HandlePropertiesData(data);
                         AdminPanel.ResultReceived(true);
+                        Main.ResultReceived(true);
                         break;
 
                     case "maintenances_data":
                         HandleMaintenancesData(data);
                         AdminPanel.ResultReceived(true);
+                        Main.ResultReceived(true);
                         break;
 
                     case "quicklinks_data":
@@ -93,6 +95,7 @@ namespace iLet4You
                     case "rents_data":
                         HandleRentsData(data);
                         AdminPanel.ResultReceived(true);
+                        Main.ResultReceived(true);
                         break;
 
                     case "record_created":
@@ -125,15 +128,12 @@ namespace iLet4You
                         break;
 
                     case "create_success":
-                        // HANDLE CREATE RECORD SUCCESS? (a MessageBox.Show is enough?)
                         break;
 
                     case "update_success":
-                        // HANDLE UPDATE RECORD SUCCESS? (a MessageBox.Show is enough?)
                         break;
                     
                     case "delete_success":
-                        // HANDLE DELETE RECORD SUCCESS? (a MessageBox.Show is enough?)
                         break;
 
                     case "error":

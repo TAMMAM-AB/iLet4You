@@ -42,5 +42,4 @@ public static class Settings
             MessageBox.Show($"Failed to load config: {ex.Message}");
         }
     }
-
 }

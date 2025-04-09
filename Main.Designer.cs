@@ -103,6 +103,18 @@
             label21 = new Label();
             button2 = new Button();
             tabPageProperty = new TabPage();
+            chkbxMaintenanceCompleted = new CheckBox();
+            dateMaintenanceCompleted = new DateTimePicker();
+            dateMaintenanceReported = new DateTimePicker();
+            cmbobxMaintenanceStatus = new ComboBox();
+            btnMaintenanceRefresh = new Button();
+            btnMaintenanceDelete = new Button();
+            btnMaintenanceCreate = new Button();
+            btnMaintenanceUpdate = new Button();
+            label30 = new Label();
+            label29 = new Label();
+            rchtxtbxMaintenance = new RichTextBox();
+            label28 = new Label();
             label24 = new Label();
             dgvMaintenances = new DataGridView();
             maintenanceIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -142,6 +154,7 @@
             labelTotalTenants = new Label();
             tabControl = new TabControl();
             btnQuickLinks = new Button();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPageTenant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
@@ -799,6 +812,18 @@
             // 
             // tabPageProperty
             // 
+            tabPageProperty.Controls.Add(chkbxMaintenanceCompleted);
+            tabPageProperty.Controls.Add(dateMaintenanceCompleted);
+            tabPageProperty.Controls.Add(dateMaintenanceReported);
+            tabPageProperty.Controls.Add(cmbobxMaintenanceStatus);
+            tabPageProperty.Controls.Add(btnMaintenanceRefresh);
+            tabPageProperty.Controls.Add(btnMaintenanceDelete);
+            tabPageProperty.Controls.Add(btnMaintenanceCreate);
+            tabPageProperty.Controls.Add(btnMaintenanceUpdate);
+            tabPageProperty.Controls.Add(label30);
+            tabPageProperty.Controls.Add(label29);
+            tabPageProperty.Controls.Add(rchtxtbxMaintenance);
+            tabPageProperty.Controls.Add(label28);
             tabPageProperty.Controls.Add(label24);
             tabPageProperty.Controls.Add(dgvMaintenances);
             tabPageProperty.Controls.Add(lblPropertyTenant);
@@ -835,6 +860,117 @@
             tabPageProperty.Text = "Property";
             tabPageProperty.UseVisualStyleBackColor = true;
             // 
+            // chkbxMaintenanceCompleted
+            // 
+            chkbxMaintenanceCompleted.AutoSize = true;
+            chkbxMaintenanceCompleted.CheckAlign = ContentAlignment.MiddleRight;
+            chkbxMaintenanceCompleted.Location = new Point(1517, 336);
+            chkbxMaintenanceCompleted.Name = "chkbxMaintenanceCompleted";
+            chkbxMaintenanceCompleted.Size = new Size(115, 19);
+            chkbxMaintenanceCompleted.TabIndex = 103;
+            chkbxMaintenanceCompleted.Text = "Date Completed:";
+            chkbxMaintenanceCompleted.UseVisualStyleBackColor = true;
+            chkbxMaintenanceCompleted.CheckedChanged += chkbxMaintenanceCompleted_CheckedChanged;
+            // 
+            // dateMaintenanceCompleted
+            // 
+            dateMaintenanceCompleted.Location = new Point(1517, 358);
+            dateMaintenanceCompleted.Name = "dateMaintenanceCompleted";
+            dateMaintenanceCompleted.Size = new Size(120, 23);
+            dateMaintenanceCompleted.TabIndex = 102;
+            // 
+            // dateMaintenanceReported
+            // 
+            dateMaintenanceReported.Location = new Point(1393, 358);
+            dateMaintenanceReported.Name = "dateMaintenanceReported";
+            dateMaintenanceReported.Size = new Size(120, 23);
+            dateMaintenanceReported.TabIndex = 101;
+            // 
+            // cmbobxMaintenanceStatus
+            // 
+            cmbobxMaintenanceStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbobxMaintenanceStatus.FormattingEnabled = true;
+            cmbobxMaintenanceStatus.Items.AddRange(new object[] { "Pending", "In Progress", "Completed", "Paused" });
+            cmbobxMaintenanceStatus.Location = new Point(1267, 358);
+            cmbobxMaintenanceStatus.Name = "cmbobxMaintenanceStatus";
+            cmbobxMaintenanceStatus.Size = new Size(120, 23);
+            cmbobxMaintenanceStatus.TabIndex = 100;
+            // 
+            // btnMaintenanceRefresh
+            // 
+            btnMaintenanceRefresh.Location = new Point(1548, 387);
+            btnMaintenanceRefresh.Name = "btnMaintenanceRefresh";
+            btnMaintenanceRefresh.Size = new Size(89, 23);
+            btnMaintenanceRefresh.TabIndex = 99;
+            btnMaintenanceRefresh.Text = "Refresh";
+            btnMaintenanceRefresh.UseVisualStyleBackColor = true;
+            btnMaintenanceRefresh.Click += btnMaintenanceRefresh_Click;
+            // 
+            // btnMaintenanceDelete
+            // 
+            btnMaintenanceDelete.Location = new Point(1453, 387);
+            btnMaintenanceDelete.Name = "btnMaintenanceDelete";
+            btnMaintenanceDelete.Size = new Size(89, 23);
+            btnMaintenanceDelete.TabIndex = 98;
+            btnMaintenanceDelete.Text = "Delete";
+            btnMaintenanceDelete.UseVisualStyleBackColor = true;
+            btnMaintenanceDelete.Click += btnMaintenanceDelete_Click;
+            // 
+            // btnMaintenanceCreate
+            // 
+            btnMaintenanceCreate.Location = new Point(1267, 387);
+            btnMaintenanceCreate.Name = "btnMaintenanceCreate";
+            btnMaintenanceCreate.Size = new Size(89, 23);
+            btnMaintenanceCreate.TabIndex = 97;
+            btnMaintenanceCreate.Text = "Create";
+            btnMaintenanceCreate.UseVisualStyleBackColor = true;
+            btnMaintenanceCreate.Click += btnMaintenanceCreate_Click;
+            // 
+            // btnMaintenanceUpdate
+            // 
+            btnMaintenanceUpdate.Location = new Point(1362, 387);
+            btnMaintenanceUpdate.Name = "btnMaintenanceUpdate";
+            btnMaintenanceUpdate.Size = new Size(89, 23);
+            btnMaintenanceUpdate.TabIndex = 96;
+            btnMaintenanceUpdate.Text = "Update";
+            btnMaintenanceUpdate.UseVisualStyleBackColor = true;
+            btnMaintenanceUpdate.Click += btnMaintenanceUpdate_Click;
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Location = new Point(1393, 336);
+            label30.Name = "label30";
+            label30.Size = new Size(85, 15);
+            label30.TabIndex = 93;
+            label30.Text = "Date Reported:";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(1267, 336);
+            label29.Name = "label29";
+            label29.Size = new Size(42, 15);
+            label29.TabIndex = 91;
+            label29.Text = "Status:";
+            // 
+            // rchtxtbxMaintenance
+            // 
+            rchtxtbxMaintenance.Location = new Point(551, 358);
+            rchtxtbxMaintenance.Name = "rchtxtbxMaintenance";
+            rchtxtbxMaintenance.Size = new Size(710, 61);
+            rchtxtbxMaintenance.TabIndex = 89;
+            rchtxtbxMaintenance.Text = "";
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Location = new Point(551, 336);
+            label28.Name = "label28";
+            label28.Size = new Size(70, 15);
+            label28.TabIndex = 88;
+            label28.Text = "Description:";
+            // 
             // label24
             // 
             label24.Location = new Point(551, 2);
@@ -857,7 +993,7 @@
             dgvMaintenances.Name = "dgvMaintenances";
             dgvMaintenances.ReadOnly = true;
             dgvMaintenances.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMaintenances.Size = new Size(1086, 395);
+            dgvMaintenances.Size = new Size(1086, 313);
             dgvMaintenances.TabIndex = 86;
             // 
             // maintenanceIdDataGridViewTextBoxColumn
@@ -1341,5 +1477,18 @@
         private DataGridViewTextBoxColumn rentAmountPaidDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn1;
         private BindingSource rentBindingSource;
+        private Label label28;
+        private RichTextBox rchtxtbxMaintenance;
+        private Label label29;
+        private Label label30;
+        private Button btnMaintenanceDelete;
+        private Button btnMaintenanceCreate;
+        private Button btnMaintenanceUpdate;
+        private Button btnMaintenanceRefresh;
+        private DateTimePicker dateMaintenanceCompleted;
+        private DateTimePicker dateMaintenanceReported;
+        private ComboBox cmbobxMaintenanceStatus;
+        private CheckBox chkbxMaintenanceCompleted;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

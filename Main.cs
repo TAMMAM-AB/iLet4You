@@ -15,14 +15,278 @@
             string role = Global.User?.Role;
 
             InitializeComponent();
+            RefreshData();
 
             this.Text = $"iLet4You | {username} | {role}";
+
+            cmbobxMaintenanceStatus.SelectedIndex = 0;
+            dateMaintenanceCompleted.Enabled = false; // disable until checked
 
             // show and enable admin controls button is user is admin
             btnAdmin.Enabled = (role == "admin");
             btnAdmin.Visible = (role == "admin");
             Global.Server.RequestData();
         }
+
+        public static Main? Instance { get; private set; }
+        // server response
+        private static TaskCompletionSource<bool> result = new();
+        public static void ResultReceived(bool success)
+        {
+            if (!result.Task.IsCompleted)
+            {
+                result.SetResult(success);
+            }
+        }
+
+        private async Task<bool> AwaitResponse()
+        {
+            Cursor = Cursors.WaitCursor; // loading cursor
+
+            Task delayTask = Task.Delay(5000); // timeout after 5 seconds
+            Task completedTask = await Task.WhenAny(result.Task, delayTask);
+
+            Cursor = Cursors.Default;
+
+            return completedTask == result.Task && result.Task.Result;
+        }
+
+        private async void RefreshData()
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestData();
+            bool success = await AwaitResponse(); // wait for response
+
+            dgvMaintenances.DataSource = null;
+            dgvLandlordProperties.DataSource = null;
+            dgvTenantProperties.DataSource = null;
+            dgvRents.DataSource = null;
+
+            if (_selectedProperty != null) dgvMaintenances.DataSource = Global.Properties?.FindMaintenancesFromId(_selectedProperty.Value.PropertyId);
+            if (_selectedLandlord != null) dgvLandlordProperties.DataSource = Global.Landlords?.FindPropertiesFromId(_selectedLandlord.Value.LandlordId);
+            if (_selectedTenant != null) dgvTenantProperties.DataSource = Global.Tenants?.FindPropertiesFromId(_selectedTenant.Value.TenantId);
+            if (_selectedTenant != null) dgvRents.DataSource = Global.Tenants?.FindRentsFromId(_selectedTenant.Value.TenantId);
+        }
+
+        // landlords
+        private async void CreateLandlord(string fName, string lName, string address, string phone, string email, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "Address", $"{address}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.landlordsTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateLandlord(int id, string fName, string lName, string address, string phone, string email, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "Address", $"{address}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.landlordsTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteLandlord(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.landlordsTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // tenants
+        private async void CreateTenant(string fName, string lName, string phone, string email, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.tenantsTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateTenant(int id, string fName, string lName, string phone, string email, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "FirstName", $"{fName}" },
+                { "LastName", $"{lName}" },
+                { "PhoneNumber", $"{phone}" },
+                { "Email", $"{email}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.tenantsTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteTenant(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.tenantsTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // properties
+        private async void CreateProperty(int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "LandlordID", $"{landLordId}" },
+                { "TenantID", $"{tenantId}" },
+                { "HouseNo", $"{houseNo}" },
+                { "AddressLine1", $"{address1}" },
+                { "City", $"{city}" },
+                { "PostCode", $"{postcode}" },
+                { "RentAmount", $"{rentAmount}" },
+                { "GasCertExpiry", gasCertExpiry?.ToString("yyyy-MM-dd") }, // nullable
+                { "EPCExpiry", epcExpiry?.ToString("yyyy-MM-dd") },
+                { "EICRExpiry", eicrExpiry?.ToString("yyyy-MM-dd") },
+                { "EPCRating", $"{epcRating}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.propertiesTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateProperty(int id, int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "LandlordID", $"{landLordId}" },
+                { "TenantID", $"{tenantId}" },
+                { "HouseNo", $"{houseNo}" },
+                { "AddressLine1", $"{address1}" },
+                { "City", $"{city}" },
+                { "PostCode", $"{postcode}" },
+                { "RentAmount", $"{rentAmount}" },
+                { "GasCertExpiry", gasCertExpiry?.ToString("yyyy-MM-dd") },
+                { "EPCExpiry", epcExpiry?.ToString("yyyy-MM-dd") },
+                { "EICRExpiry", eicrExpiry?.ToString("yyyy-MM-dd") },
+                { "EPCRating", $"{epcRating}" },
+                { "Notes", $"{notes}" }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.propertiesTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteProperty(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.propertiesTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // maintenances
+        private async void CreateMaintenance(int propertyId, string description, string status, DateTime dateReported, DateTime? dateCompleted)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "PropertyID", $"{propertyId}" },
+                { "Description", $"{description}" },
+                { "Status", $"{status}" },
+                { "DateReported", $"{dateReported:yyyy-MM-dd}" },
+                { "DateCompleted", dateCompleted?.ToString("yyyy-MM-dd") }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.maintenancesTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateMaintenance(int id, int propertyId, string description, string status, DateTime dateReported, DateTime? dateCompleted)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "PropertyID", $"{propertyId}" },
+                { "Description", $"{description}" },
+                { "Status", $"{status}" },
+                { "DateReported", $"{dateReported:yyyy-MM-dd}" },
+                { "DateCompleted", dateCompleted?.ToString("yyyy-MM-dd") }
+            };
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.maintenancesTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteMaintenance(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.maintenancesTable, id);
+            bool success = await AwaitResponse();
+        }
+
+        // rents
+        private async void CreateRent(int tenantId, int propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "TenantID", tenantId },
+                { "PropertyID", propertyId },
+                { "DueDate", dueDate.ToString("yyyy-MM-dd") },
+                { "DateReceived", dateReceived?.ToString("yyyy-MM-dd") },
+                { "RentAmount", rentAmount },
+                { "RentAmountPaid", rentAmountPaid },
+                { "Notes", notes }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestCreateRecord(Settings.rentsTable, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void UpdateRent(int id, int tenantId, int propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
+        {
+            var data = new Dictionary<string, object>
+            {
+                { "TenantID", tenantId },
+                { "PropertyID", propertyId },
+                { "DueDate", dueDate.ToString("yyyy-MM-dd") },
+                { "DateReceived", dateReceived?.ToString("yyyy-MM-dd") },
+                { "RentAmount", rentAmount },
+                { "RentAmountPaid", rentAmountPaid },
+                { "Notes", notes }
+            };
+
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestUpdateRecord(Settings.rentsTable, id, data);
+            bool success = await AwaitResponse();
+        }
+
+        private async void DeleteRent(int id)
+        {
+            result = new TaskCompletionSource<bool>();
+            Global.Server.RequestDeleteRecord(Settings.rentsTable, id);
+            bool success = await AwaitResponse();
+        }
+
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
@@ -458,6 +722,138 @@
         private void radioBtnTenant_CheckedChanged(object sender, EventArgs e)
         {
             txtbxSearch_TextChanged(sender, e);
+        }
+
+        // maintenance
+
+        private bool CheckMaintenanceFields()
+        {
+            if (_selectedProperty == null)
+            {
+                MessageBox.Show("Please select a property first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(rchtxtbxMaintenance.Text.Trim()))
+            {
+                MessageBox.Show("Description is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(cmbobxMaintenanceStatus.Text.Trim()))
+            {
+                MessageBox.Show("Status is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(dateMaintenanceReported.Text.Trim())) // idk if this is even possible but just in case
+            {
+                MessageBox.Show("Date reported is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        private async void btnMaintenanceCreate_Click(object sender, EventArgs e)
+        {
+            if (!CheckMaintenanceFields()) return;
+
+            string description = rchtxtbxMaintenance.Text.Trim();
+            string status = cmbobxMaintenanceStatus.Text.Trim();
+            DateTime dateReported = dateMaintenanceReported.Value;
+            DateTime dateCompleted = dateMaintenanceCompleted.Value;
+
+            CreateMaintenance(_selectedProperty.Value.PropertyId, description, status, dateReported, chkbxMaintenanceCompleted.Checked ? dateCompleted : null);
+            await Task.Delay(500);
+            RefreshData();
+
+            rchtxtbxMaintenance.Text = "";
+            cmbobxMaintenanceStatus.Text = "";
+            dateMaintenanceReported.Value = DateTime.Now;
+            dateMaintenanceCompleted.Value = DateTime.Now;
+        }
+
+        private async void btnMaintenanceUpdate_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvMaintenances.SelectedRows[0].Cells["maintenanceIdDataGridViewTextBoxColumn"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a maintenance to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!CheckMaintenanceFields()) return;
+
+            string description = rchtxtbxMaintenance.Text.Trim();
+            string status = cmbobxMaintenanceStatus.Text.Trim();
+            DateTime dateReported = dateMaintenanceReported.Value;
+            DateTime dateCompleted = dateMaintenanceCompleted.Value;
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to update selected maintenance? (Maintenance ID: '{id}')",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                UpdateMaintenance(id, _selectedProperty.Value.PropertyId, description, status, dateReported, chkbxMaintenanceCompleted.Checked ? dateCompleted : null);
+                await Task.Delay(500);
+                RefreshData();
+
+                rchtxtbxMaintenance.Text = "";
+                cmbobxMaintenanceStatus.Text = "";
+                dateMaintenanceReported.Value = DateTime.Now;
+                dateMaintenanceCompleted.Value = DateTime.Now;
+            }
+        }
+
+        private async void btnMaintenanceDelete_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvMaintenances.SelectedRows[0].Cells["maintenanceIdDataGridViewTextBoxColumn"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a maintenance to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to delete selected maintenance? (Maintenance ID: '{id}')",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                DeleteMaintenance(id);
+                await Task.Delay(500);
+                RefreshData();
+            }
+        }
+
+        private async void btnMaintenanceRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void chkbxMaintenanceCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxMaintenanceCompleted.Checked)
+            {
+                dateMaintenanceCompleted.Enabled = true;
+                cmbobxMaintenanceStatus.SelectedItem = "Completed"; // set to completed
+                cmbobxMaintenanceStatus.Enabled = false; // disable status selection
+            }
+            else
+            {
+                dateMaintenanceCompleted.Enabled = false;
+                cmbobxMaintenanceStatus.Enabled = true;
+            }
         }
     }
 }

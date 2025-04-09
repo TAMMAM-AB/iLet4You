@@ -629,7 +629,7 @@ namespace iLet4You
 
             DialogResult result = MessageBox.Show(
                 $"Are you sure you want to update selected tenant? (Tenant ID: '{id}')",
-                "Confirm Deletion",
+                "Confirm Update",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
