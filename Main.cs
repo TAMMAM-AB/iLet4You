@@ -3,7 +3,11 @@
     public partial class Main : Form
     {
         public Panel QuickLinkPanel => panel1;
-        public TabPage DashboardTab => tabPage5;
+        public TabPage DashboardTab => tabPageHome;
+
+        private Property? _selectedProperty;
+        private Landlord? _selectedLandlord;
+        private Tenant? _selectedTenant;
 
         public Main()
         {
@@ -85,9 +89,20 @@
         private void OnSearchResultClicked(object selectedItem)
         {
             txtbxSearch.Text = "";
+            panelSearchResults.Visible = false;
 
             lblPropertyTenant.Text = "";
             lblPropertyLandord.Text = "";
+            txtbxHNo.Text = "";
+            txtbxAddress.Text = "";
+            txtbxCity.Text = "";
+            txtbxPostcode.Text = "";
+            numRent.Value = 0;
+            dateGas.Value = DateTime.Now;
+            dateEPC.Value = DateTime.Now;
+            dateEICR.Value = DateTime.Now;
+            cmbobxEPC.SelectedItem = null;
+            richtxtbxProperty.Text = "";
 
             txtbxLandlordFName.Text = "";
             txtbxLandlordLName.Text = "";
@@ -102,34 +117,35 @@
             txtbxTenantEmail.Text = "";
             richtxtbxTenant.Text = "";
 
-            txtbxHNo.Text = "";
-            txtbxAddress.Text = "";
-            txtbxCity.Text = "";
-            txtbxPostcode.Text = "";
+            dgvMaintenances.DataSource = null;
+            dgvLandlordProperties.DataSource = null;
+            dgvTenantProperties.DataSource = null;
 
-            numRent.Value = 0;
+            _selectedProperty = null;
+            _selectedLandlord = null;
+            _selectedTenant = null;
 
-            dateGas.Value = DateTime.Now;
-            dateEPC.Value = DateTime.Now;
-            dateEICR.Value = DateTime.Now;
+            tabPageProperty.Text = "Property";
+            tabPageLandlord.Text = "Landlord";
+            tabPageTenant.Text = "Tenant";
 
-            cmbobxEPC.SelectedItem = null;
-
-            richtxtbxProperty.Text = "";
+            if (radioBtnProperty.Checked) tabControl.SelectedTab = tabPageProperty;
+            if (radioBtnLandlord.Checked) tabControl.SelectedTab = tabPageLandlord;
+            if (radioBtnTenant.Checked) tabControl.SelectedTab = tabPageTenant;
 
             if (selectedItem is Landlord landlord)
             {
-                panelSearchResults.Visible = false;
+                _selectedLandlord = landlord;
                 ShowLandlordDetails(landlord);
             }
             else if (selectedItem is Tenant tenant)
             {
-                panelSearchResults.Visible = false;
+                _selectedTenant = tenant;
                 ShowTenantDetails(tenant);
             }
             else if (selectedItem is Property property)
             {
-                panelSearchResults.Visible = false;
+                _selectedProperty = property;
                 ShowPropertyDetails(property);
             }
         }
@@ -142,6 +158,10 @@
             txtbxLandlordPhone.Text = landlord.PhoneNumber;
             txtbxLandlordEmail.Text = landlord.Email;
             richtxtbxLandlord.Text = landlord.Notes;
+
+            LandlordTabTitle();
+
+            dgvLandlordProperties.DataSource = Global.Landlords.FindPropertiesFromId(landlord.LandlordId);
         }
 
         private void ShowTenantDetails(Tenant tenant)
@@ -151,6 +171,10 @@
             txtbxTenantPhone.Text = tenant.PhoneNumber;
             txtbxTenantEmail.Text = tenant.Email;
             richtxtbxTenant.Text = tenant.Notes;
+
+            TenantTabTitle();
+
+            dgvTenantProperties.DataSource = Global.Tenants.FindPropertiesFromId(tenant.TenantId);
         }
 
         private void ShowPropertyDetails(Property property)
@@ -172,10 +196,12 @@
 
             if (property.TenantId.HasValue)
             {
+                _selectedTenant = Global.Tenants.FindById(property.TenantId.Value);
                 ShowTenantDetails(Global.Tenants.FindById(property.TenantId.Value));
                 lblPropertyTenant.Text = $"{Global.Tenants.FindById(property.TenantId.Value).FirstName} {Global.Tenants.FindById(property.TenantId.Value).LastName}";
             }
 
+            _selectedLandlord = Global.Landlords.FindById(property.LandlordId);
             ShowLandlordDetails(Global.Landlords.FindById(property.LandlordId));
             lblPropertyLandord.Text = $"{Global.Landlords.FindById(property.LandlordId).FirstName} {Global.Landlords.FindById(property.LandlordId).LastName}";
 
@@ -234,6 +260,183 @@
         {
             QuickLinksManager q = new QuickLinksManager();
             q.ShowDialog();
+        }
+
+        // make it obvious to user when there are unsaved changes
+        // property tab
+
+        private void PropertyTabTitle ()
+        {
+            if (_selectedProperty != null)
+            {
+                if (txtbxHNo.Text.Trim() != _selectedProperty.Value.HouseNo.Trim()
+                    || txtbxAddress.Text.Trim() != _selectedProperty.Value.AddressLine1.Trim()
+                    || txtbxCity.Text.Trim() != _selectedProperty.Value.City.Trim()
+                    || txtbxPostcode.Text.Trim() != _selectedProperty.Value.PostCode.Trim()
+                    || Math.Round(numRent.Value, 2) != (decimal)_selectedProperty.Value.RentAmount // treat as decimal without converting by using (decimal)
+                    || dateGas.Value != _selectedProperty.Value.GasCertExpiry
+                    || dateEPC.Value != _selectedProperty.Value.EPCExpiry
+                    || dateEICR.Value != _selectedProperty.Value.EICRExpiry
+                    || cmbobxEPC.SelectedItem?.ToString() != _selectedProperty.Value.EPCRating.Trim()
+                    || richtxtbxProperty.Text.Trim() != _selectedProperty.Value.Notes.Trim()
+                    )
+                {
+                    tabPageProperty.Text = "Property *";
+                }
+                else
+                {
+                    tabPageProperty.Text = "Property";
+                }
+            }
+        }
+
+        private void txtbxHNo_TextChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void txtbxAddress_TextChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void txtbxCity_TextChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void txtbxPostcode_TextChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void numRent_ValueChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void dateGas_ValueChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void dateEPC_ValueChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void dateEICR_ValueChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void cmbobxEPC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        private void richtxtbxProperty_TextChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+        }
+
+        // landlord tab
+
+        private void LandlordTabTitle()
+        {
+            if (_selectedLandlord != null)
+            {
+                if (txtbxLandlordFName.Text.Trim() != _selectedLandlord.Value.FirstName.Trim()
+                    || txtbxLandlordLName.Text.Trim() != _selectedLandlord.Value.LastName.Trim()
+                    || txtbxLandlordAddress.Text.Trim() != _selectedLandlord.Value.Address.Trim()
+                    || txtbxLandlordPhone.Text.Trim() != _selectedLandlord.Value.PhoneNumber.Trim()
+                    || txtbxLandlordEmail.Text.Trim() != _selectedLandlord.Value.Email.Trim()
+                    || richtxtbxLandlord.Text.Trim() != _selectedLandlord.Value.Notes.Trim()
+                    )
+                {
+                    tabPageLandlord.Text = "Landlord *";
+                }
+                else
+                {
+                    tabPageLandlord.Text = "Landlord";
+                }
+            }
+        }
+
+        private void txtbxLandlordFName_TextChanged(object sender, EventArgs e)
+        {
+            LandlordTabTitle();
+        }
+
+        private void txtbxLandlordLName_TextChanged(object sender, EventArgs e)
+        {
+            LandlordTabTitle();
+        }
+
+        private void txtbxLandlordAddress_TextChanged(object sender, EventArgs e)
+        {
+            LandlordTabTitle();
+        }
+
+        private void txtbxLandlordPhone_TextChanged(object sender, EventArgs e)
+        {
+            LandlordTabTitle();
+        }
+
+        private void txtbxLandlordEmail_TextChanged(object sender, EventArgs e)
+        {
+            LandlordTabTitle();
+        }
+
+        private void richtxtbxLandlord_TextChanged(object sender, EventArgs e)
+        {
+            LandlordTabTitle();
+        }
+
+        // tenant tab
+        private void TenantTabTitle()
+        {
+            if (_selectedTenant != null)
+            {
+                if (txtbxTenantFName.Text.Trim() != _selectedTenant.Value.FirstName.Trim()
+                    || txtbxTenantLName.Text.Trim() != _selectedTenant.Value.LastName.Trim()
+                    || txtbxTenantPhone.Text.Trim() != _selectedTenant.Value.PhoneNumber.Trim()
+                    || txtbxTenantEmail.Text.Trim() != _selectedTenant.Value.Email.Trim()
+                    || richtxtbxTenant.Text.Trim() != _selectedTenant.Value.Notes.Trim()
+                    )
+                {
+                    tabPageTenant.Text = "Tenant *";
+                }
+                else
+                {
+                    tabPageTenant.Text = "Tenant";
+                }
+            }
+        }
+
+        private void txtbxTenantFName_TextChanged(object sender, EventArgs e)
+        {
+            TenantTabTitle();
+        }
+
+        private void txtbxTenantLName_TextChanged(object sender, EventArgs e)
+        {
+            TenantTabTitle();
+        }
+
+        private void txtbxTenantPhone_TextChanged(object sender, EventArgs e)
+        {
+            TenantTabTitle();
+        }
+
+        private void txtbxTenantEmail_TextChanged(object sender, EventArgs e)
+        {
+            TenantTabTitle();
+        }
+
+        private void richtxtbxTenant_TextChanged(object sender, EventArgs e)
+        {
+            TenantTabTitle();
         }
     }
 }

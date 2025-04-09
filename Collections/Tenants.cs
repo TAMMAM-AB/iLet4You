@@ -16,4 +16,18 @@
     {
         return _tenants.FirstOrDefault(t => t.TenantId == id);
     }
+
+    public List<Property>? FindPropertiesFromId(int id)
+    {
+        List<Property> properties = new List<Property>();
+        Global.Properties?.GetAll().ForEach(p =>
+        {
+            if (p.TenantId == id)
+            {
+                properties.Add(p);
+            }
+        });
+
+        return properties;
+    }
 }
