@@ -200,9 +200,9 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage7);
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage6);
-            tabControl1.Controls.Add(tabPage7);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;

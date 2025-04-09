@@ -552,7 +552,7 @@ namespace iLet4You
 
                     string Notes = rent["Notes"]?.ToString();
 
-                    rentList.Add(new Rent(RentID, PropertyID, TenantID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
+                    rentList.Add(new Rent(RentID, TenantID, PropertyID, DueDate, DateReceived, RentAmount, RentAmountPaid, Notes));
                 }
 
                 Global.Rents = new Rents(rentList);

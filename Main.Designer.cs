@@ -40,6 +40,16 @@
             pictureBox1 = new PictureBox();
             panelSearchResults = new Panel();
             tabPageTenant = new TabPage();
+            label27 = new Label();
+            dgvRents = new DataGridView();
+            rentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            dueDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateReceivedDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rentAmountDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            rentAmountPaidDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            notesDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            rentBindingSource = new BindingSource(components);
             label26 = new Label();
             dgvTenantProperties = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -134,6 +144,8 @@
             btnQuickLinks = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPageTenant.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTenantProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
             tabPageLandlord.SuspendLayout();
@@ -167,6 +179,7 @@
             radioBtnProperty.TabStop = true;
             radioBtnProperty.Text = "Property";
             radioBtnProperty.UseVisualStyleBackColor = true;
+            radioBtnProperty.CheckedChanged += radioBtnProperty_CheckedChanged;
             // 
             // radioBtnLandlord
             // 
@@ -177,6 +190,7 @@
             radioBtnLandlord.TabIndex = 3;
             radioBtnLandlord.Text = "Landlord";
             radioBtnLandlord.UseVisualStyleBackColor = true;
+            radioBtnLandlord.CheckedChanged += radioBtnLandlord_CheckedChanged;
             // 
             // radioBtnTenant
             // 
@@ -187,6 +201,7 @@
             radioBtnTenant.TabIndex = 4;
             radioBtnTenant.Text = "Tenant";
             radioBtnTenant.UseVisualStyleBackColor = true;
+            radioBtnTenant.CheckedChanged += radioBtnTenant_CheckedChanged;
             // 
             // panel1
             // 
@@ -239,6 +254,8 @@
             // 
             // tabPageTenant
             // 
+            tabPageTenant.Controls.Add(label27);
+            tabPageTenant.Controls.Add(dgvRents);
             tabPageTenant.Controls.Add(label26);
             tabPageTenant.Controls.Add(dgvTenantProperties);
             tabPageTenant.Controls.Add(txtbxTenantEmail);
@@ -260,6 +277,84 @@
             tabPageTenant.TabIndex = 2;
             tabPageTenant.Text = "Tenant";
             tabPageTenant.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            label27.Location = new Point(551, 133);
+            label27.Name = "label27";
+            label27.Size = new Size(100, 18);
+            label27.TabIndex = 120;
+            label27.Text = "Rents:";
+            // 
+            // dgvRents
+            // 
+            dgvRents.AllowUserToAddRows = false;
+            dgvRents.AllowUserToDeleteRows = false;
+            dgvRents.AutoGenerateColumns = false;
+            dgvRents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRents.Columns.AddRange(new DataGridViewColumn[] { rentIdDataGridViewTextBoxColumn, Column2, dueDateDataGridViewTextBoxColumn, dateReceivedDataGridViewTextBoxColumn, rentAmountDataGridViewTextBoxColumn1, rentAmountPaidDataGridViewTextBoxColumn, notesDataGridViewTextBoxColumn1 });
+            dgvRents.DataSource = rentBindingSource;
+            dgvRents.Location = new Point(551, 154);
+            dgvRents.MultiSelect = false;
+            dgvRents.Name = "dgvRents";
+            dgvRents.ReadOnly = true;
+            dgvRents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRents.Size = new Size(1086, 261);
+            dgvRents.TabIndex = 119;
+            // 
+            // rentIdDataGridViewTextBoxColumn
+            // 
+            rentIdDataGridViewTextBoxColumn.DataPropertyName = "RentId";
+            rentIdDataGridViewTextBoxColumn.HeaderText = "Rent ID";
+            rentIdDataGridViewTextBoxColumn.Name = "rentIdDataGridViewTextBoxColumn";
+            rentIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            Column2.DataPropertyName = "PropertyId";
+            Column2.HeaderText = "Property ID";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            // 
+            // dueDateDataGridViewTextBoxColumn
+            // 
+            dueDateDataGridViewTextBoxColumn.DataPropertyName = "DueDate";
+            dueDateDataGridViewTextBoxColumn.HeaderText = "Due Date";
+            dueDateDataGridViewTextBoxColumn.Name = "dueDateDataGridViewTextBoxColumn";
+            dueDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateReceivedDataGridViewTextBoxColumn
+            // 
+            dateReceivedDataGridViewTextBoxColumn.DataPropertyName = "DateReceived";
+            dateReceivedDataGridViewTextBoxColumn.HeaderText = "Date Received";
+            dateReceivedDataGridViewTextBoxColumn.Name = "dateReceivedDataGridViewTextBoxColumn";
+            dateReceivedDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rentAmountDataGridViewTextBoxColumn1
+            // 
+            rentAmountDataGridViewTextBoxColumn1.DataPropertyName = "RentAmount";
+            rentAmountDataGridViewTextBoxColumn1.HeaderText = "Rent Amount";
+            rentAmountDataGridViewTextBoxColumn1.Name = "rentAmountDataGridViewTextBoxColumn1";
+            rentAmountDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // rentAmountPaidDataGridViewTextBoxColumn
+            // 
+            rentAmountPaidDataGridViewTextBoxColumn.DataPropertyName = "RentAmountPaid";
+            rentAmountPaidDataGridViewTextBoxColumn.HeaderText = "Rent Paid";
+            rentAmountPaidDataGridViewTextBoxColumn.Name = "rentAmountPaidDataGridViewTextBoxColumn";
+            rentAmountPaidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // notesDataGridViewTextBoxColumn1
+            // 
+            notesDataGridViewTextBoxColumn1.DataPropertyName = "Notes";
+            notesDataGridViewTextBoxColumn1.HeaderText = "Notes";
+            notesDataGridViewTextBoxColumn1.Name = "notesDataGridViewTextBoxColumn1";
+            notesDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // rentBindingSource
+            // 
+            rentBindingSource.DataSource = typeof(Rent);
             // 
             // label26
             // 
@@ -283,7 +378,7 @@
             dgvTenantProperties.Name = "dgvTenantProperties";
             dgvTenantProperties.ReadOnly = true;
             dgvTenantProperties.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTenantProperties.Size = new Size(1086, 395);
+            dgvTenantProperties.Size = new Size(1086, 110);
             dgvTenantProperties.TabIndex = 117;
             // 
             // dataGridViewTextBoxColumn1
@@ -1113,6 +1208,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabPageTenant.ResumeLayout(false);
             tabPageTenant.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRents).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rentBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvTenantProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
             tabPageLandlord.ResumeLayout(false);
@@ -1234,5 +1331,15 @@
         private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dateReportedDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dateCompletedDataGridViewTextBoxColumn;
+        private Label label27;
+        private DataGridView dgvRents;
+        private DataGridViewTextBoxColumn rentIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn dueDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateReceivedDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rentAmountDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn rentAmountPaidDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn1;
+        private BindingSource rentBindingSource;
     }
 }

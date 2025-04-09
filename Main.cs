@@ -120,6 +120,7 @@
             dgvMaintenances.DataSource = null;
             dgvLandlordProperties.DataSource = null;
             dgvTenantProperties.DataSource = null;
+            dgvRents.DataSource = null;
 
             _selectedProperty = null;
             _selectedLandlord = null;
@@ -175,6 +176,7 @@
             TenantTabTitle();
 
             dgvTenantProperties.DataSource = Global.Tenants.FindPropertiesFromId(tenant.TenantId);
+            dgvRents.DataSource = Global.Tenants.FindRentsFromId(tenant.TenantId);
         }
 
         private void ShowPropertyDetails(Property property)
@@ -441,6 +443,21 @@
         private void richtxtbxTenant_TextChanged(object sender, EventArgs e)
         {
             TenantTabTitle();
+        }
+
+        private void radioBtnProperty_CheckedChanged(object sender, EventArgs e)
+        {
+            txtbxSearch_TextChanged(sender, e);
+        }
+
+        private void radioBtnLandlord_CheckedChanged(object sender, EventArgs e)
+        {
+            txtbxSearch_TextChanged(sender, e);
+        }
+
+        private void radioBtnTenant_CheckedChanged(object sender, EventArgs e)
+        {
+            txtbxSearch_TextChanged(sender, e);
         }
     }
 }
