@@ -154,6 +154,7 @@
             txtbxSearch.Size = new Size(621, 23);
             txtbxSearch.TabIndex = 0;
             txtbxSearch.TextChanged += txtbxSearch_TextChanged;
+            txtbxSearch.KeyDown += txtbxSearch_KeyDown;
             // 
             // radioBtnProperty
             // 
@@ -197,7 +198,7 @@
             // btnAdmin
             // 
             btnAdmin.Enabled = false;
-            btnAdmin.Location = new Point(1520, 12);
+            btnAdmin.Location = new Point(1679, 12);
             btnAdmin.Name = "btnAdmin";
             btnAdmin.Size = new Size(132, 23);
             btnAdmin.TabIndex = 6;
@@ -208,7 +209,7 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(1658, 12);
+            btnLogout.Location = new Point(1817, 12);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(75, 23);
             btnLogout.TabIndex = 7;

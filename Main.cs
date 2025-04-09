@@ -255,6 +255,10 @@
                 PopulateSearchResultsPanel(panelSearchResults, results.Cast<object>().ToList(), "Property");
             }
         }
+        private void txtbxSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) txtbxSearch.Text = "";
+        }
 
         private void btnQuickLinks_Click(object sender, EventArgs e)
         {
@@ -265,7 +269,7 @@
         // make it obvious to user when there are unsaved changes
         // property tab
 
-        private void PropertyTabTitle ()
+        private void PropertyTabTitle()
         {
             if (_selectedProperty != null)
             {
@@ -281,11 +285,11 @@
                     || richtxtbxProperty.Text.Trim() != _selectedProperty.Value.Notes.Trim()
                     )
                 {
-                    tabPageProperty.Text = "Property *";
+                    if (tabPageProperty.Text != "Property *") tabPageProperty.Text = "Property *";
                 }
                 else
                 {
-                    tabPageProperty.Text = "Property";
+                    if (tabPageProperty.Text != "Property") tabPageProperty.Text = "Property";
                 }
             }
         }
@@ -354,11 +358,11 @@
                     || richtxtbxLandlord.Text.Trim() != _selectedLandlord.Value.Notes.Trim()
                     )
                 {
-                    tabPageLandlord.Text = "Landlord *";
+                    if (tabPageLandlord.Text != "Landlord *") tabPageLandlord.Text = "Landlord *";
                 }
                 else
                 {
-                    tabPageLandlord.Text = "Landlord";
+                    if (tabPageLandlord.Text != "Landlord") tabPageLandlord.Text = "Landlord";
                 }
             }
         }
@@ -405,11 +409,11 @@
                     || richtxtbxTenant.Text.Trim() != _selectedTenant.Value.Notes.Trim()
                     )
                 {
-                    tabPageTenant.Text = "Tenant *";
+                    if (tabPageTenant.Text != "Tenant *") tabPageTenant.Text = "Tenant *";
                 }
                 else
                 {
-                    tabPageTenant.Text = "Tenant";
+                    if (tabPageTenant.Text != "Tenant") tabPageTenant.Text = "Tenant";
                 }
             }
         }
