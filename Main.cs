@@ -22,6 +22,11 @@
             cmbobxMaintenanceStatus.SelectedIndex = 0;
             dateMaintenanceCompleted.Enabled = false; // disable until checked
 
+            cmbobxLPepcRating.SelectedIndex = 0;
+            dateLPgas.Enabled = false;
+            dateLPepc.Enabled = false;
+            dateLPeicr.Enabled = false;
+
             // show and enable admin controls button is user is admin
             btnAdmin.Enabled = (role == "admin");
             btnAdmin.Visible = (role == "admin");
@@ -151,12 +156,12 @@
         }
 
         // properties
-        private async void CreateProperty(int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
+        private async void CreateProperty(int landLordId, int? tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string? epcRating, string notes)
         {
             var data = new Dictionary<string, object>
             {
                 { "LandlordID", $"{landLordId}" },
-                { "TenantID", $"{tenantId}" },
+                { "TenantID", tenantId.HasValue ? tenantId.Value : null },
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },
@@ -174,12 +179,12 @@
             bool success = await AwaitResponse();
         }
 
-        private async void UpdateProperty(int id, int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
+        private async void UpdateProperty(int id, int landLordId, int? tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string? epcRating, string notes)
         {
             var data = new Dictionary<string, object>
             {
                 { "LandlordID", $"{landLordId}" },
-                { "TenantID", $"{tenantId}" },
+                { "TenantID", tenantId.HasValue ? tenantId.Value : null },
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },
@@ -452,9 +457,11 @@
 
             numRent.Value = (decimal)property.RentAmount;
 
+            /* FIX THESE
             dateGas.Value = property.GasCertExpiry;
             dateEPC.Value = property.EPCExpiry;
             dateEICR.Value = property.EICRExpiry;
+            */
 
             cmbobxEPC.SelectedItem = property.EPCRating;
 
@@ -724,8 +731,7 @@
             txtbxSearch_TextChanged(sender, e);
         }
 
-        // maintenance
-
+        // property maintenances
         private bool CheckMaintenanceFields()
         {
             if (_selectedProperty == null)
@@ -744,13 +750,9 @@
                 MessageBox.Show("Status is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (string.IsNullOrEmpty(dateMaintenanceReported.Text.Trim())) // idk if this is even possible but just in case
-            {
-                MessageBox.Show("Date reported is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
             return true;
         }
+
         private async void btnMaintenanceCreate_Click(object sender, EventArgs e)
         {
             if (!CheckMaintenanceFields()) return;
@@ -836,7 +838,7 @@
             }
         }
 
-        private async void btnMaintenanceRefresh_Click(object sender, EventArgs e)
+        private void btnMaintenanceRefresh_Click(object sender, EventArgs e)
         {
             RefreshData();
         }
@@ -853,6 +855,227 @@
             {
                 dateMaintenanceCompleted.Enabled = false;
                 cmbobxMaintenanceStatus.Enabled = true;
+            }
+        }
+
+        // landlord properties
+        private bool CheckLandlordPropertyFields()
+        {
+            if (_selectedLandlord == null)
+            {
+                MessageBox.Show("Please select a landlord first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtbxLPaddress.Text.Trim()))
+            {
+                MessageBox.Show("Address is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxLPcity.Text.Trim()))
+            {
+                MessageBox.Show("City is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtbxLPpostcode.Text.Trim()))
+            {
+                MessageBox.Show("Postcode is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private async void btnLPcreate_Click(object sender, EventArgs e)
+        {
+            if (!CheckLandlordPropertyFields()) return;
+
+            int? tenantId = null;
+            if (numLPtenantId.Value <= 0)
+            {
+                DialogResult result = MessageBox.Show(
+                    $"You have not selected a tenant. Continue with no tenant?",
+                    "Create property with no tenant",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
+            string houseNo = txtbxLPhouse.Text.Trim();
+            string address1 = txtbxLPaddress.Text.Trim();
+            string city = txtbxLPcity.Text.Trim();
+            string postcode = txtbxLPpostcode.Text.Trim();
+
+            double rentAmount = (double)Math.Round(numLPrent.Value, 2);
+
+            DateTime gasCertExpiry = dateLPgas.Value;
+            DateTime epcExpiry = dateLPepc.Value;
+            DateTime eicrExpiry = dateLPeicr.Value;
+
+            string epcRating = cmbobxLPepcRating.Text.Trim();
+
+            string notes = rchtxtbxLPnotes.Text.Trim();
+
+            CreateProperty(_selectedLandlord.Value.LandlordId, tenantId, houseNo, address1, city, postcode, rentAmount,
+                chkbxLPgas.Checked ? gasCertExpiry : null, chkbxLPepc.Checked ? epcExpiry : null,
+                chkbxLPeicr.Checked ? eicrExpiry : null, epcRating, notes);
+            await Task.Delay(500);
+            RefreshData();
+
+            numLPtenantId.Value = 0;
+            txtbxLPhouse.Text = "";
+            txtbxLPaddress.Text = "";
+            txtbxLPcity.Text = "";
+            txtbxLPpostcode.Text = "";
+            numLPrent.Value = 0;
+            dateLPgas.Value = DateTime.Now;
+            dateLPepc.Value = DateTime.Now;
+            dateLPeicr.Value = DateTime.Now;
+            cmbobxEPC.SelectedIndex = 1;
+            rchtxtbxLPnotes.Text = "";
+        }
+
+        private async void btnLPupdate_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvLandlordProperties.SelectedRows[0].Cells["propertyIdDataGridViewTextBoxColumn1"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a property to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!CheckLandlordPropertyFields()) return;
+
+            int? tenantId = null;
+            if (numLPtenantId.Value <= 0)
+            {
+                DialogResult r = MessageBox.Show(
+                    $"You have not selected a tenant. Continue with no tenant?",
+                    "Create property with no tenant",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (r != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
+            string houseNo = txtbxLPhouse.Text.Trim();
+            string address1 = txtbxLPaddress.Text.Trim();
+            string city = txtbxLPcity.Text.Trim();
+            string postcode = txtbxLPpostcode.Text.Trim();
+
+            double rentAmount = (double)Math.Round(numLPrent.Value, 2);
+
+            DateTime gasCertExpiry = dateLPgas.Value;
+            DateTime epcExpiry = dateLPepc.Value;
+            DateTime eicrExpiry = dateLPeicr.Value;
+
+            string epcRating = cmbobxLPepcRating.Text.Trim();
+
+            string notes = rchtxtbxLPnotes.Text.Trim();
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to update selected property? (Property ID: '{id}')",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                UpdateProperty(id, _selectedLandlord.Value.LandlordId, tenantId, houseNo, address1, city, postcode, rentAmount,
+                    chkbxLPgas.Checked ? gasCertExpiry : null, chkbxLPepc.Checked ? epcExpiry : null,
+                    chkbxLPeicr.Checked ? eicrExpiry : null, epcRating, notes);
+                await Task.Delay(500);
+                RefreshData();
+
+                numLPtenantId.Value = 0;
+                txtbxLPhouse.Text = "";
+                txtbxLPaddress.Text = "";
+                txtbxLPcity.Text = "";
+                txtbxLPpostcode.Text = "";
+                numLPrent.Value = 0;
+                dateLPgas.Value = DateTime.Now;
+                dateLPepc.Value = DateTime.Now;
+                dateLPeicr.Value = DateTime.Now;
+                cmbobxEPC.SelectedIndex = 1;
+                rchtxtbxLPnotes.Text = "";
+            }
+        }
+
+        private async void btnLPdelete_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvLandlordProperties.SelectedRows[0].Cells["propertyIdDataGridViewTextBoxColumn1"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a property to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to delete selected property? (Property ID: '{id}')",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                DeleteProperty(id);
+                await Task.Delay(500);
+                RefreshData();
+            }
+        }
+
+        private void btnLPrefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void chkbxLPgas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxLPgas.Checked)
+            {
+                dateLPgas.Enabled = true;
+            }
+            else
+            {
+                dateLPgas.Enabled = false;
+            }
+        }
+
+        private void chkbxLPepc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxLPepc.Checked)
+            {
+                dateLPepc.Enabled = true;
+            }
+            else
+            {
+                dateLPepc.Enabled = false;
+            }
+        }
+
+        private void chkbxLPeicr_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxLPeicr.Checked)
+            {
+                dateLPeicr.Enabled = true;
+            }
+            else
+            {
+                dateLPeicr.Enabled = false;
             }
         }
     }

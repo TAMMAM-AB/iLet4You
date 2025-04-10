@@ -7,9 +7,9 @@
     string City,
     string PostCode,
     double RentAmount,
-    DateTime GasCertExpiry,
-    DateTime EPCExpiry,
-    DateTime EICRExpiry,
+    DateTime? GasCertExpiry,
+    DateTime? EPCExpiry,
+    DateTime? EICRExpiry,
     string? EPCRating,
     string? Notes
 );

@@ -96,7 +96,6 @@
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             tenantBindingSource = new BindingSource(components);
             tabPage4 = new TabPage();
-            comboBox1 = new ComboBox();
             label26 = new Label();
             dateTimePicker3 = new DateTimePicker();
             label25 = new Label();
@@ -168,6 +167,7 @@
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             uRLDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             quickLinkBindingSource = new BindingSource(components);
+            comboBox1 = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -838,16 +838,6 @@
             tabPage4.Text = "Properties";
             tabPage4.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G" });
-            comboBox1.Location = new Point(686, 430);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(100, 23);
-            comboBox1.TabIndex = 58;
-            // 
             // label26
             // 
             label26.AutoSize = true;
@@ -1436,6 +1426,16 @@
             // 
             quickLinkBindingSource.DataSource = typeof(QuickLink);
             // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G" });
+            comboBox1.Location = new Point(686, 430);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(100, 23);
+            comboBox1.TabIndex = 58;
+            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1617,9 +1617,9 @@
         private Label label24;
         private DateTimePicker dateTimePicker1;
         private NumericUpDown numericUpDown2;
-        private ComboBox comboBox1;
         private Label label26;
         private DateTimePicker dateTimePicker3;
         private Label label25;
+        private ComboBox comboBox1;
     }
 }

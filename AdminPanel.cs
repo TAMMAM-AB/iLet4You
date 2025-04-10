@@ -156,12 +156,12 @@ namespace iLet4You
         }
 
         // properties
-        private async void CreateProperty(int landLordId, int tenantId,string houseNo, string address1, string city, string postcode, double rentAmount,DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
+        private async void CreateProperty(int landLordId, int? tenantId,string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string? epcRating, string notes)
         {
             var data = new Dictionary<string, object>
             {
                 { "LandlordID", $"{landLordId}" },
-                { "TenantID", $"{tenantId}" },
+                { "TenantID", tenantId.HasValue ? tenantId.Value : null },
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },
@@ -179,12 +179,12 @@ namespace iLet4You
             bool success = await AwaitResponse();
         }
 
-        private async void UpdateProperty(int id, int landLordId, int tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string epcRating, string notes)
+        private async void UpdateProperty(int id, int landLordId, int? tenantId, string houseNo, string address1, string city, string postcode, double rentAmount, DateTime? gasCertExpiry, DateTime? epcExpiry, DateTime? eicrExpiry, string? epcRating, string notes)
         {
             var data = new Dictionary<string, object>
             {
                 { "LandlordID", $"{landLordId}" },
-                { "TenantID", $"{tenantId}" },
+                { "TenantID", tenantId.HasValue ? tenantId.Value : null },
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },

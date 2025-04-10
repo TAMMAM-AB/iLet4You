@@ -383,8 +383,8 @@ namespace iLet4You
 
                     int LandlordID = property["LandlordID"] != null && property["LandlordID"].Type != JTokenType.Null
                         ? property["LandlordID"].Value<int>() : -1;
-                    int TenantID = property["TenantID"] != null && property["TenantID"].Type != JTokenType.Null
-                        ? property["TenantID"].Value<int>() : -1;
+
+                    int? TenantID = property["TenantID"]?.Value<int?>();
 
                     string HouseNo = property["HouseNo"]?.ToString() ?? "Unknown";
                     string AddressLine1 = property["AddressLine1"]?.ToString() ?? "Unknown";
@@ -394,17 +394,15 @@ namespace iLet4You
                     double RentAmount = property["RentAmount"] != null &&
                         double.TryParse(property["RentAmount"].ToString(), out double rent) ? rent : 0.0;
 
-                    DateTime GasCertExpiry = property["GasCertExpiry"] != null &&
-                        DateTime.TryParse(property["GasCertExpiry"].ToString(), out DateTime gasExpiry)
-                            ? gasExpiry : DateTime.MinValue;
+                    
+                    DateTime? GasCertExpiry = property["GasCertExpiry"] != null &&
+                        DateTime.TryParse(property["GasCertExpiry"].ToString(), out DateTime gasExpiry) ? gasExpiry : null;
 
-                    DateTime EPCExpiry = property["EPCExpiry"] != null &&
-                        DateTime.TryParse(property["EPCExpiry"].ToString(), out DateTime epcExpiry)
-                            ? epcExpiry : DateTime.MinValue;
+                    DateTime? EPCExpiry = property["EPCExpiry"] != null &&
+                        DateTime.TryParse(property["EPCExpiry"].ToString(), out DateTime epcExpiry) ? epcExpiry : null;
 
-                    DateTime EICRExpiry = property["EICRExpiry"] != null &&
-                        DateTime.TryParse(property["EICRExpiry"].ToString(), out DateTime eicrExpiry)
-                            ? eicrExpiry : DateTime.MinValue;
+                    DateTime? EICRExpiry = property["EICRExpiry"] != null &&
+                        DateTime.TryParse(property["EICRExpiry"].ToString(), out DateTime eicrExpiry) ? eicrExpiry : null;
 
                     string EPCRating = property["EPCRating"]?.ToString() ?? "Unknown";
                     string Notes = property["Notes"]?.ToString() ?? "Unknown";
@@ -419,16 +417,14 @@ namespace iLet4You
 
                 while (mainForm == null || mainForm.DashboardTab == null || !mainForm.DashboardTab.IsHandleCreated)
                 {
-                    Application.DoEvents();  // Process UI messages to keep the app responsive
-                    mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();  // Refresh mainForm reference
+                    Application.DoEvents();  // process UI messages
+                    mainForm = Application.OpenForms.OfType<Main>().FirstOrDefault();
                 }
 
                 mainForm.Invoke(() =>
                 {
                     UIUpdater.UpdateHomeTabStats(mainForm.DashboardTab);
                 });
-
-                
             }
             catch (Exception ex)
             {

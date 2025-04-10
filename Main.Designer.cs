@@ -76,9 +76,37 @@
             richtxtbxTenant = new RichTextBox();
             button1 = new Button();
             tabPageLandlord = new TabPage();
+            chkbxLPeicr = new CheckBox();
+            chkbxLPepc = new CheckBox();
+            chkbxLPgas = new CheckBox();
+            btnLPsearchTenants = new Button();
+            label41 = new Label();
+            numLPtenantId = new NumericUpDown();
+            label39 = new Label();
+            cmbobxLPepcRating = new ComboBox();
+            label31 = new Label();
+            dateLPeicr = new DateTimePicker();
+            dateLPepc = new DateTimePicker();
+            dateLPgas = new DateTimePicker();
+            numLPrent = new NumericUpDown();
+            label35 = new Label();
+            txtbxLPpostcode = new TextBox();
+            label36 = new Label();
+            btnLPupdate = new Button();
+            rchtxtbxLPnotes = new RichTextBox();
+            txtbxLPcity = new TextBox();
+            label37 = new Label();
+            txtbxLPhouse = new TextBox();
+            label38 = new Label();
+            txtbxLPaddress = new TextBox();
+            btnLPcreate = new Button();
+            btnLPdelete = new Button();
+            label40 = new Label();
+            btnLPrefresh = new Button();
             label25 = new Label();
             dgvLandlordProperties = new DataGridView();
             propertyIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            TenantId = new DataGridViewTextBoxColumn();
             houseNoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             addressLine1DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -162,6 +190,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvTenantProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
             tabPageLandlord.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numLPtenantId).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numLPrent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvLandlordProperties).BeginInit();
             tabPageProperty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMaintenances).BeginInit();
@@ -185,7 +215,7 @@
             // 
             radioBtnProperty.AutoSize = true;
             radioBtnProperty.Checked = true;
-            radioBtnProperty.Location = new Point(868, 17);
+            radioBtnProperty.Location = new Point(868, 14);
             radioBtnProperty.Name = "radioBtnProperty";
             radioBtnProperty.Size = new Size(70, 19);
             radioBtnProperty.TabIndex = 2;
@@ -197,7 +227,7 @@
             // radioBtnLandlord
             // 
             radioBtnLandlord.AutoSize = true;
-            radioBtnLandlord.Location = new Point(944, 17);
+            radioBtnLandlord.Location = new Point(944, 14);
             radioBtnLandlord.Name = "radioBtnLandlord";
             radioBtnLandlord.Size = new Size(72, 19);
             radioBtnLandlord.TabIndex = 3;
@@ -208,7 +238,7 @@
             // radioBtnTenant
             // 
             radioBtnTenant.AutoSize = true;
-            radioBtnTenant.Location = new Point(1022, 17);
+            radioBtnTenant.Location = new Point(1022, 14);
             radioBtnTenant.Name = "radioBtnTenant";
             radioBtnTenant.Size = new Size(61, 19);
             radioBtnTenant.TabIndex = 4;
@@ -293,7 +323,7 @@
             // 
             // label27
             // 
-            label27.Location = new Point(551, 133);
+            label27.Location = new Point(319, 133);
             label27.Name = "label27";
             label27.Size = new Size(100, 18);
             label27.TabIndex = 120;
@@ -308,12 +338,12 @@
             dgvRents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRents.Columns.AddRange(new DataGridViewColumn[] { rentIdDataGridViewTextBoxColumn, Column2, dueDateDataGridViewTextBoxColumn, dateReceivedDataGridViewTextBoxColumn, rentAmountDataGridViewTextBoxColumn1, rentAmountPaidDataGridViewTextBoxColumn, notesDataGridViewTextBoxColumn1 });
             dgvRents.DataSource = rentBindingSource;
-            dgvRents.Location = new Point(551, 154);
+            dgvRents.Location = new Point(319, 154);
             dgvRents.MultiSelect = false;
             dgvRents.Name = "dgvRents";
             dgvRents.ReadOnly = true;
             dgvRents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRents.Size = new Size(1086, 261);
+            dgvRents.Size = new Size(1318, 261);
             dgvRents.TabIndex = 119;
             // 
             // rentIdDataGridViewTextBoxColumn
@@ -371,7 +401,7 @@
             // 
             // label26
             // 
-            label26.Location = new Point(551, 2);
+            label26.Location = new Point(319, 2);
             label26.Name = "label26";
             label26.Size = new Size(100, 18);
             label26.TabIndex = 118;
@@ -386,12 +416,12 @@
             dgvTenantProperties.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTenantProperties.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
             dgvTenantProperties.DataSource = propertyBindingSource;
-            dgvTenantProperties.Location = new Point(551, 20);
+            dgvTenantProperties.Location = new Point(319, 20);
             dgvTenantProperties.MultiSelect = false;
             dgvTenantProperties.Name = "dgvTenantProperties";
             dgvTenantProperties.ReadOnly = true;
             dgvTenantProperties.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTenantProperties.Size = new Size(1086, 110);
+            dgvTenantProperties.Size = new Size(1318, 110);
             dgvTenantProperties.TabIndex = 117;
             // 
             // dataGridViewTextBoxColumn1
@@ -479,7 +509,7 @@
             // 
             txtbxTenantEmail.Location = new Point(112, 107);
             txtbxTenantEmail.Name = "txtbxTenantEmail";
-            txtbxTenantEmail.Size = new Size(120, 23);
+            txtbxTenantEmail.Size = new Size(201, 23);
             txtbxTenantEmail.TabIndex = 116;
             txtbxTenantEmail.TextChanged += txtbxTenantEmail_TextChanged;
             // 
@@ -496,7 +526,7 @@
             // 
             txtbxTenantPhone.Location = new Point(112, 78);
             txtbxTenantPhone.Name = "txtbxTenantPhone";
-            txtbxTenantPhone.Size = new Size(120, 23);
+            txtbxTenantPhone.Size = new Size(201, 23);
             txtbxTenantPhone.TabIndex = 114;
             txtbxTenantPhone.TextChanged += txtbxTenantPhone_TextChanged;
             // 
@@ -504,7 +534,7 @@
             // 
             txtbxTenantLName.Location = new Point(112, 49);
             txtbxTenantLName.Name = "txtbxTenantLName";
-            txtbxTenantLName.Size = new Size(120, 23);
+            txtbxTenantLName.Size = new Size(201, 23);
             txtbxTenantLName.TabIndex = 112;
             txtbxTenantLName.TextChanged += txtbxTenantLName_TextChanged;
             // 
@@ -512,7 +542,7 @@
             // 
             txtbxTenantFName.Location = new Point(112, 20);
             txtbxTenantFName.Name = "txtbxTenantFName";
-            txtbxTenantFName.Size = new Size(120, 23);
+            txtbxTenantFName.Size = new Size(201, 23);
             txtbxTenantFName.TabIndex = 111;
             txtbxTenantFName.TextChanged += txtbxTenantFName_TextChanged;
             // 
@@ -546,7 +576,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(238, 2);
+            label16.Location = new Point(3, 136);
             label16.Name = "label16";
             label16.Size = new Size(41, 15);
             label16.TabIndex = 106;
@@ -554,16 +584,16 @@
             // 
             // richtxtbxTenant
             // 
-            richtxtbxTenant.Location = new Point(238, 20);
+            richtxtbxTenant.Location = new Point(3, 154);
             richtxtbxTenant.Name = "richtxtbxTenant";
-            richtxtbxTenant.Size = new Size(307, 395);
+            richtxtbxTenant.Size = new Size(310, 309);
             richtxtbxTenant.TabIndex = 105;
             richtxtbxTenant.Text = "";
             richtxtbxTenant.TextChanged += richtxtbxTenant_TextChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(470, 421);
+            button1.Location = new Point(238, 469);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 104;
@@ -572,6 +602,33 @@
             // 
             // tabPageLandlord
             // 
+            tabPageLandlord.Controls.Add(chkbxLPeicr);
+            tabPageLandlord.Controls.Add(chkbxLPepc);
+            tabPageLandlord.Controls.Add(chkbxLPgas);
+            tabPageLandlord.Controls.Add(btnLPsearchTenants);
+            tabPageLandlord.Controls.Add(label41);
+            tabPageLandlord.Controls.Add(numLPtenantId);
+            tabPageLandlord.Controls.Add(label39);
+            tabPageLandlord.Controls.Add(cmbobxLPepcRating);
+            tabPageLandlord.Controls.Add(label31);
+            tabPageLandlord.Controls.Add(dateLPeicr);
+            tabPageLandlord.Controls.Add(dateLPepc);
+            tabPageLandlord.Controls.Add(dateLPgas);
+            tabPageLandlord.Controls.Add(numLPrent);
+            tabPageLandlord.Controls.Add(label35);
+            tabPageLandlord.Controls.Add(txtbxLPpostcode);
+            tabPageLandlord.Controls.Add(label36);
+            tabPageLandlord.Controls.Add(btnLPupdate);
+            tabPageLandlord.Controls.Add(rchtxtbxLPnotes);
+            tabPageLandlord.Controls.Add(txtbxLPcity);
+            tabPageLandlord.Controls.Add(label37);
+            tabPageLandlord.Controls.Add(txtbxLPhouse);
+            tabPageLandlord.Controls.Add(label38);
+            tabPageLandlord.Controls.Add(txtbxLPaddress);
+            tabPageLandlord.Controls.Add(btnLPcreate);
+            tabPageLandlord.Controls.Add(btnLPdelete);
+            tabPageLandlord.Controls.Add(label40);
+            tabPageLandlord.Controls.Add(btnLPrefresh);
             tabPageLandlord.Controls.Add(label25);
             tabPageLandlord.Controls.Add(dgvLandlordProperties);
             tabPageLandlord.Controls.Add(txtbxLandlordEmail);
@@ -596,9 +653,255 @@
             tabPageLandlord.Text = "Landlord";
             tabPageLandlord.UseVisualStyleBackColor = true;
             // 
+            // chkbxLPeicr
+            // 
+            chkbxLPeicr.AutoSize = true;
+            chkbxLPeicr.CheckAlign = ContentAlignment.MiddleRight;
+            chkbxLPeicr.Location = new Point(1398, 260);
+            chkbxLPeicr.Name = "chkbxLPeicr";
+            chkbxLPeicr.Size = new Size(87, 19);
+            chkbxLPeicr.TabIndex = 138;
+            chkbxLPeicr.Text = "EICR Expiry:";
+            chkbxLPeicr.UseVisualStyleBackColor = true;
+            chkbxLPeicr.CheckedChanged += chkbxLPeicr_CheckedChanged;
+            // 
+            // chkbxLPepc
+            // 
+            chkbxLPepc.AutoSize = true;
+            chkbxLPepc.CheckAlign = ContentAlignment.MiddleRight;
+            chkbxLPepc.Location = new Point(1259, 261);
+            chkbxLPepc.Name = "chkbxLPepc";
+            chkbxLPepc.Size = new Size(84, 19);
+            chkbxLPepc.TabIndex = 137;
+            chkbxLPepc.Text = "EPC Expiry:";
+            chkbxLPepc.UseVisualStyleBackColor = true;
+            chkbxLPepc.CheckedChanged += chkbxLPepc_CheckedChanged;
+            // 
+            // chkbxLPgas
+            // 
+            chkbxLPgas.AutoSize = true;
+            chkbxLPgas.CheckAlign = ContentAlignment.MiddleRight;
+            chkbxLPgas.Location = new Point(1120, 260);
+            chkbxLPgas.Name = "chkbxLPgas";
+            chkbxLPgas.Size = new Size(110, 19);
+            chkbxLPgas.TabIndex = 136;
+            chkbxLPgas.Text = "Gas Cert. Expiry:";
+            chkbxLPgas.UseVisualStyleBackColor = true;
+            chkbxLPgas.CheckedChanged += chkbxLPgas_CheckedChanged;
+            // 
+            // btnLPsearchTenants
+            // 
+            btnLPsearchTenants.FlatStyle = FlatStyle.Flat;
+            btnLPsearchTenants.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnLPsearchTenants.Location = new Point(398, 280);
+            btnLPsearchTenants.Name = "btnLPsearchTenants";
+            btnLPsearchTenants.Size = new Size(21, 23);
+            btnLPsearchTenants.TabIndex = 135;
+            btnLPsearchTenants.Text = "⌕";
+            btnLPsearchTenants.UseVisualStyleBackColor = true;
+            // 
+            // label41
+            // 
+            label41.AutoSize = true;
+            label41.Location = new Point(319, 262);
+            label41.Name = "label41";
+            label41.Size = new Size(60, 15);
+            label41.TabIndex = 134;
+            label41.Text = "Tenant ID:";
+            // 
+            // numLPtenantId
+            // 
+            numLPtenantId.Location = new Point(319, 280);
+            numLPtenantId.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
+            numLPtenantId.Name = "numLPtenantId";
+            numLPtenantId.Size = new Size(80, 23);
+            numLPtenantId.TabIndex = 133;
+            numLPtenantId.ThousandsSeparator = true;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(319, 331);
+            label39.Name = "label39";
+            label39.Size = new Size(41, 15);
+            label39.TabIndex = 132;
+            label39.Text = "Notes:";
+            // 
+            // cmbobxLPepcRating
+            // 
+            cmbobxLPepcRating.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbobxLPepcRating.FormattingEnabled = true;
+            cmbobxLPepcRating.Items.AddRange(new object[] { "-", "A", "B", "C", "D", "E", "F", "G" });
+            cmbobxLPepcRating.Location = new Point(1537, 279);
+            cmbobxLPepcRating.Name = "cmbobxLPepcRating";
+            cmbobxLPepcRating.Size = new Size(100, 23);
+            cmbobxLPepcRating.TabIndex = 131;
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Location = new Point(1537, 263);
+            label31.Name = "label31";
+            label31.Size = new Size(68, 15);
+            label31.TabIndex = 130;
+            label31.Text = "EPC Rating:";
+            // 
+            // dateLPeicr
+            // 
+            dateLPeicr.Location = new Point(1398, 280);
+            dateLPeicr.Name = "dateLPeicr";
+            dateLPeicr.Size = new Size(133, 23);
+            dateLPeicr.TabIndex = 129;
+            // 
+            // dateLPepc
+            // 
+            dateLPepc.Location = new Point(1259, 280);
+            dateLPepc.Name = "dateLPepc";
+            dateLPepc.Size = new Size(133, 23);
+            dateLPepc.TabIndex = 127;
+            // 
+            // dateLPgas
+            // 
+            dateLPgas.Location = new Point(1120, 280);
+            dateLPgas.Name = "dateLPgas";
+            dateLPgas.Size = new Size(133, 23);
+            dateLPgas.TabIndex = 125;
+            // 
+            // numLPrent
+            // 
+            numLPrent.DecimalPlaces = 2;
+            numLPrent.Increment = new decimal(new int[] { 5, 0, 0, 0 });
+            numLPrent.Location = new Point(1014, 280);
+            numLPrent.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
+            numLPrent.Name = "numLPrent";
+            numLPrent.Size = new Size(100, 23);
+            numLPrent.TabIndex = 124;
+            numLPrent.ThousandsSeparator = true;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Location = new Point(1014, 263);
+            label35.Name = "label35";
+            label35.Size = new Size(81, 15);
+            label35.TabIndex = 122;
+            label35.Text = "Rent Amount:";
+            // 
+            // txtbxLPpostcode
+            // 
+            txtbxLPpostcode.Location = new Point(809, 280);
+            txtbxLPpostcode.Name = "txtbxLPpostcode";
+            txtbxLPpostcode.Size = new Size(133, 23);
+            txtbxLPpostcode.TabIndex = 121;
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(809, 262);
+            label36.Name = "label36";
+            label36.Size = new Size(59, 15);
+            label36.TabIndex = 120;
+            label36.Text = "Postcode:";
+            // 
+            // btnLPupdate
+            // 
+            btnLPupdate.Location = new Point(1325, 317);
+            btnLPupdate.Name = "btnLPupdate";
+            btnLPupdate.Size = new Size(100, 23);
+            btnLPupdate.TabIndex = 118;
+            btnLPupdate.Text = "Update";
+            btnLPupdate.UseVisualStyleBackColor = true;
+            btnLPupdate.Click += btnLPupdate_Click;
+            // 
+            // rchtxtbxLPnotes
+            // 
+            rchtxtbxLPnotes.Location = new Point(319, 349);
+            rchtxtbxLPnotes.Name = "rchtxtbxLPnotes";
+            rchtxtbxLPnotes.Size = new Size(1318, 143);
+            rchtxtbxLPnotes.TabIndex = 117;
+            rchtxtbxLPnotes.Text = "";
+            // 
+            // txtbxLPcity
+            // 
+            txtbxLPcity.Location = new Point(670, 280);
+            txtbxLPcity.Name = "txtbxLPcity";
+            txtbxLPcity.Size = new Size(133, 23);
+            txtbxLPcity.TabIndex = 116;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(670, 262);
+            label37.Name = "label37";
+            label37.Size = new Size(31, 15);
+            label37.TabIndex = 115;
+            label37.Text = "City:";
+            // 
+            // txtbxLPhouse
+            // 
+            txtbxLPhouse.Location = new Point(425, 280);
+            txtbxLPhouse.Name = "txtbxLPhouse";
+            txtbxLPhouse.Size = new Size(100, 23);
+            txtbxLPhouse.TabIndex = 114;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new Point(425, 262);
+            label38.Name = "label38";
+            label38.Size = new Size(91, 15);
+            label38.TabIndex = 113;
+            label38.Text = "House Number:";
+            // 
+            // txtbxLPaddress
+            // 
+            txtbxLPaddress.Location = new Point(531, 280);
+            txtbxLPaddress.Name = "txtbxLPaddress";
+            txtbxLPaddress.Size = new Size(133, 23);
+            txtbxLPaddress.TabIndex = 112;
+            // 
+            // btnLPcreate
+            // 
+            btnLPcreate.Location = new Point(1219, 317);
+            btnLPcreate.Name = "btnLPcreate";
+            btnLPcreate.Size = new Size(100, 23);
+            btnLPcreate.TabIndex = 111;
+            btnLPcreate.Text = "Create";
+            btnLPcreate.UseVisualStyleBackColor = true;
+            btnLPcreate.Click += btnLPcreate_Click;
+            // 
+            // btnLPdelete
+            // 
+            btnLPdelete.Location = new Point(1431, 317);
+            btnLPdelete.Name = "btnLPdelete";
+            btnLPdelete.Size = new Size(100, 23);
+            btnLPdelete.TabIndex = 110;
+            btnLPdelete.Text = "Delete";
+            btnLPdelete.UseVisualStyleBackColor = true;
+            btnLPdelete.Click += btnLPdelete_Click;
+            // 
+            // label40
+            // 
+            label40.AutoSize = true;
+            label40.Location = new Point(531, 262);
+            label40.Name = "label40";
+            label40.Size = new Size(52, 15);
+            label40.TabIndex = 107;
+            label40.Text = "Address:";
+            // 
+            // btnLPrefresh
+            // 
+            btnLPrefresh.Location = new Point(1537, 317);
+            btnLPrefresh.Name = "btnLPrefresh";
+            btnLPrefresh.Size = new Size(100, 23);
+            btnLPrefresh.TabIndex = 105;
+            btnLPrefresh.Text = "Refresh";
+            btnLPrefresh.UseVisualStyleBackColor = true;
+            btnLPrefresh.Click += btnLPrefresh_Click;
+            // 
             // label25
             // 
-            label25.Location = new Point(551, 2);
+            label25.Location = new Point(319, 2);
             label25.Name = "label25";
             label25.Size = new Size(100, 18);
             label25.TabIndex = 104;
@@ -611,14 +914,14 @@
             dgvLandlordProperties.AutoGenerateColumns = false;
             dgvLandlordProperties.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLandlordProperties.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLandlordProperties.Columns.AddRange(new DataGridViewColumn[] { propertyIdDataGridViewTextBoxColumn1, houseNoDataGridViewTextBoxColumn, addressLine1DataGridViewTextBoxColumn, cityDataGridViewTextBoxColumn, postCodeDataGridViewTextBoxColumn, rentAmountDataGridViewTextBoxColumn, gasCertExpiryDataGridViewTextBoxColumn, ePCExpiryDataGridViewTextBoxColumn, eICRExpiryDataGridViewTextBoxColumn, ePCRatingDataGridViewTextBoxColumn, notesDataGridViewTextBoxColumn });
+            dgvLandlordProperties.Columns.AddRange(new DataGridViewColumn[] { propertyIdDataGridViewTextBoxColumn1, TenantId, houseNoDataGridViewTextBoxColumn, addressLine1DataGridViewTextBoxColumn, cityDataGridViewTextBoxColumn, postCodeDataGridViewTextBoxColumn, rentAmountDataGridViewTextBoxColumn, gasCertExpiryDataGridViewTextBoxColumn, ePCExpiryDataGridViewTextBoxColumn, eICRExpiryDataGridViewTextBoxColumn, ePCRatingDataGridViewTextBoxColumn, notesDataGridViewTextBoxColumn });
             dgvLandlordProperties.DataSource = propertyBindingSource;
-            dgvLandlordProperties.Location = new Point(551, 20);
+            dgvLandlordProperties.Location = new Point(319, 20);
             dgvLandlordProperties.MultiSelect = false;
             dgvLandlordProperties.Name = "dgvLandlordProperties";
             dgvLandlordProperties.ReadOnly = true;
             dgvLandlordProperties.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvLandlordProperties.Size = new Size(1086, 395);
+            dgvLandlordProperties.Size = new Size(1318, 240);
             dgvLandlordProperties.TabIndex = 13;
             // 
             // propertyIdDataGridViewTextBoxColumn1
@@ -627,6 +930,13 @@
             propertyIdDataGridViewTextBoxColumn1.HeaderText = "Property ID";
             propertyIdDataGridViewTextBoxColumn1.Name = "propertyIdDataGridViewTextBoxColumn1";
             propertyIdDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // TenantId
+            // 
+            TenantId.DataPropertyName = "TenantId";
+            TenantId.HeaderText = "Tenant ID";
+            TenantId.Name = "TenantId";
+            TenantId.ReadOnly = true;
             // 
             // houseNoDataGridViewTextBoxColumn
             // 
@@ -638,7 +948,7 @@
             // addressLine1DataGridViewTextBoxColumn
             // 
             addressLine1DataGridViewTextBoxColumn.DataPropertyName = "AddressLine1";
-            addressLine1DataGridViewTextBoxColumn.HeaderText = "Address Line 1";
+            addressLine1DataGridViewTextBoxColumn.HeaderText = "Address";
             addressLine1DataGridViewTextBoxColumn.Name = "addressLine1DataGridViewTextBoxColumn";
             addressLine1DataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -702,7 +1012,7 @@
             // 
             txtbxLandlordEmail.Location = new Point(112, 136);
             txtbxLandlordEmail.Name = "txtbxLandlordEmail";
-            txtbxLandlordEmail.Size = new Size(120, 23);
+            txtbxLandlordEmail.Size = new Size(201, 23);
             txtbxLandlordEmail.TabIndex = 103;
             txtbxLandlordEmail.TextChanged += txtbxLandlordEmail_TextChanged;
             // 
@@ -710,7 +1020,7 @@
             // 
             txtbxLandlordPhone.Location = new Point(112, 107);
             txtbxLandlordPhone.Name = "txtbxLandlordPhone";
-            txtbxLandlordPhone.Size = new Size(120, 23);
+            txtbxLandlordPhone.Size = new Size(201, 23);
             txtbxLandlordPhone.TabIndex = 96;
             txtbxLandlordPhone.TextChanged += txtbxLandlordPhone_TextChanged;
             // 
@@ -718,7 +1028,7 @@
             // 
             txtbxLandlordAddress.Location = new Point(112, 78);
             txtbxLandlordAddress.Name = "txtbxLandlordAddress";
-            txtbxLandlordAddress.Size = new Size(120, 23);
+            txtbxLandlordAddress.Size = new Size(201, 23);
             txtbxLandlordAddress.TabIndex = 95;
             txtbxLandlordAddress.TextChanged += txtbxLandlordAddress_TextChanged;
             // 
@@ -726,7 +1036,7 @@
             // 
             txtbxLandlordLName.Location = new Point(112, 49);
             txtbxLandlordLName.Name = "txtbxLandlordLName";
-            txtbxLandlordLName.Size = new Size(120, 23);
+            txtbxLandlordLName.Size = new Size(201, 23);
             txtbxLandlordLName.TabIndex = 94;
             txtbxLandlordLName.TextChanged += txtbxLandlordLName_TextChanged;
             // 
@@ -734,15 +1044,15 @@
             // 
             txtbxLandlordFName.Location = new Point(112, 20);
             txtbxLandlordFName.Name = "txtbxLandlordFName";
-            txtbxLandlordFName.Size = new Size(120, 23);
+            txtbxLandlordFName.Size = new Size(201, 23);
             txtbxLandlordFName.TabIndex = 93;
             txtbxLandlordFName.TextChanged += txtbxLandlordFName_TextChanged;
             // 
             // richtxtbxLandlord
             // 
-            richtxtbxLandlord.Location = new Point(238, 20);
+            richtxtbxLandlord.Location = new Point(6, 177);
             richtxtbxLandlord.Name = "richtxtbxLandlord";
-            richtxtbxLandlord.Size = new Size(307, 395);
+            richtxtbxLandlord.Size = new Size(307, 286);
             richtxtbxLandlord.TabIndex = 82;
             richtxtbxLandlord.Text = "";
             richtxtbxLandlord.TextChanged += richtxtbxLandlord_TextChanged;
@@ -795,7 +1105,7 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new Point(238, 2);
+            label21.Location = new Point(6, 159);
             label21.Name = "label21";
             label21.Size = new Size(41, 15);
             label21.TabIndex = 83;
@@ -803,7 +1113,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(470, 421);
+            button2.Location = new Point(238, 469);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 81;
@@ -958,7 +1268,7 @@
             // 
             rchtxtbxMaintenance.Location = new Point(551, 358);
             rchtxtbxMaintenance.Name = "rchtxtbxMaintenance";
-            rchtxtbxMaintenance.Size = new Size(710, 61);
+            rchtxtbxMaintenance.Size = new Size(710, 105);
             rchtxtbxMaintenance.TabIndex = 89;
             rchtxtbxMaintenance.Text = "";
             // 
@@ -1149,7 +1459,7 @@
             // 
             richtxtbxProperty.Location = new Point(238, 20);
             richtxtbxProperty.Name = "richtxtbxProperty";
-            richtxtbxProperty.Size = new Size(307, 395);
+            richtxtbxProperty.Size = new Size(307, 443);
             richtxtbxProperty.TabIndex = 61;
             richtxtbxProperty.Text = "";
             richtxtbxProperty.TextChanged += richtxtbxProperty_TextChanged;
@@ -1246,7 +1556,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(470, 421);
+            button3.Location = new Point(470, 469);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 9;
@@ -1350,6 +1660,8 @@
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
             tabPageLandlord.ResumeLayout(false);
             tabPageLandlord.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numLPtenantId).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numLPrent).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvLandlordProperties).EndInit();
             tabPageProperty.ResumeLayout(false);
             tabPageProperty.PerformLayout();
@@ -1451,17 +1763,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private DataGridViewTextBoxColumn propertyIdDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn houseNoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn addressLine1DataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn postCodeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn rentAmountDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn gasCertExpiryDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn ePCExpiryDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn eICRExpiryDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn ePCRatingDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn maintenanceIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
@@ -1490,5 +1791,44 @@
         private ComboBox cmbobxMaintenanceStatus;
         private CheckBox chkbxMaintenanceCompleted;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private ComboBox cmbobxLPepcRating;
+        private Label label31;
+        private DateTimePicker dateLPeicr;
+        private DateTimePicker dateLPepc;
+        private DateTimePicker dateLPgas;
+        private NumericUpDown numLPrent;
+        private Label label35;
+        private TextBox txtbxLPpostcode;
+        private Label label36;
+        private Button btnLPupdate;
+        private RichTextBox rchtxtbxLPnotes;
+        private TextBox txtbxLPcity;
+        private Label label37;
+        private TextBox txtbxLPhouse;
+        private Label label38;
+        private TextBox txtbxLPaddress;
+        private Button btnLPcreate;
+        private Button btnLPdelete;
+        private Label label40;
+        private Button btnLPrefresh;
+        private Label label39;
+        private DataGridViewTextBoxColumn propertyIdDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn TenantId;
+        private DataGridViewTextBoxColumn houseNoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn addressLine1DataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn postCodeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn rentAmountDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn gasCertExpiryDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ePCExpiryDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn eICRExpiryDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ePCRatingDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
+        private NumericUpDown numLPtenantId;
+        private Button btnLPsearchTenants;
+        private Label label41;
+        private CheckBox chkbxLPeicr;
+        private CheckBox chkbxLPepc;
+        private CheckBox chkbxLPgas;
     }
 }
