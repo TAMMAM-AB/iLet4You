@@ -19,23 +19,23 @@ namespace iLet4You
             ws = new WebSocket($"ws://{ip}:{port}");
 
             // setting event handlers
-            ws.OnOpen += Ws_OnOpen;
-            ws.OnMessage += Ws_OnMessage;
-            ws.OnError += Ws_OnError;
-            ws.OnClose += Ws_OnClose;
+            ws.OnOpen += WsOnOpen;
+            ws.OnMessage += WsOnMessage;
+            ws.OnError += WsOnError;
+            ws.OnClose += WsOnClose;
 
             // open the WebSocket connection
             ws.Connect();
         }
 
         // when connection is opened
-        private void Ws_OnOpen(object sender, EventArgs e)
+        private void WsOnOpen(object sender, EventArgs e)
         {
 
         }
 
         // server resonses / updates (runs every time a server sends message)
-        private async void Ws_OnMessage(object sender, MessageEventArgs e)
+        private async void WsOnMessage(object sender, MessageEventArgs e)
         {
             try
             {
@@ -153,13 +153,13 @@ namespace iLet4You
         }
 
         // errors
-        private void Ws_OnError(object sender, WebSocketSharp.ErrorEventArgs e)
+        private void WsOnError(object sender, WebSocketSharp.ErrorEventArgs e)
         {
 
         }
 
         // when connection is closed
-        private void Ws_OnClose(object sender, CloseEventArgs e)
+        private void WsOnClose(object sender, CloseEventArgs e)
         {
             // open login page again (and close everything else)? idk
         }
