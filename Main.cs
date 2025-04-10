@@ -140,11 +140,16 @@ namespace iLet4You
             bool success = await AwaitResponse(); // wait for response
 
             dgvMaintenances.DataSource = null;
+            dgvPrents.DataSource = null;
             dgvLandlordProperties.DataSource = null;
             dgvTenantProperties.DataSource = null;
             dgvRents.DataSource = null;
 
-            if (_selectedProperty != null) dgvMaintenances.DataSource = Global.Properties?.FindMaintenancesFromId(_selectedProperty.Value.PropertyId);
+            if (_selectedProperty != null)
+            {
+                dgvMaintenances.DataSource = Global.Properties?.FindMaintenancesFromId(_selectedProperty.Value.PropertyId);
+                dgvPrents.DataSource = Global.Properties?.FindRentsFromId(_selectedProperty.Value.PropertyId);
+            }
             if (_selectedLandlord != null) dgvLandlordProperties.DataSource = Global.Landlords?.FindPropertiesFromId(_selectedLandlord.Value.LandlordId);
             if (_selectedTenant != null) dgvTenantProperties.DataSource = Global.Tenants?.FindPropertiesFromId(_selectedTenant.Value.TenantId);
             if (_selectedTenant != null) dgvRents.DataSource = Global.Tenants?.FindRentsFromId(_selectedTenant.Value.TenantId);
@@ -1229,6 +1234,41 @@ namespace iLet4You
             {
                 dateLPeicr.Enabled = false;
             }
+        }
+
+        private void PasteDate(RichTextBox target)
+        {
+            string text = DateTime.Now.ToString("dd-MM-yyyy");
+
+            int cursorPos = target.SelectionStart;
+            target.Text = target.Text.Insert(cursorPos, text);
+            target.SelectionStart = cursorPos + text.Length;
+            target.Focus();
+        }
+
+        private void lblDate1_Click(object sender, EventArgs e)
+        {
+            PasteDate(richtxtbxProperty);
+        }
+
+        private void lblDate2_Click(object sender, EventArgs e)
+        {
+            PasteDate(rchtxtbxMaintenance);
+        }
+
+        private void lblDate3_Click(object sender, EventArgs e)
+        {
+            PasteDate(richtxtbxLandlord);
+        }
+
+        private void lblDate4_Click(object sender, EventArgs e)
+        {
+            PasteDate(rchtxtbxLPnotes);
+        }
+
+        private void lblDate5_Click(object sender, EventArgs e)
+        {
+            PasteDate(richtxtbxTenant);
         }
     }
 }

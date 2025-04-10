@@ -76,6 +76,8 @@
             richtxtbxTenant = new RichTextBox();
             button1 = new Button();
             tabPageLandlord = new TabPage();
+            lblDate3 = new Label();
+            lblDate4 = new Label();
             chkbxLPeicr = new CheckBox();
             chkbxLPepc = new CheckBox();
             chkbxLPgas = new CheckBox();
@@ -131,6 +133,17 @@
             label21 = new Label();
             button2 = new Button();
             tabPageProperty = new TabPage();
+            lblDate2 = new Label();
+            lblDate1 = new Label();
+            label32 = new Label();
+            dgvPrents = new DataGridView();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
             chkbxEICR = new CheckBox();
             chkbxEPC = new CheckBox();
             label9 = new Label();
@@ -187,6 +200,7 @@
             btnQuickLinks = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             linkFolder = new LinkLabel();
+            lblDate5 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPageTenant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
@@ -198,6 +212,7 @@
             ((System.ComponentModel.ISupportInitialize)numLPrent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvLandlordProperties).BeginInit();
             tabPageProperty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPrents).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvMaintenances).BeginInit();
             ((System.ComponentModel.ISupportInitialize)maintenanceBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numRent).BeginInit();
@@ -301,6 +316,7 @@
             // 
             // tabPageTenant
             // 
+            tabPageTenant.Controls.Add(lblDate5);
             tabPageTenant.Controls.Add(label27);
             tabPageTenant.Controls.Add(dgvRents);
             tabPageTenant.Controls.Add(label26);
@@ -331,7 +347,7 @@
             label27.Name = "label27";
             label27.Size = new Size(100, 18);
             label27.TabIndex = 120;
-            label27.Text = "Rents:";
+            label27.Text = "Rent history:";
             // 
             // dgvRents
             // 
@@ -409,7 +425,7 @@
             label26.Name = "label26";
             label26.Size = new Size(100, 18);
             label26.TabIndex = 118;
-            label26.Text = "Properties:";
+            label26.Text = "Property:";
             // 
             // dgvTenantProperties
             // 
@@ -597,15 +613,17 @@
             // 
             // button1
             // 
-            button1.Location = new Point(238, 469);
+            button1.Location = new Point(6, 469);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(307, 23);
             button1.TabIndex = 104;
             button1.Text = "save";
             button1.UseVisualStyleBackColor = true;
             // 
             // tabPageLandlord
             // 
+            tabPageLandlord.Controls.Add(lblDate3);
+            tabPageLandlord.Controls.Add(lblDate4);
             tabPageLandlord.Controls.Add(chkbxLPeicr);
             tabPageLandlord.Controls.Add(chkbxLPepc);
             tabPageLandlord.Controls.Add(chkbxLPgas);
@@ -656,6 +674,26 @@
             tabPageLandlord.TabIndex = 1;
             tabPageLandlord.Text = "Landlord";
             tabPageLandlord.UseVisualStyleBackColor = true;
+            // 
+            // lblDate3
+            // 
+            lblDate3.Location = new Point(53, 159);
+            lblDate3.Name = "lblDate3";
+            lblDate3.Size = new Size(18, 15);
+            lblDate3.TabIndex = 149;
+            lblDate3.Text = "📅";
+            lblDate3.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate3.Click += lblDate3_Click;
+            // 
+            // lblDate4
+            // 
+            lblDate4.Location = new Point(361, 331);
+            lblDate4.Name = "lblDate4";
+            lblDate4.Size = new Size(18, 15);
+            lblDate4.TabIndex = 148;
+            lblDate4.Text = "📅";
+            lblDate4.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate4.Click += lblDate4_Click;
             // 
             // chkbxLPeicr
             // 
@@ -1117,15 +1155,19 @@
             // 
             // button2
             // 
-            button2.Location = new Point(238, 469);
+            button2.Location = new Point(6, 469);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(307, 23);
             button2.TabIndex = 81;
             button2.Text = "save";
             button2.UseVisualStyleBackColor = true;
             // 
             // tabPageProperty
             // 
+            tabPageProperty.Controls.Add(lblDate2);
+            tabPageProperty.Controls.Add(lblDate1);
+            tabPageProperty.Controls.Add(label32);
+            tabPageProperty.Controls.Add(dgvPrents);
             tabPageProperty.Controls.Add(chkbxEICR);
             tabPageProperty.Controls.Add(chkbxEPC);
             tabPageProperty.Controls.Add(label9);
@@ -1176,6 +1218,100 @@
             tabPageProperty.TabIndex = 0;
             tabPageProperty.Text = "Property";
             tabPageProperty.UseVisualStyleBackColor = true;
+            // 
+            // lblDate2
+            // 
+            lblDate2.Location = new Point(627, 340);
+            lblDate2.Name = "lblDate2";
+            lblDate2.Size = new Size(18, 15);
+            lblDate2.TabIndex = 148;
+            lblDate2.Text = "📅";
+            lblDate2.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate2.Click += lblDate2_Click;
+            // 
+            // lblDate1
+            // 
+            lblDate1.Location = new Point(285, 2);
+            lblDate1.Name = "lblDate1";
+            lblDate1.Size = new Size(18, 15);
+            lblDate1.TabIndex = 147;
+            lblDate1.Text = "📅";
+            lblDate1.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate1.Click += lblDate1_Click;
+            // 
+            // label32
+            // 
+            label32.Location = new Point(6, 490);
+            label32.Name = "label32";
+            label32.Size = new Size(133, 18);
+            label32.TabIndex = 146;
+            label32.Text = "Rent for this property:";
+            // 
+            // dgvPrents
+            // 
+            dgvPrents.AllowUserToAddRows = false;
+            dgvPrents.AllowUserToDeleteRows = false;
+            dgvPrents.AutoGenerateColumns = false;
+            dgvPrents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPrents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPrents.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18 });
+            dgvPrents.DataSource = rentBindingSource;
+            dgvPrents.Location = new Point(6, 511);
+            dgvPrents.MultiSelect = false;
+            dgvPrents.Name = "dgvPrents";
+            dgvPrents.ReadOnly = true;
+            dgvPrents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPrents.Size = new Size(1626, 359);
+            dgvPrents.TabIndex = 145;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "RentId";
+            dataGridViewTextBoxColumn2.HeaderText = "Rent ID";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.DataPropertyName = "TenantId";
+            dataGridViewTextBoxColumn13.HeaderText = "Tenant ID";
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            dataGridViewTextBoxColumn14.DataPropertyName = "DueDate";
+            dataGridViewTextBoxColumn14.HeaderText = "Due Date";
+            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            dataGridViewTextBoxColumn15.DataPropertyName = "DateReceived";
+            dataGridViewTextBoxColumn15.HeaderText = "Date Received";
+            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            dataGridViewTextBoxColumn16.DataPropertyName = "RentAmount";
+            dataGridViewTextBoxColumn16.HeaderText = "Rent Amount";
+            dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            dataGridViewTextBoxColumn17.DataPropertyName = "RentAmountPaid";
+            dataGridViewTextBoxColumn17.HeaderText = "Rent Paid";
+            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            dataGridViewTextBoxColumn18.DataPropertyName = "Notes";
+            dataGridViewTextBoxColumn18.HeaderText = "Notes";
+            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            dataGridViewTextBoxColumn18.ReadOnly = true;
             // 
             // chkbxEICR
             // 
@@ -1320,7 +1456,7 @@
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new Point(551, 336);
+            label28.Location = new Point(551, 340);
             label28.Name = "label28";
             label28.Size = new Size(70, 15);
             label28.TabIndex = 88;
@@ -1676,6 +1812,16 @@
             linkFolder.Text = "Open Folder";
             linkFolder.LinkClicked += linkFolder_LinkClicked;
             // 
+            // lblDate5
+            // 
+            lblDate5.Location = new Point(50, 136);
+            lblDate5.Name = "lblDate5";
+            lblDate5.Size = new Size(18, 15);
+            lblDate5.TabIndex = 150;
+            lblDate5.Text = "📅";
+            lblDate5.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate5.Click += lblDate5_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1713,6 +1859,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvLandlordProperties).EndInit();
             tabPageProperty.ResumeLayout(false);
             tabPageProperty.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPrents).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvMaintenances).EndInit();
             ((System.ComponentModel.ISupportInitialize)maintenanceBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)numRent).EndInit();
@@ -1882,5 +2029,19 @@
         private CheckBox chkbxEICR;
         private CheckBox chkbxEPC;
         private LinkLabel linkFolder;
+        private Label label32;
+        private DataGridView dgvPrents;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private Label lblDate1;
+        private Label lblDate2;
+        private Label lblDate4;
+        private Label lblDate3;
+        private Label lblDate5;
     }
 }

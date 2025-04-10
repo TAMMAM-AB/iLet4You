@@ -30,4 +30,18 @@
 
         return maintenances;
     }
+
+    public List<Rent>? FindRentsFromId(int id)
+    {
+        List<Rent> rents = new List<Rent>();
+        Global.Rents?.GetAll().ForEach(m =>
+        {
+            if (m.PropertyId == id)
+            {
+                rents.Add(m);
+            }
+        });
+
+        return rents;
+    }
 }
