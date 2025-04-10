@@ -6,6 +6,7 @@ public static class Settings
     public static string ip = "127.0.0.1";
     public static string port = "8080";
 
+    // database
     public static string landlordsTable = "Landlords";
     public static string maintenancesTable = "Maintenances";
     public static string propertiesTable = "Properties";
@@ -13,6 +14,14 @@ public static class Settings
     public static string rentsTable = "Rents";
     public static string tenantsTable = "Tenants";
 
+    // folder paths - ADD THIS TO CONFIG FILE
+    public static string mainFolder = "Properties";
+    public static List<string> folders = new List<string>
+    {
+        "Guaranteed Properties",
+        "Managed Properties",
+        "Own"
+    };
 
     private class ConfigData
     {

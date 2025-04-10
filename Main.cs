@@ -1,4 +1,6 @@
-﻿namespace iLet4You
+﻿using System.Diagnostics;
+
+namespace iLet4You
 {
     public partial class Main : Form
     {
@@ -38,6 +40,74 @@
             btnAdmin.Enabled = (role == "admin");
             btnAdmin.Visible = (role == "admin");
             Global.Server.RequestData();
+        }
+
+        private void linkFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (_selectedProperty != null)
+            {
+                if (tabControl.SelectedTab == tabPageProperty)
+                {
+                    foreach (string p in Settings.folders)
+                    {
+                        try
+                        {
+                            string path = Path.Combine(Settings.mainFolder, p, _selectedProperty.Value.AddressLine1.Trim());
+                            System.Diagnostics.Process.Start(new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch { }
+                    }
+                }
+                else if (tabControl.SelectedTab == tabPageLandlord)
+                {
+                    foreach (string p in Settings.folders)
+                    {
+                        try
+                        {
+                            string path = Path.Combine(Settings.mainFolder, p, _selectedProperty.Value.AddressLine1.Trim(), "Landlord");
+                            System.Diagnostics.Process.Start(new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch { }
+                    }
+                }
+                else if (tabControl.SelectedTab == tabPageTenant)
+                {
+                    foreach (string p in Settings.folders)
+                    {
+                        try
+                        {
+                            string path = Path.Combine(Settings.mainFolder, p, _selectedProperty.Value.AddressLine1.Trim(), "Tenant");
+                            System.Diagnostics.Process.Start(new ProcessStartInfo
+                            {
+                                FileName = path,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch { }
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    string path = Settings.mainFolder;
+                    System.Diagnostics.Process.Start(new ProcessStartInfo
+                    {
+                        FileName = path,
+                        UseShellExecute = true
+                    });
+                }
+                catch { }
+            }
         }
 
         public static Main? Instance { get; private set; }
@@ -576,14 +646,14 @@
         // make it obvious to user when there are unsaved changes
         // property tab
         private void PropertyTabTitle()
-        {
+        { // longgggg if statement but it works
             if (_selectedProperty != null)
             {
                 if (txtbxHNo.Text.Trim() != _selectedProperty.Value.HouseNo.Trim()
                     || txtbxAddress.Text.Trim() != _selectedProperty.Value.AddressLine1.Trim()
                     || txtbxCity.Text.Trim() != _selectedProperty.Value.City.Trim()
                     || txtbxPostcode.Text.Trim() != _selectedProperty.Value.PostCode.Trim()
-                    || Math.Round(numRent.Value, 2) != (decimal)_selectedProperty.Value.RentAmount // treat as decimal without converting by using (decimal)
+                    || Math.Round(numRent.Value, 2) != (decimal)_selectedProperty.Value.RentAmount // treat as decimal without converting by using (decimal) very cool
 
                     || (dateGas.Value != _selectedProperty.Value.GasCertExpiry && chkbxGas.Checked)
                     || (_selectedProperty.Value.GasCertExpiry == null && chkbxGas.Checked)
@@ -1016,7 +1086,7 @@
             dateLPgas.Value = DateTime.Now;
             dateLPepc.Value = DateTime.Now;
             dateLPeicr.Value = DateTime.Now;
-            cmbobxEPC.SelectedIndex = 1;
+            cmbobxLPepcRating.SelectedIndex = 1;
             rchtxtbxLPnotes.Text = "";
         }
 
@@ -1088,7 +1158,7 @@
                 dateLPgas.Value = DateTime.Now;
                 dateLPepc.Value = DateTime.Now;
                 dateLPeicr.Value = DateTime.Now;
-                cmbobxEPC.SelectedIndex = 1;
+                cmbobxLPepcRating.SelectedIndex = 1;
                 rchtxtbxLPnotes.Text = "";
             }
         }

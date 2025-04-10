@@ -186,6 +186,7 @@
             tabControl = new TabControl();
             btnQuickLinks = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            linkFolder = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPageTenant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
@@ -253,7 +254,7 @@
             // 
             panel1.Location = new Point(12, 81);
             panel1.Name = "panel1";
-            panel1.Size = new Size(223, 497);
+            panel1.Size = new Size(223, 846);
             panel1.TabIndex = 5;
             // 
             // btnAdmin
@@ -319,7 +320,7 @@
             tabPageTenant.Margin = new Padding(3, 2, 3, 2);
             tabPageTenant.Name = "tabPageTenant";
             tabPageTenant.Padding = new Padding(3, 2, 3, 2);
-            tabPageTenant.Size = new Size(1643, 497);
+            tabPageTenant.Size = new Size(1643, 875);
             tabPageTenant.TabIndex = 2;
             tabPageTenant.Text = "Tenant";
             tabPageTenant.UseVisualStyleBackColor = true;
@@ -651,7 +652,7 @@
             tabPageLandlord.Margin = new Padding(3, 2, 3, 2);
             tabPageLandlord.Name = "tabPageLandlord";
             tabPageLandlord.Padding = new Padding(3, 2, 3, 2);
-            tabPageLandlord.Size = new Size(1643, 497);
+            tabPageLandlord.Size = new Size(1643, 875);
             tabPageLandlord.TabIndex = 1;
             tabPageLandlord.Text = "Landlord";
             tabPageLandlord.UseVisualStyleBackColor = true;
@@ -1171,7 +1172,7 @@
             tabPageProperty.Margin = new Padding(3, 2, 3, 2);
             tabPageProperty.Name = "tabPageProperty";
             tabPageProperty.Padding = new Padding(3, 2, 3, 2);
-            tabPageProperty.Size = new Size(1643, 497);
+            tabPageProperty.Size = new Size(1643, 875);
             tabPageProperty.TabIndex = 0;
             tabPageProperty.Text = "Property";
             tabPageProperty.UseVisualStyleBackColor = true;
@@ -1591,9 +1592,9 @@
             // 
             // button3
             // 
-            button3.Location = new Point(470, 469);
+            button3.Location = new Point(6, 440);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(226, 23);
             button3.TabIndex = 9;
             button3.Text = "save";
             button3.UseVisualStyleBackColor = true;
@@ -1606,7 +1607,7 @@
             tabPageHome.Location = new Point(4, 24);
             tabPageHome.Name = "tabPageHome";
             tabPageHome.Padding = new Padding(3);
-            tabPageHome.Size = new Size(1643, 497);
+            tabPageHome.Size = new Size(1643, 875);
             tabPageHome.TabIndex = 4;
             tabPageHome.Text = "Home";
             tabPageHome.UseVisualStyleBackColor = true;
@@ -1651,12 +1652,12 @@
             tabControl.Margin = new Padding(3, 2, 3, 2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1651, 525);
+            tabControl.Size = new Size(1651, 903);
             tabControl.TabIndex = 1;
             // 
             // btnQuickLinks
             // 
-            btnQuickLinks.Location = new Point(12, 584);
+            btnQuickLinks.Location = new Point(12, 933);
             btnQuickLinks.Name = "btnQuickLinks";
             btnQuickLinks.Size = new Size(223, 23);
             btnQuickLinks.TabIndex = 9;
@@ -1664,12 +1665,24 @@
             btnQuickLinks.UseVisualStyleBackColor = true;
             btnQuickLinks.Click += btnQuickLinks_Click;
             // 
+            // linkFolder
+            // 
+            linkFolder.AutoSize = true;
+            linkFolder.Location = new Point(1089, 16);
+            linkFolder.Name = "linkFolder";
+            linkFolder.Size = new Size(72, 15);
+            linkFolder.TabIndex = 145;
+            linkFolder.TabStop = true;
+            linkFolder.Text = "Open Folder";
+            linkFolder.LinkClicked += linkFolder_LinkClicked;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1904, 1041);
+            Controls.Add(linkFolder);
             Controls.Add(btnQuickLinks);
             Controls.Add(panelSearchResults);
             Controls.Add(pictureBox1);
@@ -1868,5 +1881,6 @@
         private Label label10;
         private CheckBox chkbxEICR;
         private CheckBox chkbxEPC;
+        private LinkLabel linkFolder;
     }
 }
