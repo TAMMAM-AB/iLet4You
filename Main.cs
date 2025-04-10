@@ -17,6 +17,13 @@
             InitializeComponent();
             RefreshData();
 
+            lblPropertyLandord.Text = "";
+            lblPropertyTenant.Text = "";
+
+            dateGas.Enabled = false;
+            dateEPC.Enabled = false;
+            dateEICR.Enabled = false;
+
             this.Text = $"iLet4You | {username} | {role}";
 
             cmbobxMaintenanceStatus.SelectedIndex = 0;
@@ -457,11 +464,38 @@
 
             numRent.Value = (decimal)property.RentAmount;
 
-            /* FIX THESE
-            dateGas.Value = property.GasCertExpiry;
-            dateEPC.Value = property.EPCExpiry;
-            dateEICR.Value = property.EICRExpiry;
-            */
+            if (property.GasCertExpiry.HasValue)
+            {
+                chkbxGas.Checked = true;
+                dateGas.Value = property.GasCertExpiry.Value;
+            }
+            else
+            {
+                chkbxGas.Checked = false;
+                dateGas.Value = DateTime.Now;
+            }
+
+            if (property.EPCExpiry.HasValue)
+            {
+                chkbxEPC.Checked = true;
+                dateEPC.Value = property.EPCExpiry.Value;
+            }
+            else
+            {
+                chkbxEPC.Checked = false;
+                dateEPC.Value = DateTime.Now;
+            }
+
+            if (property.EICRExpiry.HasValue)
+            {
+                chkbxEICR.Checked = true;
+                dateEICR.Value = property.EICRExpiry.Value;
+            }
+            else
+            {
+                chkbxEICR.Checked = false;
+                dateEICR.Value = DateTime.Now;
+            }
 
             cmbobxEPC.SelectedItem = property.EPCRating;
 
@@ -541,7 +575,6 @@
 
         // make it obvious to user when there are unsaved changes
         // property tab
-
         private void PropertyTabTitle()
         {
             if (_selectedProperty != null)
@@ -551,9 +584,19 @@
                     || txtbxCity.Text.Trim() != _selectedProperty.Value.City.Trim()
                     || txtbxPostcode.Text.Trim() != _selectedProperty.Value.PostCode.Trim()
                     || Math.Round(numRent.Value, 2) != (decimal)_selectedProperty.Value.RentAmount // treat as decimal without converting by using (decimal)
-                    || dateGas.Value != _selectedProperty.Value.GasCertExpiry
-                    || dateEPC.Value != _selectedProperty.Value.EPCExpiry
-                    || dateEICR.Value != _selectedProperty.Value.EICRExpiry
+
+                    || (dateGas.Value != _selectedProperty.Value.GasCertExpiry && chkbxGas.Checked)
+                    || (_selectedProperty.Value.GasCertExpiry == null && chkbxGas.Checked)
+                    || (_selectedProperty.Value.GasCertExpiry != null && !chkbxGas.Checked)
+
+                    || (dateEPC.Value != _selectedProperty.Value.EPCExpiry && chkbxEPC.Checked)
+                    || (_selectedProperty.Value.EPCExpiry == null && chkbxEPC.Checked)
+                    || (_selectedProperty.Value.EPCExpiry != null && !chkbxEPC.Checked)
+
+                    || (dateEICR.Value != _selectedProperty.Value.EICRExpiry && chkbxEICR.Checked)
+                    || (_selectedProperty.Value.EICRExpiry == null && chkbxEICR.Checked)
+                    || (_selectedProperty.Value.EICRExpiry != null && !chkbxEICR.Checked)
+
                     || cmbobxEPC.SelectedItem?.ToString() != _selectedProperty.Value.EPCRating.Trim()
                     || richtxtbxProperty.Text.Trim() != _selectedProperty.Value.Notes.Trim()
                     )
@@ -615,6 +658,45 @@
         private void richtxtbxProperty_TextChanged(object sender, EventArgs e)
         {
             PropertyTabTitle();
+        }
+
+        private void chkbxGas_CheckedChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+            if (chkbxGas.Checked)
+            {
+                dateGas.Enabled = true;
+            }
+            else
+            {
+                dateGas.Enabled = false;
+            }
+        }
+
+        private void chkbxEPC_CheckedChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+            if (chkbxEPC.Checked)
+            {
+                dateEPC.Enabled = true;
+            }
+            else
+            {
+                dateEPC.Enabled = false;
+            }
+        }
+
+        private void chkbxEICR_CheckedChanged(object sender, EventArgs e)
+        {
+            PropertyTabTitle();
+            if (chkbxEICR.Checked)
+            {
+                dateEICR.Enabled = true;
+            }
+            else
+            {
+                dateEICR.Enabled = false;
+            }
         }
 
         // landlord tab

@@ -131,6 +131,10 @@
             label21 = new Label();
             button2 = new Button();
             tabPageProperty = new TabPage();
+            chkbxEICR = new CheckBox();
+            chkbxEPC = new CheckBox();
+            label9 = new Label();
+            chkbxGas = new CheckBox();
             chkbxMaintenanceCompleted = new CheckBox();
             dateMaintenanceCompleted = new DateTimePicker();
             dateMaintenanceReported = new DateTimePicker();
@@ -168,7 +172,6 @@
             label12 = new Label();
             label11 = new Label();
             label10 = new Label();
-            label9 = new Label();
             label2 = new Label();
             label3 = new Label();
             label6 = new Label();
@@ -1122,6 +1125,10 @@
             // 
             // tabPageProperty
             // 
+            tabPageProperty.Controls.Add(chkbxEICR);
+            tabPageProperty.Controls.Add(chkbxEPC);
+            tabPageProperty.Controls.Add(label9);
+            tabPageProperty.Controls.Add(chkbxGas);
             tabPageProperty.Controls.Add(chkbxMaintenanceCompleted);
             tabPageProperty.Controls.Add(dateMaintenanceCompleted);
             tabPageProperty.Controls.Add(dateMaintenanceReported);
@@ -1153,7 +1160,6 @@
             tabPageProperty.Controls.Add(label12);
             tabPageProperty.Controls.Add(label11);
             tabPageProperty.Controls.Add(label10);
-            tabPageProperty.Controls.Add(label9);
             tabPageProperty.Controls.Add(label2);
             tabPageProperty.Controls.Add(label3);
             tabPageProperty.Controls.Add(label6);
@@ -1169,6 +1175,44 @@
             tabPageProperty.TabIndex = 0;
             tabPageProperty.Text = "Property";
             tabPageProperty.UseVisualStyleBackColor = true;
+            // 
+            // chkbxEICR
+            // 
+            chkbxEICR.CheckAlign = ContentAlignment.MiddleCenter;
+            chkbxEICR.Location = new Point(85, 317);
+            chkbxEICR.Name = "chkbxEICR";
+            chkbxEICR.Size = new Size(21, 23);
+            chkbxEICR.TabIndex = 144;
+            chkbxEICR.UseVisualStyleBackColor = true;
+            chkbxEICR.CheckedChanged += chkbxEICR_CheckedChanged;
+            // 
+            // chkbxEPC
+            // 
+            chkbxEPC.CheckAlign = ContentAlignment.MiddleCenter;
+            chkbxEPC.Location = new Point(85, 270);
+            chkbxEPC.Name = "chkbxEPC";
+            chkbxEPC.Size = new Size(21, 23);
+            chkbxEPC.TabIndex = 143;
+            chkbxEPC.UseVisualStyleBackColor = true;
+            chkbxEPC.CheckedChanged += chkbxEPC_CheckedChanged;
+            // 
+            // label9
+            // 
+            label9.Location = new Point(112, 203);
+            label9.Name = "label9";
+            label9.Size = new Size(100, 18);
+            label9.TabIndex = 142;
+            label9.Text = "Gas Cert. Expiry:";
+            // 
+            // chkbxGas
+            // 
+            chkbxGas.CheckAlign = ContentAlignment.MiddleCenter;
+            chkbxGas.Location = new Point(85, 224);
+            chkbxGas.Name = "chkbxGas";
+            chkbxGas.Size = new Size(21, 23);
+            chkbxGas.TabIndex = 139;
+            chkbxGas.UseVisualStyleBackColor = true;
+            chkbxGas.CheckedChanged += chkbxGas_CheckedChanged;
             // 
             // chkbxMaintenanceCompleted
             // 
@@ -1347,21 +1391,23 @@
             // 
             // lblPropertyTenant
             // 
-            lblPropertyTenant.Location = new Point(112, 372);
+            lblPropertyTenant.Location = new Point(112, 410);
             lblPropertyTenant.Name = "lblPropertyTenant";
             lblPropertyTenant.Size = new Size(120, 18);
             lblPropertyTenant.TabIndex = 85;
+            lblPropertyTenant.Text = "*tenant*";
             // 
             // lblPropertyLandord
             // 
-            lblPropertyLandord.Location = new Point(112, 354);
+            lblPropertyLandord.Location = new Point(112, 392);
             lblPropertyLandord.Name = "lblPropertyLandord";
             lblPropertyLandord.Size = new Size(120, 18);
             lblPropertyLandord.TabIndex = 84;
+            lblPropertyLandord.Text = "*landlord*";
             // 
             // label14
             // 
-            label14.Location = new Point(6, 372);
+            label14.Location = new Point(6, 410);
             label14.Name = "label14";
             label14.Size = new Size(100, 18);
             label14.TabIndex = 83;
@@ -1370,7 +1416,7 @@
             // 
             // label23
             // 
-            label23.Location = new Point(6, 354);
+            label23.Location = new Point(6, 392);
             label23.Name = "label23";
             label23.Size = new Size(100, 18);
             label23.TabIndex = 82;
@@ -1381,8 +1427,8 @@
             // 
             cmbobxEPC.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbobxEPC.FormattingEnabled = true;
-            cmbobxEPC.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G" });
-            cmbobxEPC.Location = new Point(112, 310);
+            cmbobxEPC.Items.AddRange(new object[] { "-", "A", "B", "C", "D", "E", "F", "G" });
+            cmbobxEPC.Location = new Point(112, 346);
             cmbobxEPC.Name = "cmbobxEPC";
             cmbobxEPC.Size = new Size(120, 23);
             cmbobxEPC.TabIndex = 80;
@@ -1390,7 +1436,7 @@
             // 
             // dateEICR
             // 
-            dateEICR.Location = new Point(112, 281);
+            dateEICR.Location = new Point(112, 317);
             dateEICR.Name = "dateEICR";
             dateEICR.Size = new Size(120, 23);
             dateEICR.TabIndex = 79;
@@ -1398,7 +1444,7 @@
             // 
             // dateEPC
             // 
-            dateEPC.Location = new Point(112, 252);
+            dateEPC.Location = new Point(112, 270);
             dateEPC.Name = "dateEPC";
             dateEPC.Size = new Size(120, 23);
             dateEPC.TabIndex = 78;
@@ -1406,7 +1452,7 @@
             // 
             // dateGas
             // 
-            dateGas.Location = new Point(112, 223);
+            dateGas.Location = new Point(112, 224);
             dateGas.Name = "dateGas";
             dateGas.Size = new Size(120, 23);
             dateGas.TabIndex = 77;
@@ -1466,7 +1512,7 @@
             // 
             // label12
             // 
-            label12.Location = new Point(6, 315);
+            label12.Location = new Point(6, 351);
             label12.Name = "label12";
             label12.Size = new Size(100, 18);
             label12.TabIndex = 71;
@@ -1475,30 +1521,19 @@
             // 
             // label11
             // 
-            label11.Location = new Point(6, 287);
+            label11.Location = new Point(112, 296);
             label11.Name = "label11";
             label11.Size = new Size(100, 18);
             label11.TabIndex = 70;
             label11.Text = "EICR Expiry:";
-            label11.TextAlign = ContentAlignment.TopRight;
             // 
             // label10
             // 
-            label10.Location = new Point(6, 257);
+            label10.Location = new Point(112, 249);
             label10.Name = "label10";
             label10.Size = new Size(100, 18);
             label10.TabIndex = 69;
             label10.Text = "EPC Expiry:";
-            label10.TextAlign = ContentAlignment.TopRight;
-            // 
-            // label9
-            // 
-            label9.Location = new Point(6, 228);
-            label9.Name = "label9";
-            label9.Size = new Size(100, 18);
-            label9.TabIndex = 68;
-            label9.Text = "Gas Cert. Expiry:";
-            label9.TextAlign = ContentAlignment.TopRight;
             // 
             // label2
             // 
@@ -1725,8 +1760,6 @@
         private RichTextBox richtxtbxProperty;
         private Label label12;
         private Label label11;
-        private Label label10;
-        private Label label9;
         private Label label2;
         private Label label3;
         private Label label6;
@@ -1830,5 +1863,10 @@
         private CheckBox chkbxLPeicr;
         private CheckBox chkbxLPepc;
         private CheckBox chkbxLPgas;
+        private CheckBox chkbxGas;
+        private Label label9;
+        private Label label10;
+        private CheckBox chkbxEICR;
+        private CheckBox chkbxEPC;
     }
 }
