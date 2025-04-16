@@ -36,7 +36,7 @@ namespace iLet4You
             dateLPepc.Enabled = false;
             dateLPeicr.Enabled = false;
 
-            // show and enable admin controls button is user is admin
+            // show and enable admin controls button if user is admin
             btnAdmin.Enabled = (role == "admin");
             btnAdmin.Visible = (role == "admin");
             Global.Server.RequestData();
@@ -147,12 +147,21 @@ namespace iLet4You
 
             if (_selectedProperty != null)
             {
+                _selectedProperty = Global.Properties.FindById(_selectedProperty.Value.PropertyId);
                 dgvMaintenances.DataSource = Global.Properties?.FindMaintenancesFromId(_selectedProperty.Value.PropertyId);
                 dgvPrents.DataSource = Global.Properties?.FindRentsFromId(_selectedProperty.Value.PropertyId);
             }
-            if (_selectedLandlord != null) dgvLandlordProperties.DataSource = Global.Landlords?.FindPropertiesFromId(_selectedLandlord.Value.LandlordId);
-            if (_selectedTenant != null) dgvTenantProperties.DataSource = Global.Tenants?.FindPropertiesFromId(_selectedTenant.Value.TenantId);
-            if (_selectedTenant != null) dgvRents.DataSource = Global.Tenants?.FindRentsFromId(_selectedTenant.Value.TenantId);
+            if (_selectedLandlord != null)
+            {
+                _selectedLandlord = Global.Landlords.FindById(_selectedLandlord.Value.LandlordId);
+                dgvLandlordProperties.DataSource = Global.Landlords?.FindPropertiesFromId(_selectedLandlord.Value.LandlordId);
+            }
+            if (_selectedTenant != null)
+            {
+                _selectedTenant = Global.Tenants.FindById(_selectedTenant.Value.TenantId);
+                dgvTenantProperties.DataSource = Global.Tenants?.FindPropertiesFromId(_selectedTenant.Value.TenantId);
+                dgvRents.DataSource = Global.Tenants?.FindRentsFromId(_selectedTenant.Value.TenantId);
+            }
         }
 
         // landlords
@@ -439,6 +448,34 @@ namespace iLet4You
 
         private void OnSearchResultClicked(object selectedItem)
         {
+            if (tabPageLandlord.Text != "Landlord" || tabPageTenant.Text != "Tenant" || tabPageProperty.Text != "Property")
+            {
+                DialogResult result = MessageBox.Show(
+                    $"Save changes?",
+                    "Unsaved Changes",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    if (_selectedProperty != null)
+                    {
+                        SaveProperty();
+                    }
+                    if (_selectedLandlord != null)
+                    {
+                        SaveLandlord();
+                    }
+                    if (_selectedTenant != null)
+                    {
+                        SaveTenant();
+                    }
+                }
+                else if (result == DialogResult.Cancel) {
+                    return;
+                }
+            }
+
             txtbxSearch.Text = "";
             panelSearchResults.Visible = false;
 
@@ -651,7 +688,7 @@ namespace iLet4You
         // make it obvious to user when there are unsaved changes
         // property tab
         private void PropertyTabTitle()
-        { // longgggg if statement but it works
+        { // long if statement but it works
             if (_selectedProperty != null)
             {
                 if (txtbxHNo.Text.Trim() != _selectedProperty.Value.HouseNo.Trim()
@@ -1060,6 +1097,10 @@ namespace iLet4You
                     return;
                 }
             }
+            else
+            {
+                tenantId = (int)numLPtenantId.Value;
+            }
 
             string houseNo = txtbxLPhouse.Text.Trim();
             string address1 = txtbxLPaddress.Text.Trim();
@@ -1123,6 +1164,10 @@ namespace iLet4You
                 {
                     return;
                 }
+            }
+            else
+            {
+                tenantId = (int)numLPtenantId.Value;
             }
 
             string houseNo = txtbxLPhouse.Text.Trim();
@@ -1269,6 +1314,124 @@ namespace iLet4You
         private void lblDate5_Click(object sender, EventArgs e)
         {
             PasteDate(richtxtbxTenant);
+        }
+
+        private async void SaveProperty()
+        {
+            string HouseNo = txtbxHNo.Text.Trim();
+            string AddressLine1 = txtbxAddress.Text.Trim();
+            string City = txtbxCity.Text.Trim();
+            string PostCode = txtbxPostcode.Text.Trim();
+
+            double RentAmount = (double)numRent.Value;
+
+            DateTime? GasCertExpiry = null;
+            if (chkbxGas.Checked == true)
+            {
+                GasCertExpiry = dateGas.Value;
+            }
+
+            DateTime? EPCExpiry = null;
+            if (chkbxEPC.Checked == true)
+            {
+                EPCExpiry = dateEPC.Value;
+            }
+            DateTime? EICRExpiry = null;
+            if (chkbxEICR.Checked == true)
+            {
+                EICRExpiry = dateEICR.Value;
+            }
+
+            string EPCRating = cmbobxEPC.SelectedItem.ToString();
+            string Notes = richtxtbxProperty.Text.Trim();
+
+            UpdateProperty(_selectedProperty.Value.PropertyId, _selectedProperty.Value.LandlordId, _selectedProperty.Value.TenantId, HouseNo, AddressLine1, City, PostCode, RentAmount, GasCertExpiry, EPCExpiry, EICRExpiry, EPCRating, Notes);
+            await Task.Delay(500);
+            RefreshData();
+            await Task.Delay(500);
+            ShowPropertyDetails(_selectedProperty.Value);
+            PropertyTabTitle();
+        }
+
+        private async void SaveLandlord()
+        {
+            string fName = txtbxLandlordFName.Text.Trim();
+            string lName = txtbxLandlordLName.Text.Trim();
+            string address = txtbxLandlordAddress.Text.Trim();
+            string phone = txtbxLandlordPhone.Text.Trim();
+            string email = txtbxLandlordEmail.Text.Trim();
+            string notes = richtxtbxLandlord.Text.Trim();
+
+            UpdateLandlord(_selectedLandlord.Value.LandlordId, fName, lName, address, phone, email, notes);
+            await Task.Delay(500);
+            RefreshData();
+            await Task.Delay(500);
+            ShowLandlordDetails(_selectedLandlord.Value);
+            LandlordTabTitle();
+        }
+
+        private async void SaveTenant()
+        {
+            string fName = txtbxTenantFName.Text.Trim();
+            string lName = txtbxTenantLName.Text.Trim();
+            string phone = txtbxTenantPhone.Text.Trim();
+            string email = txtbxTenantEmail.Text.Trim();
+            string notes = richtxtbxTenant.Text.Trim();
+
+            UpdateTenant(_selectedTenant.Value.TenantId, fName, lName, phone, email, notes);
+            await Task.Delay(500);
+            RefreshData();
+            await Task.Delay(500);
+            ShowTenantDetails(_selectedTenant.Value);
+            TenantTabTitle();
+        }
+
+        private async void btnPsave_Click(object sender, EventArgs e)
+        {
+            if (tabPageProperty.Text != "Property")
+            {
+                DialogResult result = MessageBox.Show(
+                    $"Save changes to property details?",
+                    "Confirm",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning);
+                if (result == DialogResult.OK)
+                {
+                    SaveProperty();
+                }
+            }
+        }
+
+        private void btnLsave_Click(object sender, EventArgs e)
+        {
+            if (tabPageLandlord.Text != "Landlord")
+            {
+                DialogResult result = MessageBox.Show(
+                    $"Save changes to landlord details?",
+                    "Confirm",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning);
+                if (result == DialogResult.OK)
+                {
+                    SaveLandlord();
+                }
+            }
+        }
+
+        private void btnTsave_Click(object sender, EventArgs e)
+        {
+            if (tabPageLandlord.Text != "Tenant")
+            {
+                DialogResult result = MessageBox.Show(
+                    $"Save changes to tenant details?",
+                    "Confirm",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning);
+                if (result == DialogResult.OK)
+                {
+                    SaveTenant();
+                }
+            }
         }
     }
 }

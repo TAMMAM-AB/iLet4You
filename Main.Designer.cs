@@ -40,6 +40,7 @@
             pictureBox1 = new PictureBox();
             panelSearchResults = new Panel();
             tabPageTenant = new TabPage();
+            lblDate5 = new Label();
             label27 = new Label();
             dgvRents = new DataGridView();
             rentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -74,7 +75,7 @@
             label15 = new Label();
             label16 = new Label();
             richtxtbxTenant = new RichTextBox();
-            button1 = new Button();
+            btnTsave = new Button();
             tabPageLandlord = new TabPage();
             lblDate3 = new Label();
             lblDate4 = new Label();
@@ -131,7 +132,7 @@
             label19 = new Label();
             label20 = new Label();
             label21 = new Label();
-            button2 = new Button();
+            btnLsave = new Button();
             tabPageProperty = new TabPage();
             lblDate2 = new Label();
             lblDate1 = new Label();
@@ -191,7 +192,7 @@
             label8 = new Label();
             label7 = new Label();
             label13 = new Label();
-            button3 = new Button();
+            btnPsave = new Button();
             tabPageHome = new TabPage();
             labelTotalLandlords = new Label();
             labelTotalProperties = new Label();
@@ -200,7 +201,6 @@
             btnQuickLinks = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             linkFolder = new LinkLabel();
-            lblDate5 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPageTenant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
@@ -331,7 +331,7 @@
             tabPageTenant.Controls.Add(label15);
             tabPageTenant.Controls.Add(label16);
             tabPageTenant.Controls.Add(richtxtbxTenant);
-            tabPageTenant.Controls.Add(button1);
+            tabPageTenant.Controls.Add(btnTsave);
             tabPageTenant.Location = new Point(4, 24);
             tabPageTenant.Margin = new Padding(3, 2, 3, 2);
             tabPageTenant.Name = "tabPageTenant";
@@ -340,6 +340,16 @@
             tabPageTenant.TabIndex = 2;
             tabPageTenant.Text = "Tenant";
             tabPageTenant.UseVisualStyleBackColor = true;
+            // 
+            // lblDate5
+            // 
+            lblDate5.Location = new Point(50, 136);
+            lblDate5.Name = "lblDate5";
+            lblDate5.Size = new Size(18, 15);
+            lblDate5.TabIndex = 150;
+            lblDate5.Text = "📅";
+            lblDate5.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate5.Click += lblDate5_Click;
             // 
             // label27
             // 
@@ -611,14 +621,15 @@
             richtxtbxTenant.Text = "";
             richtxtbxTenant.TextChanged += richtxtbxTenant_TextChanged;
             // 
-            // button1
+            // btnTsave
             // 
-            button1.Location = new Point(6, 469);
-            button1.Name = "button1";
-            button1.Size = new Size(307, 23);
-            button1.TabIndex = 104;
-            button1.Text = "save";
-            button1.UseVisualStyleBackColor = true;
+            btnTsave.Location = new Point(6, 469);
+            btnTsave.Name = "btnTsave";
+            btnTsave.Size = new Size(307, 23);
+            btnTsave.TabIndex = 104;
+            btnTsave.Text = "Save";
+            btnTsave.UseVisualStyleBackColor = true;
+            btnTsave.Click += btnTsave_Click;
             // 
             // tabPageLandlord
             // 
@@ -665,7 +676,7 @@
             tabPageLandlord.Controls.Add(label19);
             tabPageLandlord.Controls.Add(label20);
             tabPageLandlord.Controls.Add(label21);
-            tabPageLandlord.Controls.Add(button2);
+            tabPageLandlord.Controls.Add(btnLsave);
             tabPageLandlord.Location = new Point(4, 24);
             tabPageLandlord.Margin = new Padding(3, 2, 3, 2);
             tabPageLandlord.Name = "tabPageLandlord";
@@ -1153,14 +1164,15 @@
             label21.TabIndex = 83;
             label21.Text = "Notes:";
             // 
-            // button2
+            // btnLsave
             // 
-            button2.Location = new Point(6, 469);
-            button2.Name = "button2";
-            button2.Size = new Size(307, 23);
-            button2.TabIndex = 81;
-            button2.Text = "save";
-            button2.UseVisualStyleBackColor = true;
+            btnLsave.Location = new Point(6, 469);
+            btnLsave.Name = "btnLsave";
+            btnLsave.Size = new Size(307, 23);
+            btnLsave.TabIndex = 81;
+            btnLsave.Text = "Save";
+            btnLsave.UseVisualStyleBackColor = true;
+            btnLsave.Click += btnLsave_Click;
             // 
             // tabPageProperty
             // 
@@ -1209,7 +1221,7 @@
             tabPageProperty.Controls.Add(label8);
             tabPageProperty.Controls.Add(label7);
             tabPageProperty.Controls.Add(label13);
-            tabPageProperty.Controls.Add(button3);
+            tabPageProperty.Controls.Add(btnPsave);
             tabPageProperty.Location = new Point(4, 24);
             tabPageProperty.Margin = new Padding(3, 2, 3, 2);
             tabPageProperty.Name = "tabPageProperty";
@@ -1726,14 +1738,15 @@
             label13.TabIndex = 62;
             label13.Text = "Notes:";
             // 
-            // button3
+            // btnPsave
             // 
-            button3.Location = new Point(6, 440);
-            button3.Name = "button3";
-            button3.Size = new Size(226, 23);
-            button3.TabIndex = 9;
-            button3.Text = "save";
-            button3.UseVisualStyleBackColor = true;
+            btnPsave.Location = new Point(6, 440);
+            btnPsave.Name = "btnPsave";
+            btnPsave.Size = new Size(226, 23);
+            btnPsave.TabIndex = 9;
+            btnPsave.Text = "Save";
+            btnPsave.UseVisualStyleBackColor = true;
+            btnPsave.Click += btnPsave_Click;
             // 
             // tabPageHome
             // 
@@ -1812,16 +1825,6 @@
             linkFolder.Text = "Open Folder";
             linkFolder.LinkClicked += linkFolder_LinkClicked;
             // 
-            // lblDate5
-            // 
-            lblDate5.Location = new Point(50, 136);
-            lblDate5.Name = "lblDate5";
-            lblDate5.Size = new Size(18, 15);
-            lblDate5.TabIndex = 150;
-            lblDate5.Text = "📅";
-            lblDate5.TextAlign = ContentAlignment.MiddleCenter;
-            lblDate5.Click += lblDate5_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1892,7 +1895,7 @@
         private Label label15;
         private Label label16;
         private RichTextBox richtxtbxTenant;
-        private Button button1;
+        private Button btnTsave;
         private TabPage tabPageLandlord;
         private TextBox txtbxLandlordEmail;
         private TextBox txtbxLandlordPhone;
@@ -1906,7 +1909,7 @@
         private Label label19;
         private Label label20;
         private Label label21;
-        private Button button2;
+        private Button btnLsave;
         private TabPage tabPageProperty;
         private ComboBox cmbobxEPC;
         private DateTimePicker dateEICR;
@@ -1926,7 +1929,7 @@
         private Label label8;
         private Label label7;
         private Label label13;
-        private Button button3;
+        private Button btnPsave;
         private TabPage tabPageHome;
         private Label labelTotalLandlords;
         private Label labelTotalProperties;
