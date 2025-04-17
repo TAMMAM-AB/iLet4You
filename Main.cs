@@ -506,6 +506,7 @@ namespace iLet4You
             richtxtbxTenant.Text = "";
 
             dgvMaintenances.DataSource = null;
+            dgvPrents.DataSource = null;
             dgvLandlordProperties.DataSource = null;
             dgvTenantProperties.DataSource = null;
             dgvRents.DataSource = null;
@@ -624,6 +625,7 @@ namespace iLet4You
             ShowLandlordDetails(Global.Landlords.FindById(property.LandlordId));
             lblPropertyLandord.Text = $"{Global.Landlords.FindById(property.LandlordId).FirstName} {Global.Landlords.FindById(property.LandlordId).LastName}";
 
+            dgvPrents.DataSource = Global.Properties.FindRentsFromId(property.PropertyId);
             dgvMaintenances.DataSource = Global.Properties.FindMaintenancesFromId(property.PropertyId);
         }
 
@@ -1283,7 +1285,7 @@ namespace iLet4You
 
         private void PasteDate(RichTextBox target)
         {
-            string text = DateTime.Now.ToString("dd-MM-yyyy");
+            string text = $"| {DateTime.Now.ToString("dd-MM-yyyy")} |";
 
             int cursorPos = target.SelectionStart;
             target.Text = target.Text.Insert(cursorPos, text);
@@ -1420,7 +1422,7 @@ namespace iLet4You
 
         private void btnTsave_Click(object sender, EventArgs e)
         {
-            if (tabPageLandlord.Text != "Tenant")
+            if (tabPageTenant.Text != "Tenant")
             {
                 DialogResult result = MessageBox.Show(
                     $"Save changes to tenant details?",

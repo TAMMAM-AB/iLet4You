@@ -433,9 +433,9 @@
             // 
             label26.Location = new Point(319, 2);
             label26.Name = "label26";
-            label26.Size = new Size(100, 18);
+            label26.Size = new Size(116, 18);
             label26.TabIndex = 118;
-            label26.Text = "Property:";
+            label26.Text = "Rented properties:";
             // 
             // dgvTenantProperties
             // 
@@ -1478,9 +1478,9 @@
             // 
             label24.Location = new Point(551, 2);
             label24.Name = "label24";
-            label24.Size = new Size(100, 18);
+            label24.Size = new Size(162, 18);
             label24.TabIndex = 87;
-            label24.Text = "Maintenance:";
+            label24.Text = "Property maintenance:";
             // 
             // dgvMaintenances
             // 
