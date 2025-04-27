@@ -96,32 +96,6 @@
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             tenantBindingSource = new BindingSource(components);
             tabPage4 = new TabPage();
-            label26 = new Label();
-            dateTimePicker3 = new DateTimePicker();
-            label25 = new Label();
-            dateTimePicker2 = new DateTimePicker();
-            label24 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            numericUpDown2 = new NumericUpDown();
-            label23 = new Label();
-            label22 = new Label();
-            textBox5 = new TextBox();
-            label21 = new Label();
-            numpLLid = new NumericUpDown();
-            label20 = new Label();
-            button1 = new Button();
-            richTextBox1 = new RichTextBox();
-            textBox1 = new TextBox();
-            label11 = new Label();
-            textBox2 = new TextBox();
-            label12 = new Label();
-            textBox3 = new TextBox();
-            button2 = new Button();
-            button3 = new Button();
-            textBox4 = new TextBox();
-            label14 = new Label();
-            label16 = new Label();
-            label19 = new Label();
             btnPropertyRefresh = new Button();
             dgvProperties = new DataGridView();
             PropertyId = new DataGridViewTextBoxColumn();
@@ -167,7 +141,6 @@
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             uRLDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             quickLinkBindingSource = new BindingSource(components);
-            comboBox1 = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
@@ -179,8 +152,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvTenants).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).BeginInit();
             tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numpLLid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).BeginInit();
             tabPage7.SuspendLayout();
@@ -801,33 +772,6 @@
             // 
             // tabPage4
             // 
-            tabPage4.Controls.Add(comboBox1);
-            tabPage4.Controls.Add(label26);
-            tabPage4.Controls.Add(dateTimePicker3);
-            tabPage4.Controls.Add(label25);
-            tabPage4.Controls.Add(dateTimePicker2);
-            tabPage4.Controls.Add(label24);
-            tabPage4.Controls.Add(dateTimePicker1);
-            tabPage4.Controls.Add(numericUpDown2);
-            tabPage4.Controls.Add(label23);
-            tabPage4.Controls.Add(label22);
-            tabPage4.Controls.Add(textBox5);
-            tabPage4.Controls.Add(label21);
-            tabPage4.Controls.Add(numpLLid);
-            tabPage4.Controls.Add(label20);
-            tabPage4.Controls.Add(button1);
-            tabPage4.Controls.Add(richTextBox1);
-            tabPage4.Controls.Add(textBox1);
-            tabPage4.Controls.Add(label11);
-            tabPage4.Controls.Add(textBox2);
-            tabPage4.Controls.Add(label12);
-            tabPage4.Controls.Add(textBox3);
-            tabPage4.Controls.Add(button2);
-            tabPage4.Controls.Add(button3);
-            tabPage4.Controls.Add(textBox4);
-            tabPage4.Controls.Add(label14);
-            tabPage4.Controls.Add(label16);
-            tabPage4.Controls.Add(label19);
             tabPage4.Controls.Add(btnPropertyRefresh);
             tabPage4.Controls.Add(dgvProperties);
             tabPage4.Location = new Point(4, 24);
@@ -837,224 +781,6 @@
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Properties";
             tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new Point(686, 414);
-            label26.Name = "label26";
-            label26.Size = new Size(68, 15);
-            label26.TabIndex = 57;
-            label26.Text = "EPC Rating:";
-            // 
-            // dateTimePicker3
-            // 
-            dateTimePicker3.Location = new Point(547, 431);
-            dateTimePicker3.Name = "dateTimePicker3";
-            dateTimePicker3.Size = new Size(133, 23);
-            dateTimePicker3.TabIndex = 56;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(547, 415);
-            label25.Name = "label25";
-            label25.Size = new Size(68, 15);
-            label25.TabIndex = 55;
-            label25.Text = "EICR Expiry:";
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(408, 430);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(133, 23);
-            dateTimePicker2.TabIndex = 54;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(408, 414);
-            label24.Name = "label24";
-            label24.Size = new Size(65, 15);
-            label24.TabIndex = 53;
-            label24.Text = "EPC Expiry:";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(269, 431);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(133, 23);
-            dateTimePicker1.TabIndex = 52;
-            // 
-            // numericUpDown2
-            // 
-            numericUpDown2.DecimalPlaces = 2;
-            numericUpDown2.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-            numericUpDown2.Location = new Point(163, 431);
-            numericUpDown2.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(100, 23);
-            numericUpDown2.TabIndex = 51;
-            numericUpDown2.ThousandsSeparator = true;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(269, 415);
-            label23.Name = "label23";
-            label23.Size = new Size(91, 15);
-            label23.TabIndex = 49;
-            label23.Text = "Gas Cert. Expiry:";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new Point(163, 413);
-            label22.Name = "label22";
-            label22.Size = new Size(81, 15);
-            label22.TabIndex = 47;
-            label22.Text = "Rent Amount:";
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(6, 430);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(150, 23);
-            textBox5.TabIndex = 46;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new Point(6, 413);
-            label21.Name = "label21";
-            label21.Size = new Size(59, 15);
-            label21.TabIndex = 45;
-            label21.Text = "Postcode:";
-            // 
-            // numpLLid
-            // 
-            numpLLid.Location = new Point(6, 377);
-            numpLLid.Maximum = new decimal(new int[] { 1661992959, 1808227885, 5, 0 });
-            numpLLid.Name = "numpLLid";
-            numpLLid.Size = new Size(100, 23);
-            numpLLid.TabIndex = 44;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(6, 456);
-            label20.Name = "label20";
-            label20.Size = new Size(41, 15);
-            label20.TabIndex = 43;
-            label20.Text = "Notes:";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(812, 378);
-            button1.Name = "button1";
-            button1.Size = new Size(100, 23);
-            button1.TabIndex = 42;
-            button1.Text = "Update";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(6, 474);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(1118, 114);
-            richTextBox1.TabIndex = 41;
-            richTextBox1.Text = "";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(475, 376);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 23);
-            textBox1.TabIndex = 40;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(475, 359);
-            label11.Name = "label11";
-            label11.Size = new Size(31, 15);
-            label11.TabIndex = 39;
-            label11.Text = "City:";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(218, 378);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(95, 23);
-            textBox2.TabIndex = 38;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(218, 360);
-            label12.Name = "label12";
-            label12.Size = new Size(91, 15);
-            label12.TabIndex = 37;
-            label12.Text = "House Number:";
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(319, 377);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(150, 23);
-            textBox3.TabIndex = 36;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(706, 378);
-            button2.Name = "button2";
-            button2.Size = new Size(100, 23);
-            button2.TabIndex = 35;
-            button2.Text = "Create";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(918, 378);
-            button3.Name = "button3";
-            button3.Size = new Size(100, 23);
-            button3.TabIndex = 34;
-            button3.Text = "Delete";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(112, 378);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 33;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(112, 360);
-            label14.Name = "label14";
-            label14.Size = new Size(60, 15);
-            label14.TabIndex = 32;
-            label14.Text = "Tenant ID:";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new Point(319, 359);
-            label16.Name = "label16";
-            label16.Size = new Size(86, 15);
-            label16.TabIndex = 31;
-            label16.Text = "Address Line 1:";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new Point(6, 360);
-            label19.Name = "label19";
-            label19.Size = new Size(71, 15);
-            label19.TabIndex = 29;
-            label19.Text = "Landlord ID:";
             // 
             // btnPropertyRefresh
             // 
@@ -1426,16 +1152,6 @@
             // 
             quickLinkBindingSource.DataSource = typeof(QuickLink);
             // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D", "E", "F", "G" });
-            comboBox1.Location = new Point(686, 430);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(100, 23);
-            comboBox1.TabIndex = 58;
-            // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1459,9 +1175,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvTenants).EndInit();
             ((System.ComponentModel.ISupportInitialize)tenantBindingSource).EndInit();
             tabPage4.ResumeLayout(false);
-            tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numpLLid).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)propertyBindingSource).EndInit();
             tabPage7.ResumeLayout(false);
@@ -1581,25 +1294,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private Label label20;
-        private Button button1;
-        private RichTextBox richTextBox1;
-        private TextBox textBox1;
-        private Label label11;
-        private TextBox textBox2;
-        private Label label12;
-        private TextBox textBox3;
-        private Button button2;
-        private Button button3;
-        private TextBox textBox4;
-        private Label label14;
-        private Label label16;
-        private Label label19;
-        private NumericUpDown numpLLid;
-        private Label label23;
-        private Label label22;
-        private TextBox textBox5;
-        private Label label21;
         private DataGridViewTextBoxColumn PropertyId;
         private DataGridViewTextBoxColumn LandlordId;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1613,13 +1307,5 @@
         private DataGridViewTextBoxColumn EICRExpiry;
         private DataGridViewTextBoxColumn EPCRating;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private DateTimePicker dateTimePicker2;
-        private Label label24;
-        private DateTimePicker dateTimePicker1;
-        private NumericUpDown numericUpDown2;
-        private Label label26;
-        private DateTimePicker dateTimePicker3;
-        private Label label25;
-        private ComboBox comboBox1;
     }
 }

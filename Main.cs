@@ -36,6 +36,8 @@ namespace iLet4You
             dateLPepc.Enabled = false;
             dateLPeicr.Enabled = false;
 
+            dateTreceived.Enabled = false;
+
             // show and enable admin controls button if user is admin
             btnAdmin.Enabled = (role == "admin");
             btnAdmin.Visible = (role == "admin");
@@ -252,7 +254,7 @@ namespace iLet4You
             var data = new Dictionary<string, object>
             {
                 { "LandlordID", $"{landLordId}" },
-                { "TenantID", tenantId.HasValue ? tenantId.Value : null },
+                { "TenantID", tenantId }, // idk why ternary operator used but whatever
                 { "HouseNo", $"{houseNo}" },
                 { "AddressLine1", $"{address1}" },
                 { "City", $"{city}" },
@@ -340,7 +342,7 @@ namespace iLet4You
         }
 
         // rents
-        private async void CreateRent(int tenantId, int propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
+        private async void CreateRent(int? tenantId, int? propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
         {
             var data = new Dictionary<string, object>
             {
@@ -358,7 +360,7 @@ namespace iLet4You
             bool success = await AwaitResponse();
         }
 
-        private async void UpdateRent(int id, int tenantId, int propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
+        private async void UpdateRent(int id, int? tenantId, int? propertyId, DateTime dueDate, DateTime? dateReceived, double rentAmount, double rentAmountPaid, string notes)
         {
             var data = new Dictionary<string, object>
             {
@@ -471,7 +473,8 @@ namespace iLet4You
                         SaveTenant();
                     }
                 }
-                else if (result == DialogResult.Cancel) {
+                else if (result == DialogResult.Cancel)
+                {
                     return;
                 }
             }
@@ -1283,6 +1286,7 @@ namespace iLet4You
             }
         }
 
+        // paste date into notes text boxes
         private void PasteDate(RichTextBox target)
         {
             string text = $"| {DateTime.Now.ToString("dd-MM-yyyy")} |";
@@ -1318,6 +1322,12 @@ namespace iLet4You
             PasteDate(richtxtbxTenant);
         }
 
+        private void lblDate6_Click(object sender, EventArgs e)
+        {
+            PasteDate(rchtxtbxT);
+        }
+
+        // save selected property, landlord, tenant
         private async void SaveProperty()
         {
             string HouseNo = txtbxHNo.Text.Trim();
@@ -1433,6 +1443,173 @@ namespace iLet4You
                 {
                     SaveTenant();
                 }
+            }
+        }
+
+        // tenant rents
+        private bool CheckTenantRentFields()
+        {
+            if (_selectedTenant == null)
+            {
+                MessageBox.Show("Please select a tenant first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private void chkbxTreceived_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxTreceived.Checked)
+            {
+                dateTreceived.Enabled = true;
+            }
+            else
+            {
+                dateTreceived.Enabled = false;
+            }
+        }
+
+        private void btnTrefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private async void btnTcreate_Click(object sender, EventArgs e)
+        {
+            if (!CheckTenantRentFields()) return;
+
+            int? propertyId = null;
+            if (numTid.Value <= 0)
+            {
+                DialogResult result = MessageBox.Show(
+                    $"You have not selected a property. Continue with no property?",
+                    "Create rent with no associated property",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                propertyId = (int)numTid.Value;
+            }
+
+            DateTime dueDate = dateTdue.Value;
+            DateTime receivedDate = dateTreceived.Value;
+
+            double rentAmount = (double)Math.Round(numTrent.Value, 2);
+            double rentPaid = (double)Math.Round(numTrentPaid.Value, 2);
+
+            string notes = rchtxtbxT.Text.Trim();
+
+            CreateRent(_selectedTenant.Value.TenantId, propertyId, dueDate, chkbxTreceived.Checked ? receivedDate : null, rentAmount, rentPaid, notes);
+            await Task.Delay(500);
+            RefreshData();
+
+            numTid.Value = 0;
+
+            dateTdue.Value = DateTime.Now;
+            dateTreceived.Value = DateTime.Now;
+
+            numTrent.Value = 0;
+            numTrentPaid.Value = 0;
+
+            rchtxtbxT.Text = "";
+        }
+
+        private async void btnTupdate_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvRents.SelectedRows[0].Cells["rentIdDataGridViewTextBoxColumn"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a rent to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!CheckTenantRentFields()) return;
+
+            int? propertyId = null;
+            if (numTid.Value <= 0)
+            {
+                DialogResult r = MessageBox.Show(
+                    $"You have not selected a property. Continue with no property?",
+                    "Create rent with no associated property",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (r != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                propertyId = (int)numTid.Value;
+            }
+
+            DateTime dueDate = dateTdue.Value;
+            DateTime receivedDate = dateTreceived.Value;
+
+            double rentAmount = (double)Math.Round(numTrent.Value, 2);
+            double rentPaid = (double)Math.Round(numTrentPaid.Value, 2);
+
+            string notes = rchtxtbxT.Text.Trim();
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to update selected rent? (Rent ID: '{id}')",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                UpdateRent(id, _selectedTenant.Value.TenantId, propertyId, dueDate, chkbxTreceived.Checked ? receivedDate : null, rentAmount, rentPaid, notes);
+                await Task.Delay(500);
+                RefreshData();
+
+                numTid.Value = 0;
+
+                dateTdue.Value = DateTime.Now;
+                dateTreceived.Value = DateTime.Now;
+
+                numTrent.Value = 0;
+                numTrentPaid.Value = 0;
+
+                rchtxtbxT.Text = "";
+            }
+        }
+
+        private async void btnTdelete_Click(object sender, EventArgs e)
+        {
+            int id;
+            try
+            {
+                id = Convert.ToInt32(dgvRents.SelectedRows[0].Cells["rentIdDataGridViewTextBoxColumn"].Value.ToString().Trim());
+            }
+            catch
+            {
+                MessageBox.Show("Please select a rent to update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to delete selected rent? (Rent ID: '{id}')",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                DeleteRent(id);
+                await Task.Delay(500);
+                RefreshData();
             }
         }
     }

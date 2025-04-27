@@ -40,6 +40,24 @@
             pictureBox1 = new PictureBox();
             panelSearchResults = new Panel();
             tabPageTenant = new TabPage();
+            label33 = new Label();
+            numTrentPaid = new NumericUpDown();
+            label45 = new Label();
+            lblDate6 = new Label();
+            chkbxTreceived = new CheckBox();
+            btnTRsearchRents = new Button();
+            label34 = new Label();
+            numTid = new NumericUpDown();
+            label42 = new Label();
+            dateTreceived = new DateTimePicker();
+            dateTdue = new DateTimePicker();
+            numTrent = new NumericUpDown();
+            label44 = new Label();
+            btnTupdate = new Button();
+            rchtxtbxT = new RichTextBox();
+            btnTcreate = new Button();
+            btnTdelete = new Button();
+            btnTrefresh = new Button();
             lblDate5 = new Label();
             label27 = new Label();
             dgvRents = new DataGridView();
@@ -203,6 +221,9 @@
             linkFolder = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPageTenant.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numTrentPaid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numTid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numTrent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvRents).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rentBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTenantProperties).BeginInit();
@@ -316,6 +337,24 @@
             // 
             // tabPageTenant
             // 
+            tabPageTenant.Controls.Add(label33);
+            tabPageTenant.Controls.Add(numTrentPaid);
+            tabPageTenant.Controls.Add(label45);
+            tabPageTenant.Controls.Add(lblDate6);
+            tabPageTenant.Controls.Add(chkbxTreceived);
+            tabPageTenant.Controls.Add(btnTRsearchRents);
+            tabPageTenant.Controls.Add(label34);
+            tabPageTenant.Controls.Add(numTid);
+            tabPageTenant.Controls.Add(label42);
+            tabPageTenant.Controls.Add(dateTreceived);
+            tabPageTenant.Controls.Add(dateTdue);
+            tabPageTenant.Controls.Add(numTrent);
+            tabPageTenant.Controls.Add(label44);
+            tabPageTenant.Controls.Add(btnTupdate);
+            tabPageTenant.Controls.Add(rchtxtbxT);
+            tabPageTenant.Controls.Add(btnTcreate);
+            tabPageTenant.Controls.Add(btnTdelete);
+            tabPageTenant.Controls.Add(btnTrefresh);
             tabPageTenant.Controls.Add(lblDate5);
             tabPageTenant.Controls.Add(label27);
             tabPageTenant.Controls.Add(dgvRents);
@@ -340,6 +379,177 @@
             tabPageTenant.TabIndex = 2;
             tabPageTenant.Text = "Tenant";
             tabPageTenant.UseVisualStyleBackColor = true;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Location = new Point(425, 417);
+            label33.Name = "label33";
+            label33.Size = new Size(58, 15);
+            label33.TabIndex = 181;
+            label33.Text = "Due Date:";
+            // 
+            // numTrentPaid
+            // 
+            numTrentPaid.DecimalPlaces = 2;
+            numTrentPaid.Increment = new decimal(new int[] { 5, 0, 0, 0 });
+            numTrentPaid.Location = new Point(838, 436);
+            numTrentPaid.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
+            numTrentPaid.Name = "numTrentPaid";
+            numTrentPaid.Size = new Size(129, 23);
+            numTrentPaid.TabIndex = 180;
+            numTrentPaid.ThousandsSeparator = true;
+            // 
+            // label45
+            // 
+            label45.AutoSize = true;
+            label45.Location = new Point(838, 418);
+            label45.Name = "label45";
+            label45.Size = new Size(60, 15);
+            label45.TabIndex = 179;
+            label45.Text = "Rent Paid:";
+            // 
+            // lblDate6
+            // 
+            lblDate6.Location = new Point(361, 487);
+            lblDate6.Name = "lblDate6";
+            lblDate6.Size = new Size(18, 15);
+            lblDate6.TabIndex = 178;
+            lblDate6.Text = "📅";
+            lblDate6.TextAlign = ContentAlignment.MiddleCenter;
+            lblDate6.Click += lblDate6_Click;
+            // 
+            // chkbxTreceived
+            // 
+            chkbxTreceived.AutoSize = true;
+            chkbxTreceived.CheckAlign = ContentAlignment.MiddleRight;
+            chkbxTreceived.Location = new Point(564, 417);
+            chkbxTreceived.Name = "chkbxTreceived";
+            chkbxTreceived.Size = new Size(103, 19);
+            chkbxTreceived.TabIndex = 176;
+            chkbxTreceived.Text = "Date Received:";
+            chkbxTreceived.UseVisualStyleBackColor = true;
+            chkbxTreceived.CheckedChanged += chkbxTreceived_CheckedChanged;
+            // 
+            // btnTRsearchRents
+            // 
+            btnTRsearchRents.FlatStyle = FlatStyle.Flat;
+            btnTRsearchRents.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnTRsearchRents.Location = new Point(398, 436);
+            btnTRsearchRents.Name = "btnTRsearchRents";
+            btnTRsearchRents.Size = new Size(21, 23);
+            btnTRsearchRents.TabIndex = 174;
+            btnTRsearchRents.Text = "⌕";
+            btnTRsearchRents.UseVisualStyleBackColor = true;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Location = new Point(319, 418);
+            label34.Name = "label34";
+            label34.Size = new Size(69, 15);
+            label34.TabIndex = 173;
+            label34.Text = "Property ID:";
+            // 
+            // numTid
+            // 
+            numTid.Location = new Point(319, 436);
+            numTid.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
+            numTid.Name = "numTid";
+            numTid.Size = new Size(80, 23);
+            numTid.TabIndex = 172;
+            numTid.ThousandsSeparator = true;
+            // 
+            // label42
+            // 
+            label42.AutoSize = true;
+            label42.Location = new Point(319, 487);
+            label42.Name = "label42";
+            label42.Size = new Size(41, 15);
+            label42.TabIndex = 171;
+            label42.Text = "Notes:";
+            // 
+            // dateTreceived
+            // 
+            dateTreceived.Location = new Point(564, 436);
+            dateTreceived.Name = "dateTreceived";
+            dateTreceived.Size = new Size(133, 23);
+            dateTreceived.TabIndex = 167;
+            // 
+            // dateTdue
+            // 
+            dateTdue.Location = new Point(425, 436);
+            dateTdue.Name = "dateTdue";
+            dateTdue.Size = new Size(133, 23);
+            dateTdue.TabIndex = 166;
+            // 
+            // numTrent
+            // 
+            numTrent.DecimalPlaces = 2;
+            numTrent.Increment = new decimal(new int[] { 5, 0, 0, 0 });
+            numTrent.Location = new Point(703, 436);
+            numTrent.Maximum = new decimal(new int[] { -1486618625, 232830643, 0, 0 });
+            numTrent.Name = "numTrent";
+            numTrent.Size = new Size(129, 23);
+            numTrent.TabIndex = 165;
+            numTrent.ThousandsSeparator = true;
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.Location = new Point(703, 418);
+            label44.Name = "label44";
+            label44.Size = new Size(81, 15);
+            label44.TabIndex = 164;
+            label44.Text = "Rent Amount:";
+            // 
+            // btnTupdate
+            // 
+            btnTupdate.Location = new Point(1325, 434);
+            btnTupdate.Name = "btnTupdate";
+            btnTupdate.Size = new Size(100, 23);
+            btnTupdate.TabIndex = 161;
+            btnTupdate.Text = "Update";
+            btnTupdate.UseVisualStyleBackColor = true;
+            btnTupdate.Click += btnTupdate_Click;
+            // 
+            // rchtxtbxT
+            // 
+            rchtxtbxT.Location = new Point(319, 505);
+            rchtxtbxT.Name = "rchtxtbxT";
+            rchtxtbxT.Size = new Size(1318, 143);
+            rchtxtbxT.TabIndex = 160;
+            rchtxtbxT.Text = "";
+            // 
+            // btnTcreate
+            // 
+            btnTcreate.Location = new Point(1219, 434);
+            btnTcreate.Name = "btnTcreate";
+            btnTcreate.Size = new Size(100, 23);
+            btnTcreate.TabIndex = 154;
+            btnTcreate.Text = "Create";
+            btnTcreate.UseVisualStyleBackColor = true;
+            btnTcreate.Click += btnTcreate_Click;
+            // 
+            // btnTdelete
+            // 
+            btnTdelete.Location = new Point(1431, 434);
+            btnTdelete.Name = "btnTdelete";
+            btnTdelete.Size = new Size(100, 23);
+            btnTdelete.TabIndex = 153;
+            btnTdelete.Text = "Delete";
+            btnTdelete.UseVisualStyleBackColor = true;
+            btnTdelete.Click += btnTdelete_Click;
+            // 
+            // btnTrefresh
+            // 
+            btnTrefresh.Location = new Point(1537, 434);
+            btnTrefresh.Name = "btnTrefresh";
+            btnTrefresh.Size = new Size(100, 23);
+            btnTrefresh.TabIndex = 151;
+            btnTrefresh.Text = "Refresh";
+            btnTrefresh.UseVisualStyleBackColor = true;
+            btnTrefresh.Click += btnTrefresh_Click;
             // 
             // lblDate5
             // 
@@ -836,9 +1046,9 @@
             label35.AutoSize = true;
             label35.Location = new Point(1014, 263);
             label35.Name = "label35";
-            label35.Size = new Size(81, 15);
+            label35.Size = new Size(34, 15);
             label35.TabIndex = 122;
-            label35.Text = "Rent Amount:";
+            label35.Text = "Rent:";
             // 
             // txtbxLPpostcode
             // 
@@ -1851,6 +2061,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabPageTenant.ResumeLayout(false);
             tabPageTenant.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numTrentPaid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numTid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numTrent).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvRents).EndInit();
             ((System.ComponentModel.ISupportInitialize)rentBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvTenantProperties).EndInit();
@@ -2046,5 +2259,23 @@
         private Label lblDate4;
         private Label lblDate3;
         private Label lblDate5;
+        private Label lblDate6;
+        private CheckBox chkbxTreceived;
+        private Button btnTRsearchRents;
+        private Label label34;
+        private NumericUpDown numTid;
+        private Label label42;
+        private DateTimePicker dateTreceived;
+        private DateTimePicker dateTdue;
+        private NumericUpDown numTrent;
+        private Label label44;
+        private Button btnTupdate;
+        private RichTextBox rchtxtbxT;
+        private Button btnTcreate;
+        private Button btnTdelete;
+        private Button btnTrefresh;
+        private NumericUpDown numTrentPaid;
+        private Label label45;
+        private Label label33;
     }
 }
